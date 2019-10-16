@@ -18,12 +18,15 @@ class fileUtils():
         # 读取csv文件
         csv_file = open(fileName, 'rb').read().decode('utf-8')
         # 保存地区和url
-        url_list = []
+        url_lists = []
         for x in csv_file.split('\r\n'):
+            url_list = []
             url_info = x.split(',')
-            url_list.append([url_info[0],url_info[1]])
+            for url in url_info:
+                url_list.append(url)
+            url_lists.append(url_list)
 
-        return url_list
+        return url_lists
 
     # 读取文件内容
     def getFileData(self,filename):
