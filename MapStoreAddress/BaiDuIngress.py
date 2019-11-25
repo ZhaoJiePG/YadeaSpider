@@ -24,15 +24,13 @@ now_time = datetime.datetime.now().strftime('%Y-%m-%d')
 # 模拟请求方法
 def BaiDuStoreInfo(queryKey,stores_list):
     url = 'https://map.baidu.com'
-    # option = webdriver.ChromeOptions()
-    # option.add_argument('headless')
-    # # 要换成适应自己操作系统的chromedriver
-    # driver = webdriver.Chrome(
-    #     executable_path='./chromedriver.exe',
-    #     chrome_options=option)
-    location='D:\Maven\YadeaSpider\MapStoreAddress\geckodriver.exe'
+    option = webdriver.ChromeOptions()
+    option.add_argument('headless')
+    # 要换成适应自己操作系统的chromedriver
+    driver = webdriver.Chrome(
+        executable_path='./chromedriver.exe',
+        chrome_options=option)
 
-    driver = webdriver.Firefox(executable_path=location)
 
     # 打开网站
     driver.get(url)
