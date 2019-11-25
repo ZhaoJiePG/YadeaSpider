@@ -11,8 +11,8 @@ import pymysql
 from pandas.errors import EmptyDataError
 
 
-def createTable(df,database_name,table_name):
-    config = dict(host='10.149.1.154', user='root', password='root',
+def createTable(df,database_name,table_name,port):
+    config = dict(host='10.149.1.{0}'.format(port), user='root', password='root',
                   cursorclass=pymysql.cursors.DictCursor)
     # 建立连接
     conn = pymysql.Connect(**config)
@@ -46,8 +46,8 @@ def createTable(df,database_name,table_name):
 
     conn.close()
 
-def truncateTable(databaseName,tableName):
-    config = dict(host='10.149.1.154', user='root', password='root',
+def truncateTable(databaseName,tableName,port):
+    config = dict(host='10.149.1.{0}'.format(port), user='root', password='root',
                   cursorclass=pymysql.cursors.DictCursor)
     # 建立连接
     conn = pymysql.Connect(**config)
@@ -61,8 +61,8 @@ def truncateTable(databaseName,tableName):
     truncate_sql = 'DELETE FROM {0}'.format(tableName)
     cursor.execute(truncate_sql)
 
-def insertIntoMysql(data,databaseName,tableName):
-    config = dict(host='10.149.1.154', user='root', password='root',
+def insertIntoMysql(data,databaseName,tableName,port):
+    config = dict(host='10.149.1.{0}'.format(port), user='root', password='root',
                   cursorclass=pymysql.cursors.DictCursor)
     # 建立连接
     conn = pymysql.Connect(**config)
@@ -82,9 +82,9 @@ def insertIntoMysql(data,databaseName,tableName):
     cursor.executemany('INSERT INTO {} VALUES ({})'.format(tableName, s), values)
 
 # 保存到数据库
-def save_to_mysql(file_addr,database_name,table_name):
+def save_to_mysql(file_addr,database_name,table_name,port):
     # 清空数据
-    truncateTable(database_name,table_name)
+    truncateTable(database_name,table_name,port)
     for dirs in os.walk(file_addr):
         fileList = dirs[2]
         for fileName in fileList:
@@ -97,7 +97,7 @@ def save_to_mysql(file_addr,database_name,table_name):
                 resData = resData.astype(object).where(pd.notnull(resData), None)
                 print(resData)
                 # 插入数据库
-                insertIntoMysql(resData,database_name,table_name)
+                insertIntoMysql(resData,database_name,table_name,port)
             except EmptyDataError:
                 print("当前商品不符合规则")
 

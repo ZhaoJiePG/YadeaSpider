@@ -26,24 +26,32 @@ from selenium import webdriver
 
 from Utils.stringUtils import delSpecialChars
 
-option = webdriver.ChromeOptions()
+# option = webdriver.ChromeOptions()
 # option.add_argument('headless')
 # option.add_argument('incognito')
-driver = webdriver.Chrome(
-    executable_path='D:\Maven\YadeaSpider\Ecommerce\Data\chromedriver.exe',
-    chrome_options=option)
+# driver = webdriver.Chrome(
+#     executable_path='D:\Maven\YadeaSpider\Ecommerce\Data\chromedriver.exe',
+#     chrome_options=option)
 
 url='https://item.jd.com/27156324216.html'
 
 # response = requests.get(url).text
-driver.get(url)
-html_doc = driver.page_source
-res = etree.HTML(html_doc)
-print(html_doc)
-print('=====')
-name = delSpecialChars(res.xpath('//div[@class="sku-name"]/text()')[0])
-print(name)
+# driver.get(url)
+
+# html_doc = driver.page_source
+# res = etree.HTML(html_doc)
+# print(html_doc)
+# print('=====')
+# name = delSpecialChars(res.xpath('//div[@class="sku-name"]/text()')[0])
+# print(name)
+
 # print(re.findall('<divclass="sku-name">(.*)</div><divclass="news">',html_doc))
 # print('==========')
 # print(re.findall('<lidata-tab="trigger"data-anchor="#detail".*>([\u4e00-\u9fa5]+)</li>',html_doc))
-driver.quit()
+# driver.quit()
+
+
+page = 259
+
+for i in range(0,int(259/10+1)):
+    print(i)

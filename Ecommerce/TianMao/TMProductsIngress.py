@@ -99,9 +99,9 @@ if __name__ == '__main__':
                 '比德文电动车','立马电动车','新大洲电动车','杰宝大王电动车']
     # car_names =['电动车']
     # 爬取商品数据
-    for car_name in car_names:
-        prod_results = TMCarsInfo(car_name)
-        fileUtils().saveAsCsv(prod_results,'./Data/Products/{0}'.format(car_name))
+    # for car_name in car_names:
+    #     prod_results = TMCarsInfo(car_name)
+    #     fileUtils().saveAsCsv(prod_results,'./Data/Products/{0}'.format(car_name))
 
     # 建表
     resData = pd.read_csv('./Data/Products/台铃电动车.csv',encoding='utf-8')

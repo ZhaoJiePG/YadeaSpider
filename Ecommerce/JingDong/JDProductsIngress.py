@@ -49,6 +49,8 @@ def JDCarsInfo(car_name):
     sleep(1)
     # 循环解析查询页数
     for page in range(1, int(pages)+1):
+
+    # for page in range(5):
         url = 'https://search.jd.com/Search?keyword={0}&enc=utf-8&page={1}'.format(car_name, str(page * 2 - 1))
         print('睡眠3s...开始爬取第' + str(page) + '页========url为' + url)
         driver.get(url)
@@ -58,47 +60,40 @@ def JDCarsInfo(car_name):
         products = xpath_date.xpath('//*[@id="J_goodsList"]/ul/li')
         for product in products:
             # 产品信息
-            prod_store = delSpecialChars(product.xpath('.//a[@class="curr-shop hd-shopname"]/text()')[0])
-            prod_price = delSpecialChars(product.xpath('./div/div[3]/strong/i/text()')[0])
-            prod_price = prod_price[:-((prod_price.index('.'))-1)]
-            prod_url = 'https:'+delSpecialChars(product.xpath('./div/div[4]/a/@href')[0])
-            prod_id = re.findall('(\d+)',prod_url)[0]
-            store_url = 'https:'+delSpecialChars(product.xpath('./div/div[7]/span/a/@href')[0])
-            store_id = re.findall('(\d+)',store_url)[0]
-            store_rates = '评价'+delSpecialChars(product.xpath('./div/div[5]/strong/a/text()')[0])
-
-            # 跳转商品url，获取详细信息
-            driver.get(prod_url)
-            prod_reponse = driver.page_source
-            sleep(1)
-            selector = etree.HTML(prod_reponse)
             try:
+                prod_store = delSpecialChars(product.xpath('.//a[@class="curr-shop hd-shopname"]/text()')[0])
+                prod_price = delSpecialChars(product.xpath('./div/div[3]/strong/i/text()')[0])
+                prod_price = prod_price[:-((prod_price.index('.'))-1)]
+                prod_url = 'https:'+delSpecialChars(product.xpath('./div/div[4]/a/@href')[0])
+                prod_id = re.findall('(\d+)',prod_url)[0]
+                store_url = 'https:'+delSpecialChars(product.xpath('./div/div[7]/span/a/@href')[0])
+                store_id = re.findall('(\d+)',store_url)[0]
+                store_rates = '评价'+delSpecialChars(product.xpath('./div/div[5]/strong/a/text()')[0])
+
+                # 跳转商品url，获取详细信息
+                driver.get(prod_url)
+                prod_reponse = driver.page_source
+                sleep(1)
+                selector = etree.HTML(prod_reponse)
                 prod_name = delSpecialChars(selector.xpath('//div[@class="sku-name"]/text()')[0])
-            except IndexError:
-                prod_name = ''
-            # 商品详细配置描述
-            shop_items = selector.xpath('//*[@id="detail"]/div[2]/div[1]/div[1]/ul[2]/li')
-            shop_list = []
-            for shop_item in shop_items:
-                shop_list.append(delSpecialChars(shop_item.xpath('./text()')[0]))
-            # 商店评分
-            try:
+
+                # 商品详细配置描述
+                shop_items = selector.xpath('//*[@id="detail"]/div[2]/div[1]/div[1]/ul[2]/li')
+                shop_list = []
+                for shop_item in shop_items:
+                    shop_list.append(delSpecialChars(shop_item.xpath('./text()')[0]))
+                # 商店评分
                 store_score = delSpecialChars(selector.xpath('//*[@id="crumb-wrap"]/div/div[2]/div[2]/div[2]/div/div/div/div/@title')[0])
-            except IndexError:
-                store_score = '5.0'
 
-            prod_dict = {'prod_store':prod_store,'prod_price':prod_price,'prod_url':prod_url,
-                         'store_url':store_url,'store_rates':store_rates,'prod_name':prod_name,
-                         'shop_list':str(shop_list),'store_score':store_score,'add_time':now_time,
-                         'prod_id':prod_id,'store_id':store_id}
-            try:
-                if int(prod_price) >= 1000 and prod_name != '':
+                prod_dict = {'prod_store':prod_store,'prod_price':prod_price,'prod_url':prod_url,
+                             'store_url':store_url,'store_rates':store_rates,'prod_name':prod_name,
+                             'shop_list':str(shop_list),'store_score':store_score,'add_time':now_time,
+                             'prod_id':prod_id,'store_id':store_id}
+                if(int(prod_price) >= 1000):
                     product_list.append(prod_dict)
-            except ValueError:
-                print('不符合条件的商品')
-            print("产品信息：" + str(prod_dict))
-
-            #print(prod_dict)
+                print("产品信息：" + str(prod_dict))
+            except BaseException:
+                print('商品信息不符合条件')
 
     # 关闭driver
     driver.quit()
@@ -106,19 +101,18 @@ def JDCarsInfo(car_name):
 
 
 if __name__ == '__main__':
-    car_names =['雅迪电动车','小牛电动车','绿源电动车','小刀电动车','台铃电动车',
-                '比德文电动车','立马电动车','新大洲电动车','新日电动车']
-    # car_names = ['新日电动车']
+    car_names =['新大洲电动车','小牛电动车','绿源电动车','新日电动车','小刀电动车','台铃电动车','比德文电动车','立马电动车','雅迪电动车']
+
     # 爬取商品数据
-    for car_name in car_names:
-        prod_results = JDCarsInfo(car_name)
-        fileUtils().saveAsCsv(prod_results,'./Data/Products/{0}'.format(car_name))
+    # for car_name in car_names:
+    #     prod_results = JDCarsInfo(car_name)
+    #     fileUtils().saveAsCsv(prod_results,'./Data/Products/{0}'.format(car_name))
 
     # 建表
     resData = pd.read_csv('./Data/Products/新日电动车.csv',encoding='utf-8')
     resData = resData.astype(object).where(pd.notnull(resData), None)
-    createTable(resData,'spider','pt_tm_ec_products_info')
+    createTable(resData,'spider','pt_jd_ec_products_info')
 
     # 保存数据
     file_addr = './Data/Products'
-    save_to_mysql(file_addr,'spider','pt_tm_ec_products_info')
+    save_to_mysql(file_addr,'spider','pt_jd_ec_products_info')

@@ -46,5 +46,5 @@ class fileUtils():
             list.append(child)
         return list
 
-# a = fileUtils().getCsvFile("D:\Maven\PyScrapy\Yadea\CompetitiveBrandStoreArea\Datas\XingRi\新日.csv")
+# a = fileUtils().getCsvFile("D:\Maven\PyScrapy\Yadea\CompetitiveBrandStoreArea\Data\XingRi\新日.csv")
 # print(a)
