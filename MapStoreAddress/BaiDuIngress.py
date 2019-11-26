@@ -25,7 +25,7 @@ now_time = datetime.datetime.now().strftime('%Y-%m-%d')
 def BaiDuStoreInfo(queryKey,stores_list):
     url = 'https://map.baidu.com'
     option = webdriver.ChromeOptions()
-    option.add_argument('headless')
+    # option.add_argument('headless')
     # 要换成适应自己操作系统的chromedriver
     driver = webdriver.Chrome(
         executable_path='./chromedriver.exe',
@@ -35,7 +35,7 @@ def BaiDuStoreInfo(queryKey,stores_list):
     # 打开网站
     driver.get(url)
 
-    citys = fileUtils().getCsvFile('D:\Maven\YadeaSpider\MapStoreAddress\Data\Baidu_cityCode.csv')
+    citys = fileUtils().getCsvFile('./Data/Baidu_cityCode.csv')
     for city in citys:
         querycity = city[1]
         # 在搜索框中输入文字
@@ -119,7 +119,7 @@ def BaiDuStoreInfo(queryKey,stores_list):
 
 if __name__ == '__main__':
     # 查询条件
-    queryKeys =['小刀','台铃','小牛','立马','新大洲','新蕾','金箭',
+    queryKeys =['小牛','立马','新大洲','新蕾','金箭','小刀','台铃',
                 '倍特','杰宝大王','绿佳','绿驹','玉骑铃','比德文','雅迪','爱玛','绿源','新日']
     for queryKey in queryKeys:
         stores_list = []
@@ -129,10 +129,10 @@ if __name__ == '__main__':
         # print(stores_list)
 
     # 建表
-    # resData = pd.read_csv('D:\Maven\YadeaSpider\MapStoreAddress\Data\Stores\小刀.csv',encoding='utf-8')
-    # resData = resData.astype(object).where(pd.notnull(resData), None)
-    # createTable(resData,'dim','bd_store_info','127')
+    resData = pd.read_csv('./Data/Stores/小刀.csv',encoding='utf-8')
+    resData = resData.astype(object).where(pd.notnull(resData), None)
+    createTable(resData,'dim','bd_store_info','127')
 
     # 保存数据
-    # file_addr = './Data/Stores'
-    # save_to_mysql(file_addr,'dim','bd_store_info','127')
+    file_addr = './Data/Stores'
+    save_to_mysql(file_addr,'dim','bd_store_info','127')
