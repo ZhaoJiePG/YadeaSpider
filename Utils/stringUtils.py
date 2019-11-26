@@ -2,6 +2,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 import re
+from pypinyin import lazy_pinyin, pinyin
 
 # 字符串%unicode解码中文
 def unicode2str(str):
@@ -16,4 +17,11 @@ def unicode2str(str):
 def delSpecialChars(str):
     return str.replace('\n','').replace(' ','').replace('(','').replace(')','').replace('\xa0', '')
 
+# 中文转拼音
+def str2pinyon(str):
+    res = ''
+    py_list=lazy_pinyin(str)
+    for py in py_list:
+        res=res+py
 
+    return res

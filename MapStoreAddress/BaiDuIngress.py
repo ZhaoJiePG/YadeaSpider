@@ -17,6 +17,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from Utils.fileUtils import fileUtils
 from Utils.mysqlUtils import createTable, save_to_mysql
+from Utils.stringUtils import str2pinyon
 
 now_time = datetime.datetime.now().strftime('%Y-%m-%d')
 
@@ -125,7 +126,7 @@ if __name__ == '__main__':
         stores_list = []
         BaiDuStoreInfo(queryKey,stores_list)
         # 保存数据到文件
-        fileUtils().saveAsCsv(stores_list, './Data/Stores/{0}'.format(queryKey))
+        fileUtils().saveAsCsv(stores_list, './Data/Stores/{0}'.format(str2pinyon(queryKey)))
         # print(stores_list)
 
     # 建表

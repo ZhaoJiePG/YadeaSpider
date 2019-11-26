@@ -203,7 +203,7 @@ def praseShangHaiYouSe(url_list):
         # 解析
         selector = etree.HTML(context)
         name = selector.xpath('/html/body/div[1]/div[2]/div[1]/div/div[1]/div/div[1]/div/p[1]/text()')[0]
-        name = name.replace('\r','').replace('\n','')
+        name = name.replace('\r','').replace('\n','').replace(' ','')
         date = selector.xpath('/html/body/div[1]/div[2]/div[1]/div/div[3]/div[2]/ul/table/tbody/tr[1]/td[1]/text()')
         price = selector.xpath('/html/body/div[1]/div[2]/div[1]/div/div[3]/div[2]/ul/table/tbody/tr[1]/td[3]/text()')
         price = (str(price[0]).replace('\n','').replace('\r','').replace(' ',''))
@@ -402,4 +402,4 @@ if __name__ == '__main__':
 
     print(data_6)
     # 保存mysql
-    saveToMysql(data_5)
+    saveToMysql(data_6)

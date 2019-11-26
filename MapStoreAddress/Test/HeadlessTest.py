@@ -20,17 +20,17 @@ driver = webdriver.Chrome(
 
 
 # option.add_argument('headless')
-url = 'http://weixin.sogou.com/weixin?type=1&s_from=input&query=买塑观察'
+url = 'https://mp.weixin.qq.com/s/Q7Vy8MkgD2GROWQInJUXEQ'
 
 
 # 打开网站
 driver.get(url)
 
 # 模拟点击“搜索”
-search_button = WebDriverWait(driver, timeout).until(
-    lambda d: d.find_element_by_xpath('//li[@id="sogou_vr_11002301_box_0"]/dl[3]/dd/a'))
-search_button.click()
-sleep(2)
+# search_button = WebDriverWait(driver, timeout).until(
+#     lambda d: d.find_element_by_xpath('//div[@id="WXAPPMSG1000000321"]/div/h4'))
+# search_button.click()
+# sleep(2)
 
 # 切换页面
 window_handles = driver.window_handles
