@@ -218,48 +218,67 @@ def praseShangHaiYouSe(url_list):
 def praseMaiSu():
     # 保存表数据
     table = []
-    timeout = 2
+    timeout=2
     option = webdriver.ChromeOptions()
     # option.add_argument('headless')
     # 要换成适应自己操作系统的chromedriver
-    driver = webdriver.Chrome(
-        executable_path='../chromedriver.exe',
-        chrome_options=option)
-
+    driver = webdriver.Chrome(executable_path='../chromedriver.exe',chrome_options=option)
     # option.add_argument('headless')
-    url = 'http://weixin.sogou.com/weixin?type=1&s_from=input&query=买塑观察'
 
-    # 打开网站
-    driver.get(url)
+    index = 250
+    while True :
+        url = 'https://weixin.sogou.com/weixin?type=2&s_from=input&query=买塑观察 第{}期'.format(index)
+        driver.get(url)
+        index = index-1
 
-    # 模拟点击“搜索”
-    search_button = WebDriverWait(driver, timeout).until(
-        lambda d: d.find_element_by_xpath('//li[@id="sogou_vr_11002301_box_0"]/dl[3]/dd/a'))
-    search_button.click()
-    sleep(2)
+        # 模拟点击“搜索”
+        try:
+            search_button = WebDriverWait(driver, timeout).until(
+                lambda d: d.find_element_by_xpath('//a[@id="sogou_vr_11002601_title_0"]'))
+            search_button.click()
+        except BaseException:
+            print('当前网页数据不匹配')
+            continue
 
-    # 切换页面
-    window_handles = driver.window_handles
-    # 切换到右边的下一个页面
-    driver.switch_to.window(window_handles[-1])
+        driver.close()
 
-    # print(driver.page_source)
-    xpath_date = etree.HTML(driver.page_source)
-    name = 'ABS塑件'+'('+str(xpath_date.xpath('//div[@id="js_content"]/table[14]/tbody/tr/td[1]/span/strong/text()')[0])+')'
-    area = xpath_date.xpath('//*[@id="js_content"]/table[14]/tbody/tr/td[2]/span/text()')[0]
-    price = xpath_date.xpath('//*[@id="js_content"]/table[14]/tbody/tr/td[3]/span/text()')[0]
-    price = price.replace(',','')
-    table.append({'name': name, 'area': area, 'date': now_time, 'price': price,'add_time': now_time})
+        # 切换页面右边
+        window_handles = driver.window_handles
+        driver.switch_to.window(window_handles[-1])
+        # print(driver.page_source)
+        xpath_date = etree.HTML(driver.page_source)
 
-    xpath_date = etree.HTML(driver.page_source)
-    name = 'PC灯具/仪表'+'('+str(xpath_date.xpath('//*[@id="js_content"]/table[23]/tbody/tr/td[1]/span/strong/text()')[0])+')'
-    area = xpath_date.xpath('//*[@id="js_content"]/table[23]/tbody/tr/td[2]/span/text()')[0]
-    price = xpath_date.xpath('//*[@id="js_content"]/table[23]/tbody/tr/td[3]/span/text()')[0]
-    price = price.replace(',', '')
-    table.append({'name': name, 'area': area, 'date': now_time, 'price': price,'add_time': now_time})
+        print('当前的期数为：'+str(index+1))
+        qi_key = ''
+        try:
+            qi_key = xpath_date.xpath('//div[@id="js_content"]/section[1]/section/section/p[2]/strong/span[1]/text()')[0]
+        except IndexError:
+            print('当前网页数据不匹配')
+            continue
 
-    driver.close()
+        print('实际期数：'+qi_key)
+        if int(index+1) == int(qi_key):
+            xpath_date = etree.HTML(driver.page_source)
+            name = 'ABS塑件'+'('+str(xpath_date.xpath('//div[@id="js_content"]/table[14]/tbody/tr/td[1]/span/strong/text()')[0])+')'
+            area = xpath_date.xpath('//*[@id="js_content"]/table[14]/tbody/tr/td[2]/span/text()')[0]
+            price = xpath_date.xpath('//*[@id="js_content"]/table[14]/tbody/tr/td[3]/span/text()')[0]
+            price = price.replace(',','')
+            table.append({'name': name, 'area': area, 'date': now_time, 'price': price,'add_time': now_time})
+
+            xpath_date = etree.HTML(driver.page_source)
+            name = 'PC灯具/仪表'+'('+str(xpath_date.xpath('//*[@id="js_content"]/table[23]/tbody/tr/td[1]/span/strong/text()')[0])+')'
+            area = xpath_date.xpath('//*[@id="js_content"]/table[23]/tbody/tr/td[2]/span/text()')[0]
+            price = xpath_date.xpath('//*[@id="js_content"]/table[23]/tbody/tr/td[3]/span/text()')[0]
+            price = price.replace(',', '')
+            table.append({'name': name, 'area': area, 'date': now_time, 'price': price,'add_time': now_time})
+
+            driver.quit()
+            break
+        else:
+            print('当前网页数据不匹配')
+            continue
     return table
+
 
 # 保存csv格式
 def saveAsCsv(data, name):
@@ -371,13 +390,7 @@ if __name__ == '__main__':
         print("网页正常")
 
     # 获取微信买塑网
-    try:
-        maiSuData = praseMaiSu()
-    except IndexError:
-        print("Error: 没有找到网页内容")
-    else:
-        saveAsCsv(praseMaiSu(), '6')
-        print("网页正常")
+    saveAsCsv(praseMaiSu(), '6')
 
     # 获取上海有色网url
     shangHaiYouSeUrl = getUrlList('./Data/RawUrl.csv', '上海有色网')
