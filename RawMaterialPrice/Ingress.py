@@ -259,14 +259,14 @@ def praseMaiSu():
         print('实际期数：'+qi_key)
         if int(index+1) == int(qi_key):
             xpath_date = etree.HTML(driver.page_source)
-            name = 'ABS塑件'+'('+str(xpath_date.xpath('//div[@id="js_content"]/table[14]/tbody/tr/td[1]/span/strong/text()')[0])+')'
+            name = 'ABS'+'('+str(xpath_date.xpath('//div[@id="js_content"]/table[14]/tbody/tr/td[1]/span/strong/text()')[0])+')'
             area = xpath_date.xpath('//*[@id="js_content"]/table[14]/tbody/tr/td[2]/span/text()')[0]
             price = xpath_date.xpath('//*[@id="js_content"]/table[14]/tbody/tr/td[3]/span/text()')[0]
             price = price.replace(',','')
             table.append({'name': name, 'area': area, 'date': now_time, 'price': price,'add_time': now_time})
 
             xpath_date = etree.HTML(driver.page_source)
-            name = 'PC灯具/仪表'+'('+str(xpath_date.xpath('//*[@id="js_content"]/table[23]/tbody/tr/td[1]/span/strong/text()')[0])+')'
+            name = 'PC'+'('+str(xpath_date.xpath('//*[@id="js_content"]/table[23]/tbody/tr/td[1]/span/strong/text()')[0])+')'
             area = xpath_date.xpath('//*[@id="js_content"]/table[23]/tbody/tr/td[2]/span/text()')[0]
             price = xpath_date.xpath('//*[@id="js_content"]/table[23]/tbody/tr/td[3]/span/text()')[0]
             price = price.replace(',', '')
