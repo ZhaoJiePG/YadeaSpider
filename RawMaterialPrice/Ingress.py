@@ -252,12 +252,16 @@ def praseMaiSu():
         qi_key = ''
         try:
             qi_key = xpath_date.xpath('//div[@id="js_content"]/section[1]/section/section/p[2]/strong/span[1]/text()')[0]
+            print('实际期数：' + qi_key)
+            qi_key = int(qi_key)
         except IndexError:
             print('当前网页数据不匹配')
             continue
+        except ValueError:
+            print('当前网页数据不匹配')
+            continue
 
-        print('实际期数：'+qi_key)
-        if int(index+1) == int(qi_key):
+        if int(index+1) == qi_key:
             xpath_date = etree.HTML(driver.page_source)
             name = 'ABS'+'('+str(xpath_date.xpath('//div[@id="js_content"]/table[14]/tbody/tr/td[1]/span/strong/text()')[0])+')'
             area = xpath_date.xpath('//*[@id="js_content"]/table[14]/tbody/tr/td[2]/span/text()')[0]
