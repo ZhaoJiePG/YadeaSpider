@@ -26,7 +26,7 @@ def TMCarsInfo(car_name):
     option.add_argument('headless')
     option.add_argument('incognito')
     driver = webdriver.Chrome(
-        executable_path='D:\Maven\YadeaSpider\Ecommerce\Data\chromedriver.exe',
+        executable_path='D:\Maven\YadeaSpider\chromedriver.exe',
         chrome_options=option)
     # 请求的url
     url = 'https://list.tmall.com/search_product.htm?q={0}'.format(car_name)
@@ -78,7 +78,7 @@ def TMCarsInfo(car_name):
                 res_score = delSpecialChars(score.xpath('./div[1]/text()')[0])+delSpecialChars(score.xpath('./div[2]/span/text()')[0])
                 score_list.append(res_score)
             # 收藏人气
-            # popularity = re.findall('(\d+)人气',str(prod_reponse))[0]
+            popularity = '/html/body/div[5]/div/div[2]/div/div[1]/div[2]/p/span[2]'
             # 保存明细
             prod_dict = {'car_name':car_name,'add_time':now_time,'prod_url':prod_url,'prod_title':prod_title,'store_url':store_url,
                          'prod_price':prod_price,'prod_store':prod_store,'prod_msale':prod_msale,'prod_rates':prod_rates,
@@ -97,17 +97,17 @@ def TMCarsInfo(car_name):
 if __name__ == '__main__':
     car_names =['雅迪电动车','新日电动车','小牛电动车','绿源电动车','小刀电动车','台铃电动车',
                 '比德文电动车','立马电动车','新大洲电动车','杰宝大王电动车']
-    # car_names =['电动车']
+    car_names =['电动车']
     # 爬取商品数据
-    # for car_name in car_names:
-    #     prod_results = TMCarsInfo(car_name)
-    #     fileUtils().saveAsCsv(prod_results,'./Data/Products/{0}'.format(car_name))
+    for car_name in car_names:
+        prod_results = TMCarsInfo(car_name)
+        fileUtils().saveAsCsv(prod_results,'./Data/Products/{0}'.format(car_name))
 
-    # 建表
-    resData = pd.read_csv('./Data/Products/台铃电动车.csv',encoding='utf-8')
-    resData = resData.astype(object).where(pd.notnull(resData), None)
-    createTable(resData,'spider','pt_tm_ec_products_info')
-
-    # 保存数据
-    file_addr = './Data/Products'
-    save_to_mysql(file_addr,'spider','pt_tm_ec_products_info')
+    # # 建表
+    # resData = pd.read_csv('./Data/Products/台铃电动车.csv',encoding='utf-8')
+    # resData = resData.astype(object).where(pd.notnull(resData), None)
+    # createTable(resData,'spider','pt_tm_ec_products_info',154)
+    #
+    # # 保存数据
+    # file_addr = './Data/Products'
+    # save_to_mysql(file_addr,'spider','pt_tm_ec_products_info',154)
