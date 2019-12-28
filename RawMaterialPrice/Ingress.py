@@ -226,7 +226,7 @@ def praseMaiSu():
     driver = webdriver.Chrome(executable_path='../chromedriver.exe', chrome_options=option)
     # option.add_argument('headless')
 
-    index = 206
+    index = 213
     while True:
         url = 'https://weixin.sogou.com/weixin?type=2&s_from=input&query=买塑观察 第{}期'.format(index)
         driver.get(url)
@@ -242,7 +242,7 @@ def praseMaiSu():
             continue
 
         driver.close()
-
+        
         # 切换页面右边
         window_handles = driver.window_handles
         driver.switch_to.window(window_handles[-1])

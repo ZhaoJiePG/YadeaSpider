@@ -102,4 +102,3 @@ def save_to_mysql(file_addr,database_name,table_name,port):
                 print("当前商品不符合规则")
 
             sleep(2)
-

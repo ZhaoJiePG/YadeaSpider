@@ -5,6 +5,7 @@ import datetime
 import re
 from time import sleep
 
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from lxml import etree
@@ -15,6 +16,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from Utils.fileUtils import fileUtils
+from Utils.mysqlUtils import createTable, save_to_mysql
 from Utils.stringUtils import delSpecialChars
 
 add_time = datetime.datetime.now().strftime('%Y-%m-%d')
@@ -141,9 +143,18 @@ def TMProductInfos(topic_list):
                 break
             sleep(3)
             driver2.quit()
-        fileUtils().saveAsCsv(products_lists,'./Data/Products/{0}'.format(topic))
+        fileUtils().saveAsCsv(products_lists,'./Data/Product/{0}'.format(topic))
     driver.quit()
 
 if __name__ == '__main__':
     topic_list=['雅迪','新日','小牛','绿源','小刀','台铃','比德文','立马','新大洲','杰宝大王']
     TMProductInfos(topic_list)
+
+    # 建表
+    resData = pd.read_csv('./Data/Product/新日.csv',encoding='utf-8')
+    resData = resData.astype(object).where(pd.notnull(resData), None)
+    createTable(resData,'spider','pt_tm_ec_products_info',154)
+
+    # 保存数据
+    file_addr = './Data/Product'
+    save_to_mysql(file_addr,'spider','pt_tm_ec_products_info',154)

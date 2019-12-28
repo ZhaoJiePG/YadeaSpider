@@ -1,6 +1,7 @@
 # Author:Aliex ZJ
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
+import json
 from time import sleep
 
 from selenium import webdriver
@@ -58,35 +59,50 @@ class taobao_infos:
 
 
         # 点击账号进入购物车
-        submit = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.site-nav-login-info-nick')))
-        submit.click()
-        submit = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.mt-menu-item > dd > a')))
-        submit.click()
+        # submit = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.site-nav-login-info-nick')))
+        # submit.click()
+        # submit = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '.mt-menu-item > dd > a')))
+        # submit.click()
 
         # 选择购买
-        sleep(5)
-        submit = self.browser.find_element_by_xpath('/html/body/div[1]/div[2]/div[2]/div/div[2]/div[1]/div/div[1]/div/div/label')
-        submit.click()
-        submit = self.browser.find_element_by_xpath('//html/body/div[1]/div[2]/div[2]/div/div[4]/div[2]/div[3]/div[5]/a/span')
-        submit.click()
+        # sleep(5)
+        # submit = self.wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, '#J_SelectAll1 > .cart-checkbox')))
+        # submit.click()
+        # submit = self.browser.find_element_by_xpath('/html/body/div[1]/div[2]/div[2]/div/div[4]/div[2]/div[3]/div[5]/a')
+        # submit.click()
 
+        # 这里是为了等待手机扫码登录, 登录后回车即可
+        input("请回车登录")
+        dictCookies = self.browser.get_cookies()
+        jsonCookies = json.dumps(dictCookies)
+        # 登录完成后,将cookies保存到本地文件
+        with open("./cookies_tao.json", "w") as fp:
+            fp.write(jsonCookies)
 
-
-
-
-    # 使用教程：
-# 1.下载chrome浏览器:https://www.google.com/chrome/
-# 2.查看chrome浏览器的版本号，下载对应版本号的chromedriver驱动:http://chromedriver.storage.googleapis.com/index.html
-# 3.填写chromedriver的绝对路径
-# 4.执行命令pip install selenium
-# 5.打开https://account.weibo.com/set/bindsns/bindtaobao并通过微博绑定淘宝账号密码
+        a.browser.quit()
 
 if __name__ == "__main__":
+    chromedriver_path = "D:\Maven\YadeaSpider\chromedriver.exe"
+    weibo_username = "18168546559"
+    weibo_password = "zj123!"
 
+    #登录
+    # a = taobao_infos()
+    # a.login()
 
-    chromedriver_path = "D:\Maven\YadeaSpider\chromedriver.exe" #改成你的chromedriver的完整路径地址
-    weibo_username = "18168546559" #改成你的微博账号
-    weibo_password = "zj123!" #改成你的微博密码
-
-    a = taobao_infos()
-    a.login() #登录
+    # 使用cookie跳转
+    b = taobao_infos()
+    # 删除第一次登录是储存到本地的cookie
+    b.browser.delete_all_cookies()
+    # 读取登录时储存到本地的cookie
+    with open("D:\Maven\YadeaSpider\SpliderMethods\cookies_tao.json", "r", encoding="utf8") as fp:
+        ListCookies = json.loads(fp.read())
+    for cookie in ListCookies:
+        b.browser.add_cookie({
+            'domain': '.taobao.com',  # 此处xxx.com前，需要带点
+            'name': cookie['name'],
+            'value': cookie['value'],
+            'path': '/',
+            'expires': None
+        })
+    b.browser.get('https://detail.tmall.com')

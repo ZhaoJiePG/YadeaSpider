@@ -106,13 +106,13 @@ if __name__ == '__main__':
     # 爬取商品数据
     # for car_name in car_names:
     #     prod_results = JDCarsInfo(car_name)
-    #     fileUtils().saveAsCsv(prod_results,'./Data/Products/{0}'.format(car_name))
+    #     fileUtils().saveAsCsv(prod_results,'./Data/Product/{0}'.format(car_name))
 
     # 建表
-    resData = pd.read_csv('./Data/Products/新日电动车.csv',encoding='utf-8')
+    resData = pd.read_csv('./Data/Product/新日电动车.csv',encoding='utf-8')
     resData = resData.astype(object).where(pd.notnull(resData), None)
     createTable(resData,'spider','pt_jd_ec_products_info')
 
     # 保存数据
-    file_addr = './Data/Products'
+    file_addr = './Data/Product'
     save_to_mysql(file_addr,'spider','pt_jd_ec_products_info')
