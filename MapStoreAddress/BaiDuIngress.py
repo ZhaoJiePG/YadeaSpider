@@ -130,10 +130,10 @@ if __name__ == '__main__':
         # print(stores_list)
 
     # 建表
-    resData = pd.read_csv('./Data/Stores/小刀.csv',encoding='utf-8')
+    resData = pd.read_csv('./Data/Stores/xiaodao.csv',encoding='utf-8')
     resData = resData.astype(object).where(pd.notnull(resData), None)
-    createTable(resData,'dim','bd_store_info','127')
+    createTable(resData,'spider','bd_store_info','232')
 
     # 保存数据
     file_addr = './Data/Stores'
-    save_to_mysql(file_addr,'dim','bd_store_info','127')
+    save_to_mysql(file_addr,'spider','bd_store_info','232')
