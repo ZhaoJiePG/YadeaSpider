@@ -2,7 +2,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 import re
-from pypinyin import lazy_pinyin, pinyin
+# from pypinyin import lazy_pinyin, pinyin
 
 # 字符串%unicode解码中文
 def unicode2str(str):

@@ -26,7 +26,7 @@ option.add_argument('--proxy--server=127.0.0.1:8080')
 # 防止机器识别
 # option.add_experimental_option('excludeSwitches', ['enable-automation'])
 option.add_experimental_option("prefs", {"profile.managed_default_content_settings.images": 2})
-option.add_argument('headless')
+# option.add_argument('headless')
 
 # 要换成适应自己操作系统的chromedriver
 dirver = webdriver.Chrome(
