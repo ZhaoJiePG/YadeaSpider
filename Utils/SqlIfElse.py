@@ -3,13 +3,10 @@
 # -*- coding:utf-8 -*-
 
 str_list=[
-    'b.dealer_code',
-    'b.dealer_name',
-    'b.store_code',
-    'b.store_name',
-    'b.store_grade',
-    'b.store_province',
-    'b.store_city'
+    'a.battery_code_hy',
+    'a.battery_name_hy',
+    'a.charge_code_hy',
+    'a.charge_name_hy'
 ]
 res_list = ""
 for str in str_list:
