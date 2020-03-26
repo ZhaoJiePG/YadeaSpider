@@ -1,8 +1,19 @@
 # Author:Aliex ZJ
 # -*- coding:utf-8 -*-
 import datetime
+import os
 import random
 from time import sleep
+import json
+import requests
+import base64
+from io import BytesIO
+from PIL import Image
+from sys import version_info
+from PIL import Image
+import os
+
+from pandas.errors import EmptyDataError
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 import pandas as pd
@@ -12,6 +23,25 @@ import requests
 
 now_time = datetime.datetime.now().strftime('%Y-%m-%d')
 
+# 图片验证码解析
+def base64_api(uname, pwd, img):
+    img = img.convert('RGB')
+    buffered = BytesIO()
+    img.save(buffered, format="JPEG")
+    if version_info.major >= 3:
+        b64 = str(base64.b64encode(buffered.getvalue()), encoding='utf-8')
+    else:
+        b64 = str(base64.b64encode(buffered.getvalue()))
+    data = {"username": uname, "password": pwd, "image": b64}
+    result = json.loads(requests.post("http://api.ttshitu.com/base64", json=data).text)
+    if result['success']:
+        return result["data"]["result"]
+    else:
+        return result["message"]
+    return ""
+
+def delSpecialChars(str):
+    return str.replace('\n','').replace(' ','').replace('(','').replace(')','').replace('\xa0', '').replace('\t','')
 
 # 获取csv网址
 def getUrlList(csv_path, url_name):
@@ -26,6 +56,69 @@ def getUrlList(csv_path, url_name):
             url_list.append({url_info[1]: [url_info[0], url_info[2]]})
 
     return url_list
+
+# 保存csv格式
+def saveAsCsv(data, name):
+    df = pd.DataFrame(data)
+    df.to_csv('./Data/{0}.csv'.format(name), sep=',', header=True, index=False, encoding='utf-8')
+    print('{0}.csv'.format(name)+"保存成功")
+
+# 保存数据到mysql
+def insertIntoMysql(data,databaseName,tableName,port):
+    config = dict(host='10.149.1.{0}'.format(port), user='root', password='root',
+                  cursorclass=pymysql.cursors.DictCursor)
+    # 建立连接
+    conn = pymysql.Connect(**config)
+    print(conn)
+    # 自动确认commit True
+    conn.autocommit(1)
+    # 设置光标
+    cursor = conn.cursor()
+    # # 选择连接database
+    conn.select_db(databaseName)
+    # 提取数据转list 这里有与pandas时间模式无法写入因此换成str 此时mysql上格式已经设置完成
+    # df['日期'] = df['日期'].astype('str')
+    values = data.values.tolist()
+    # 根据columns个数
+    s = ','.join(['%s' for _ in range(len(data.columns))])
+    # executemany批量操作 插入数据 批量操作比逐个操作速度快很多
+    cursor.executemany('INSERT INTO {} VALUES ({})'.format(tableName, s), values)
+
+def truncateTable(databaseName,tableName,port):
+    config = dict(host='10.149.1.{0}'.format(port), user='root', password='root',
+                  cursorclass=pymysql.cursors.DictCursor)
+    # 建立连接
+    conn = pymysql.Connect(**config)
+    print(conn)
+    # 自动确认commit True
+    conn.autocommit(1)
+    # 设置光标
+    cursor = conn.cursor()
+    # # 选择连接database
+    conn.select_db(databaseName)
+    truncate_sql = "DELETE FROM {0} WHERE add_time='{1}'".format(tableName,now_time)
+    print(truncate_sql)
+    cursor.execute(truncate_sql)
+
+def save_to_mysql(file_addr,database_name,table_name,port):
+    # 清空数据
+    for dirs in os.walk(file_addr):
+        fileList = dirs[2]
+        for fileName in fileList:
+            # 读取每个文件
+            csvFile=file_addr+'/{0}'.format(fileName)
+            print('开始存储'+str(csvFile)+'数据到mysql')
+            try:
+                resData = pd.read_csv(csvFile,encoding='utf-8')
+                # 去除空值
+                resData = resData.astype(object).where(pd.notnull(resData), None)
+                print(resData)
+                # 插入数据库
+                insertIntoMysql(resData,database_name,table_name,port)
+            except EmptyDataError:
+                print("当前商品不符合规则")
+
+            sleep(2)
 
 # 解析中国商务网1  日期-产品-规格-价格
 def praseChinaBusiness1(url_list):
@@ -220,15 +313,15 @@ def praseMaiSu():
     # 保存表数据
     table = []
     timeout = 2
-    option = webdriver.ChromeOptions()
-    # option.add_argument('headless')
-    # 要换成适应自己操作系统的chromedriver
-    driver = webdriver.Chrome(executable_path='../chromedriver.exe', chrome_options=option)
-    # option.add_argument('headless')
 
-    index = 213
+    index = 230
     while True:
         url = 'https://weixin.sogou.com/weixin?type=2&s_from=input&query=买塑观察 第{}期'.format(index)
+        option = webdriver.ChromeOptions()
+        # option.add_argument('headless')
+        # 要换成适应自己操作系统的chromedriver
+        driver = webdriver.Chrome(executable_path='../chromedriver.exe', chrome_options=option)
+        # option.add_argument('headless')
         driver.get(url)
         index = index - 1
 
@@ -288,65 +381,203 @@ def praseMaiSu():
             continue
     return table
 
-# 保存csv格式
-def saveAsCsv(data, name):
-    df = pd.DataFrame(data)
-    df.to_csv('./Data/{0}.csv'.format(name), sep=',', header=True, index=False, encoding='utf-8')
-    print('{0}.csv'.format(name)+"保存成功")
+# 我的钢铁网
+def praseMySTeel():
 
-# 保存数据到mysql
-def saveToMysql(data):
-    config = dict(host='10.149.1.154', user='root', password='root',
-                  cursorclass=pymysql.cursors.DictCursor)
-    # 建立连接
-    conn = pymysql.Connect(**config)
-    print(conn)
-    # 自动确认commit True
-    conn.autocommit(1)
-    # 设置光标
-    cursor = conn.cursor()
+    # 保存表数据
+    table = []
 
-    def make_table_sql(df):
-        columns = df.columns.tolist()
-        types = df.ftypes
-        # 添加id 制动递增主键模式
-        make_table = []
-        for item in columns:
-            if 'int' in types[item]:
-                char = item + ' BIGINT'
-            elif 'float' in types[item]:
-                char = item + ' FLOAT'
-            elif 'object' in types[item]:
-                char = item + ' VARCHAR(255)'
-            elif 'datetime' in types[item]:
-                char = item + ' DATETIME'
-            make_table.append(char)
-        return ','.join(make_table)
+    option = webdriver.ChromeOptions()
+    # option.add_argument('headless')
+    driver = webdriver.Chrome(executable_path='../chromedriver.exe', chrome_options=option)
+    # 模拟登陆
+    driver.get('https://jiegougang.mysteel.com/')
+    driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/span').click()
+    # 账号密码
+    userName = driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/form/div[2]/input")
+    userName.send_keys('xinzhi')
+    password = driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/form/div[3]/input[1]")
+    password.send_keys('88920398')
+    login = driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div/form/div[7]')
+    login.click()
 
-    def csv2mysql(db_name, table_name, df):
-        # 创建database
-        # cursor.execute('CREATE DATABASE IF NOT EXISTS {}'.format(db_name))
-        # 选择连接database
-        conn.select_db(db_name)
-        # 创建table
-        # cursor.execute('DROP TABLE IF EXISTS {}'.format(table_name))
-        # cursor.execute('CREATE TABLE {}({})'.format(table_name,make_table_sql(df)))
-        # 删除今日数据
-        truncate_sql = 'DELETE FROM {0} where add_time={1}'.format(table_name, "\"" + now_time + "\"")
-        cursor.execute(truncate_sql)
-        # 提取数据转list 这里有与pandas时间模式无法写入因此换成str 此时mysql上格式已经设置完成
-        # df['日期'] = df['日期'].astype('str')
-        values = df.values.tolist()
-        # 根据columns个数
-        s = ','.join(['%s' for _ in range(len(df.columns))])
-        # executemany批量操作 插入数据 批量操作比逐个操作速度快很多
-        cursor.executemany('INSERT INTO {} VALUES ({})'.format(table_name, s), values)
+    mySteelUrls = getUrlList('./Data/RawUrl.csv', '我的钢铁网')
 
-    csv2mysql('test', 'RawPrice', data)
-    conn.close()
+    #1.Cr系合结钢(40CrΦ20-28)
+    stellurl1 = mySteelUrls[0]
+    origin_name = stellurl1['我的钢铁网'][0]
+    steelUrl = stellurl1['我的钢铁网'][1]
+    print("爬取材料："+origin_name)
+    sleep(1)
+    driver.get(steelUrl)
+    sleep(1)
+    xpath_date = etree.HTML(driver.page_source)
+    # 数据更新日期
+    date = delSpecialChars(xpath_date.xpath('/html/body/div[8]/div[2]/div[1]/div[1]/text()')[0])[0:10]
+    print(date)
+    tr_list = xpath_date.xpath('//table[@id="marketTable"]/tbody/tr')
+    for tr in tr_list:
+        try:
+            # origin_name = 'Cr系合结钢(40CrΦ20-28)'
+            name = delSpecialChars(tr.xpath('./td[1]/a/text()')[0])
+            paihao = delSpecialChars(tr.xpath('./td[2]/text()')[0])
+            guige = delSpecialChars(tr.xpath('./td[4]/text()')[0])
+            area = delSpecialChars(tr.xpath('./td[5]/text()')[0])
+            real_name = name+'('+guige+')'
+            if(origin_name == real_name and area=='杭钢' and paihao=='40Cr'):
+                price = delSpecialChars(tr.xpath('./td[6]/text()')[0])
+                steelDict = {'name': real_name, 'area': area, 'date': date, 'price': price, 'add_time': now_time}
+                print(steelDict)
+                table.append(steelDict)
+        except BaseException:
+            print("error")
+            continue
 
+    #2.热轧板卷(5.5-11.75*1500*CQ235B)
+    stellurl1 = mySteelUrls[1]
+    origin_name = stellurl1['我的钢铁网'][0]
+    steelUrl = stellurl1['我的钢铁网'][1]
+    print("爬取材料："+origin_name)
+    sleep(1)
+    driver.get(steelUrl)
+    sleep(1)
+    xpath_date = etree.HTML(driver.page_source)
+    # 数据更新日期
+    date = delSpecialChars(xpath_date.xpath('/html/body/div[8]/div[2]/div[1]/div[1]/text()')[0])[0:10]
+    print(date)
+    tr_list = xpath_date.xpath('//table[@id="marketTable"]/tbody/tr')
+    for tr in tr_list:
+        try:
+            # origin_name = 'Cr系合结钢(40CrΦ20-28)'
+            name = delSpecialChars(tr.xpath('./td[1]/a/text()')[0])
+            paihao = delSpecialChars(tr.xpath('./td[3]/text()')[0])
+            guige = delSpecialChars(tr.xpath('./td[2]/text()')[0])
+            area = delSpecialChars(tr.xpath('./td[4]/text()')[0])
+            real_name = name+'('+guige+')'
+            # print(real_name + area)
+            if(origin_name == real_name and area=='鞍钢/本钢' and paihao=='Q235B'):
+                price = delSpecialChars(tr.xpath('./td[5]/text()')[0])
+                steelDict = {'name': real_name, 'area': area, 'date': date, 'price': price, 'add_time': now_time}
+                print(steelDict)
+                table.append(steelDict)
+        except BaseException:
+            print("error")
+            continue
 
-if __name__ == '__main__':
+    #3.冷轧无取向硅钢(0.5*1200*C)
+    stellurl1 = mySteelUrls[2]
+    origin_name = stellurl1['我的钢铁网'][0]
+    steelUrl = stellurl1['我的钢铁网'][1]
+    print("爬取材料："+origin_name)
+    sleep(1)
+    driver.get(steelUrl)
+    sleep(1)
+    xpath_date = etree.HTML(driver.page_source)
+    # 数据更新日期
+    date = delSpecialChars(xpath_date.xpath('/html/body/div[8]/div[2]/div[1]/div[1]/text()')[0])[0:10]
+    print(date)
+    tr_list = xpath_date.xpath('//table[@id="marketTable"]/tbody/tr')
+    for tr in tr_list:
+        try:
+            name = delSpecialChars(tr.xpath('./td[1]/a/text()')[0])
+            paihao = delSpecialChars(tr.xpath('./td[3]/text()')[0])
+            guige = delSpecialChars(tr.xpath('./td[2]/text()')[0])
+            area = delSpecialChars(tr.xpath('./td[4]/text()')[0])
+            real_name = name+'('+guige+')'
+            # print(real_name + area)
+            if(origin_name == real_name and area=='宝钢' and paihao=='B50A350'):
+                price = delSpecialChars(tr.xpath('./td[5]/text()')[0])
+                steelDict = {'name': real_name, 'area': area, 'date': date, 'price': price, 'add_time': now_time}
+                print(steelDict)
+                table.append(steelDict)
+        except BaseException:
+            print("error")
+            continue
+
+    print(table)
+    driver.quit()
+    return table
+
+# 瑞道金属网
+def praseRinDow():
+    table = []
+
+    while True:
+        login_url = 'https://www.ruidow.com/login'
+        option = webdriver.ChromeOptions()
+        # option.add_argument('headless')
+        driver = webdriver.Chrome(executable_path='../chromedriver.exe', chrome_options=option)
+
+        driver.get(login_url)
+
+        # 账号密码
+        userName = driver.find_element_by_xpath("/html/body/div[3]/div/div[2]/div/div/div[2]/div/input")
+        userName.send_keys('hengci')
+        password = driver.find_element_by_xpath("/html/body/div[3]/div/div[2]/div/div/div[3]/div/input")
+        password.send_keys('123321')
+
+        # 保存验证码
+        driver.maximize_window()
+        sleep(1)
+        driver.save_screenshot('screen.png')
+
+        im = Image.open('screen.png')
+
+        # 图片的宽度和高度
+        img_size = im.size
+        print("图片宽度和高度分别是{}".format(img_size))
+        '''
+        裁剪：传入一个元组作为参数
+        元组里的元素分别是：（距离图片左边界距离x， 距离图片上边界距离y，距离图片左边界距离+裁剪框宽度x+w，距离图片上边界距离+裁剪框高度y+h）
+        '''
+        # 截取图片中一块宽和高都是250的
+        x = 940
+        y = 430
+        w = 90
+        h = 30
+        region = im.crop((x, y, x+w, y+h))
+        region.save("screen.png")
+        img_path = "screen.png"
+        img = Image.open(img_path)
+        result = base64_api(uname='luanjing312', pwd='lj940312', img=img)
+        print("验证码是"+result)
+        # 发送验证码并登陆
+        yanzhengma = driver.find_element_by_xpath("/html/body/div[3]/div/div[2]/div/div/div[4]/div/input")
+        yanzhengma.send_keys(result)
+        driver.find_element_by_xpath("/html/body/div[3]/div/div[2]/div/div/div[5]/input").click()
+        sleep(2)
+        try:
+            logininfo = driver.find_element_by_xpath("/html/body/div[3]/div[2]/div/div[2]/div[2]/div/div[1]/span").text
+            print(logininfo)
+        except BaseException:
+            print("验证码不对，继续验证")
+            continue
+        if(logininfo == '瑞资讯SVIP会员'):
+            print("登陆成功")
+            sleep(3)
+            # 请求价格网站
+            ruiRowUrls = getUrlList('./Data/RawUrl.csv', '瑞道金属网')
+            for ruiRowUrl in ruiRowUrls:
+                name = ruiRowUrl['瑞道金属网'][0]
+                url = ruiRowUrl['瑞道金属网'][1]
+                print(name + url)
+                driver.get(url)
+                sleep(1)
+                selector = etree.HTML(driver.page_source)
+                date = selector.xpath('/html/body/div[3]/div/div[2]/div/div[2]/table[1]/tbody/tr[1]/td[1]/text()')[0]
+                price = selector.xpath('/html/body/div[3]/div/div[2]/div/div[2]/table[1]/tbody/tr[1]/td[3]/text()')[0][:-3]
+                area = '全国'
+                steelDict = {'name': name, 'area': area, 'date': date, 'price': price, 'add_time': now_time}
+                print(steelDict)
+                table.append(steelDict)
+            break
+
+        driver.quit()
+
+    return table
+
+#执行爬虫并存储
+def runSpilder():
     # 获取中华商务网1
     chinaBusinessUrl = getUrlList('./Data/RawUrl.csv', '中华商务网1')
     try:
@@ -397,30 +628,31 @@ if __name__ == '__main__':
         saveAsCsv(praseChinaBusiness5(chinaBusinessUrl), '5')
         print("网页正常")
 
-    # 获取微信买塑网
-    saveAsCsv(praseMaiSu(), '6')
-
     # 获取上海有色网url
     shangHaiYouSeUrl = getUrlList('./Data/RawUrl.csv', '上海有色网')
     shangHaiYouSeData = praseShangHaiYouSe(shangHaiYouSeUrl)
     saveAsCsv(shangHaiYouSeData, '7')
 
-    data1 = pd.read_csv('./Data/1.csv')
-    data2 = pd.read_csv('./Data/2.csv')
-    data3 = pd.read_csv('./Data/3.csv')
-    data4 = pd.read_csv('./Data/4.csv')
-    data5 = pd.read_csv('./Data/5.csv')
-    data6 = pd.read_csv('./Data/6.csv')
-    data7 = pd.read_csv('./Data/7.csv')
+    # 我的钢铁网
+    saveAsCsv(praseMySTeel(), '8')
 
-    # 取数据交集
-    data_1 = pd.merge(data1, data2, how='outer')
-    data_2 = pd.merge(data_1, data3, how='outer')
-    data_3 = pd.merge(data_2, data4, how='outer')
-    data_4 = pd.merge(data_3, data5, how='outer')
-    data_5 = pd.merge(data_4, data6, how='outer')
-    data_6 = pd.merge(data_5, data7, how='outer')
+    # 瑞道金属网
+    saveAsCsv(praseRinDow(), '9')
 
-    print(data_6)
+    # 获取微信买塑网
+    saveAsCsv(praseMaiSu(), '6')
+
+if __name__ == '__main__':
+
+    # 爬取数据
+    # runSpilder()
     # 保存mysql
-    saveToMysql(data_6)
+    try:
+        truncateTable('spider','rawprice',154)
+        save_to_mysql('./Data','spider','rawprice',154)
+
+
+        truncateTable('spider','rawprice',127)
+        save_to_mysql('./Data','spider','rawprice',127)
+    except BaseException:
+        print("数据格式不匹配")

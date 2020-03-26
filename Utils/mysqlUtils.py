@@ -61,6 +61,22 @@ def truncateTable(databaseName,tableName,port):
     truncate_sql = 'DELETE FROM {0}'.format(tableName)
     cursor.execute(truncate_sql)
 
+def truncateTableDay(databaseName,tableName,port,time):
+    config = dict(host='10.149.1.{0}'.format(port), user='root', password='root',
+                  cursorclass=pymysql.cursors.DictCursor)
+    # 建立连接
+    conn = pymysql.Connect(**config)
+    print(conn)
+    # 自动确认commit True
+    conn.autocommit(1)
+    # 设置光标
+    cursor = conn.cursor()
+    # # 选择连接database
+    conn.select_db(databaseName)
+    truncate_sql = "DELETE FROM {0} WHERE add_time='{1}'".format(tableName,time)
+    print(truncate_sql)
+    cursor.execute(truncate_sql)
+
 def insertIntoMysql(data,databaseName,tableName,port):
     config = dict(host='10.149.1.{0}'.format(port), user='root', password='root',
                   cursorclass=pymysql.cursors.DictCursor)
@@ -102,3 +118,16 @@ def save_to_mysql(file_addr,database_name,table_name,port):
                 print("当前商品不符合规则")
 
             sleep(2)
+
+def save_to_mysql_file(file_name,database_name,table_name,port):
+    try:
+        resData = pd.read_csv(file_name,encoding='utf-8')
+        # 去除空值
+        resData = resData.astype(object).where(pd.notnull(resData), None)
+        print(resData)
+        # 插入数据库
+        insertIntoMysql(resData,database_name,table_name,port)
+    except EmptyDataError:
+        print("当前商品不符合规则")
+
+    sleep(2)
