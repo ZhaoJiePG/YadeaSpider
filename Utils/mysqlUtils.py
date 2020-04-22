@@ -108,7 +108,7 @@ def save_to_mysql(file_addr,database_name,table_name,port):
             csvFile=file_addr+'/{0}'.format(fileName)
             print('开始存储'+str(csvFile)+'数据到mysql')
             try:
-                resData = pd.read_csv(csvFile,encoding='utf-8')
+                resData = pd.read_csv(csvFile,encoding='utf-8',low_memory=False)
                 # 去除空值
                 resData = resData.astype(object).where(pd.notnull(resData), None)
                 print(resData)
@@ -121,7 +121,7 @@ def save_to_mysql(file_addr,database_name,table_name,port):
 
 def save_to_mysql_file(file_name,database_name,table_name,port):
     try:
-        resData = pd.read_csv(file_name,encoding='utf-8')
+        resData = pd.read_csv(file_name,encoding='utf-8',low_memory=False)
         # 去除空值
         resData = resData.astype(object).where(pd.notnull(resData), None)
         print(resData)
