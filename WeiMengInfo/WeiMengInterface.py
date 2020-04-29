@@ -3,131 +3,12 @@
 # -*- coding:utf-8 -*-
 import datetime
 import json
-import os
-import re
-import time
-
 import pandas
-import pymysql
 import requests
-import logging
 
-from pandas.errors import EmptyDataError
-from pandas.tests.frame.test_validate import dataframe
+from WeiMengInfo.MySqlClient import MySqlClient
 
 now_time = datetime.datetime.now().strftime('%Y-%m-%d')
-
-# logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-from selenium import webdriver
-
-
-# MySql客户端
-class MySqlClient():
-    def __init__(self, port, database):
-        self.port = port
-        self.database = database
-        config = dict(host='10.149.1.{0}'.format(port), user='root', password='root',
-                      cursorclass=pymysql.cursors.DictCursor)
-        # 建立连接
-        self.conn = pymysql.Connect(**config)
-        self.conn.autocommit(1)
-        self.cursor = self.conn.cursor()
-        self.conn.select_db(self.database)
-
-    # 创建表
-    def create_table(self, df, table_name):
-        # 自动确认commit True
-        self.conn.autocommit(1)
-        # 设置光标
-        cursor = self.conn.cursor()
-        # 选择连接database
-        self.conn.select_db(self.database)
-
-        def make_table_sql(df):
-            global char
-            columns = df.columns.tolist()
-            types = df.ftypes
-            # 添加id 制动递增主键模式
-            make_table = []
-            for item in columns:
-                if 'int' in types[item]:
-                    char = item + ' BIGINT'
-                elif 'float' in types[item]:
-                    char = item + ' FLOAT'
-                elif 'object' in types[item]:
-                    char = item + ' VARCHAR(255)'
-                elif 'datetime' in types[item]:
-                    char = item + ' DATETIME'
-                make_table.append(char)
-            return ','.join(make_table)
-
-        cursor.execute('DROP TABLE IF EXISTS {}'.format(table_name))
-        cursor.execute('CREATE TABLE {}({})'.format(table_name, make_table_sql(df)))
-
-    # 清空今日数据
-    def truncate_day_data(self, table_name, add_time):
-        # 选择连接database
-        truncate_sql = "DELETE FROM {0} WHERE add_time='{1}'".format(table_name, add_time)
-        print(truncate_sql)
-        self.cursor.execute(truncate_sql)
-        print('清除本日数据成功')
-
-    # 清空数据
-    def truncate_table(self, table_name):
-        # 选择连接database
-        truncate_sql = "DELETE FROM {0}".format(table_name)
-        print(truncate_sql)
-        self.cursor.execute(truncate_sql)
-        print('清除数据成功')
-
-    # 按照文件和日期增量插入数据
-    def insert_into_mysql_file_data(self, file_name, table_name, add_time):
-        try:
-            resData = pandas.read_csv(file_name, encoding='utf-8', low_memory=False)
-            # 去除空值
-            resData = resData.astype(object).where(pandas.notnull(resData), None)
-            resData = resData[resData['add_time'] == add_time]
-            print(resData)
-            # 提取数据转list 这里有与pandas时间模式无法写入因此换成str 此时mysql上格式已经设置完成
-            # df['日期'] = df['日期'].astype('str')
-            values = resData.values.tolist()
-            # 根据columns个数
-            s = ','.join(['%s' for _ in range(len(resData.columns))])
-            # executemany批量操作 插入数据 批量操作比逐个操作速度快很多
-            self.cursor.executemany('INSERT INTO {} VALUES ({})'.format(table_name, s), values)
-            print('数据插入成功')
-        except EmptyDataError:
-            print("当前商品不符合规则")
-
-    # 查询
-    def query_sql_list(self, sql, column):
-        self.cursor.execute(sql)
-        data = self.cursor.fetchall()
-        list = []
-        for res in data:
-            a = res[column]
-            list.append(a)
-        return list
-
-    # 查询
-    def query_sql_lists(self, sql):
-        self.cursor.execute(sql)
-        data = self.cursor.fetchall()
-        return data
-
-    # 获取建表语句
-    def get_create_sql(self,file_name,table_name):
-        header = open(file_name,'r',encoding='utf-8').readlines()[0]
-        try:
-            self.cursor.execute("drop table {};".format(table_name))
-        except BaseException:
-            print("表已存在")
-        sql = "CREATE TABLE {} (".format(table_name)+header.replace(',',' varchar(255) DEFAULT NULL,')+" varchar(255) DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
-        print(sql)
-        self.cursor.execute(sql)
-        print("动态建表成功")
-
-
 
 # 微盟实列
 class WeiMengInterface():
@@ -136,6 +17,13 @@ class WeiMengInterface():
         self.client_secret = client_secret
         # option = webdriver.ChromeOptions()
         # self.driver = webdriver.Chrome(executable_path='./chromedriver.exe', chrome_options=option)
+
+    def get_dict_value(self,dict,key):
+        try:
+            value = str(dict[key]).replace('\'','\"')
+        except KeyError:
+            value = ''
+        return value
 
     def get_csv_line(self, file_name, add_time, line):
         resData = pandas.read_csv(file_name, encoding='utf-8', low_memory=False)
@@ -271,13 +159,7 @@ class WeiMengInterface():
             # 获取会员数据
             member_list = res['data']['items']
             for members in member_list:
-                member = {}
-                # 获取只需要的字段
-                for item in dict(members).keys():
-                    if item != "":
-                        member[item] = str(members[item]).replace('\'','\"').lower()
-                member["add_time"] = now_time
-                member_table.append(member)
+                member_table.append({'wid':members['wid'],'name':members['name'],'phone':members['phone'],'add_time':now_time})
                 # 游标为0创建，否则插入
             print("当前游标" + data["cursor"])
             if data["cursor"] == '0':
@@ -373,13 +255,9 @@ class WeiMengInterface():
             if sale_orders == []:
                 print("数据全部请求完成")
                 break
-            for sale_order in sale_orders:
-                sale_order_dict = {}
-                for item in dict(sale_order).keys():
-                    if item != "":
-                        sale_order_dict[item] = str(sale_order[item]).replace('\'','\"')
-                sale_order_dict["add_time"] = now_time
-                sale_order_table.append(sale_order_dict)
+            for members in sale_orders:
+                member = {'add_time':now_time,'orderNo': self.get_dict_value(members,'orderNo'),'pid': self.get_dict_value(members,'pid'),'wid': self.get_dict_value(members,'wid'),'userNickname': self.get_dict_value(members,'userNickname'),'existingInvoice': self.get_dict_value(members,'existingInvoice'),'guiderName': self.get_dict_value(members,'guiderName'),'orderStatus': self.get_dict_value(members,'orderStatus'),'orderStatusName': self.get_dict_value(members,'orderStatusName'),'deliveryType': self.get_dict_value(members,'deliveryType'),'bizType': self.get_dict_value(members,'bizType'),'subBizType': self.get_dict_value(members,'subBizType'),'bizOrderId': self.get_dict_value(members,'bizOrderId'),'confirmReceivedTime': self.get_dict_value(members,'confirmReceivedTime'),'deliveryTime': self.get_dict_value(members,'deliveryTime'),'enableDelivery': self.get_dict_value(members,'enableDelivery'),'deliveryTypeName': self.get_dict_value(members,'deliveryTypeName'),'paymentAmount': self.get_dict_value(members,'paymentAmount'),'deliveryAmount': self.get_dict_value(members,'deliveryAmount'),'channelType': self.get_dict_value(members,'channelType'),'channelTypeName': self.get_dict_value(members,'channelTypeName'),'paymentType': self.get_dict_value(members,'paymentType'),'paymentTypeName': self.get_dict_value(members,'paymentTypeName'),'paymentStatus': self.get_dict_value(members,'paymentStatus'),'paymentMethodName': self.get_dict_value(members,'paymentMethodName'),'createTime': self.get_dict_value(members,'createTime'),'updateTime': self.get_dict_value(members,'updateTime'),'paymentTime': self.get_dict_value(members,'paymentTime'),'totalPoint': self.get_dict_value(members,'totalPoint'),'transferType': self.get_dict_value(members,'transferType'),'transferStatus': self.get_dict_value(members,'transferStatus'),'transferFailReason': self.get_dict_value(members,'transferFailReason'),'selfPickupSiteName': self.get_dict_value(members,'selfPickupSiteName'),'processStoreTitle': self.get_dict_value(members,'processStoreTitle'),'processStoreId': self.get_dict_value(members,'processStoreId'),'storeId': self.get_dict_value(members,'storeId'),'storeTitle': self.get_dict_value(members,'storeTitle'),'flagRank': self.get_dict_value(members,'flagRank'),'flagContent': self.get_dict_value(members,'flagContent'),'itemList': self.get_dict_value(members,'itemList'),'buyerRemark': self.get_dict_value(members,'buyerRemark'),'receiverName': self.get_dict_value(members,'receiverName'),'receiverMobile': self.get_dict_value(members,'receiverMobile'),'receiverAddress': self.get_dict_value(members,'receiverAddress'),'expectDeliveryTime': self.get_dict_value(members,'expectDeliveryTime'),'deliveryOrderId': self.get_dict_value(members,'deliveryOrderId'),'errcode': self.get_dict_value(members,'errcode'),'errmsg': self.get_dict_value(members,'errmsg'),'goodsPromotionInfo': self.get_dict_value(members,'goodsPromotionInfo'),'bizSouceType': self.get_dict_value(members,'bizSouceType')}
+                sale_order_table.append(member)
             print("请求" + str(i))
         self.save_as_csv_create(data=sale_order_table, file_name='./Data/order_list')
 
@@ -408,12 +286,7 @@ class WeiMengInterface():
                 res = requests.post(url, data).json()
                 # 获取会员数据
                 members = res['data']
-                member = {}
-                # 获取只需要的字段
-                for item in dict(members).keys():
-                    if item != "":
-                        member[item] = str(members[item]).replace('\'','\"')
-                member["add_time"] = now_time
+                member = {'add_time':now_time,'orderNo':self.get_dict_value(members,'orderNo'),'enableDelivery':self.get_dict_value(members,'enableDelivery'),'orderStatus':self.get_dict_value(members,'orderStatus'),'orderStatusName':self.get_dict_value(members,'orderStatusName'),'transferType':self.get_dict_value(members,'transferType'),'transferStatus':self.get_dict_value(members,'transferStatus'),'transferTypeReality':self.get_dict_value(members,'transferTypeReality'),'createTime':self.get_dict_value(members,'createTime'),'confirmReceivedTime':self.get_dict_value(members,'confirmReceivedTime'),'autoCancelTime':self.get_dict_value(members,'autoCancelTime'),'autoConfirmReceivedTime':self.get_dict_value(members,'autoConfirmReceivedTime'),'goodsAmount':self.get_dict_value(members,'goodsAmount'),'totalAmount':self.get_dict_value(members,'totalAmount'),'deliveryAmount':self.get_dict_value(members,'deliveryAmount'),'deliveryPaymentAmount':self.get_dict_value(members,'deliveryPaymentAmount'),'deliveryDiscountAmount':self.get_dict_value(members,'deliveryDiscountAmount'),'shouldPaymentAmount':self.get_dict_value(members,'shouldPaymentAmount'),'paymentAmount':self.get_dict_value(members,'paymentAmount'),'channelTypeName':self.get_dict_value(members,'channelTypeName'),'buyerRemark':self.get_dict_value(members,'buyerRemark'),'buyerInfo':self.get_dict_value(members,'buyerInfo'),'invoiceInfo':self.get_dict_value(members,'invoiceInfo'),'invoiceTexAmount':self.get_dict_value(members,'invoiceTexAmount'),'invoiceTexPaymentAmount':self.get_dict_value(members,'invoiceTexPaymentAmount'),'invoiceTexDiscountAmount':self.get_dict_value(members,'invoiceTexDiscountAmount'),'guideInfo':self.get_dict_value(members,'guideInfo'),'merchantInfo':self.get_dict_value(members,'merchantInfo'),'paymentInfo':self.get_dict_value(members,'paymentInfo'),'itemList':self.get_dict_value(members,'itemList'),'discountInfo':self.get_dict_value(members,'discountInfo'),'bizInfo':self.get_dict_value(members,'bizInfo'),'deliveryDetail':self.get_dict_value(members,'deliveryDetail'),'flagRank':self.get_dict_value(members,'flagRank'),'flagContent':self.get_dict_value(members,'flagContent'),'deliveryTime':self.get_dict_value(members,'deliveryTime'),'cancelTime':self.get_dict_value(members,'cancelTime'),'cancelType':self.get_dict_value(members,'cancelType'),'customFieldList':self.get_dict_value(members,'customFieldList'),'refundInfo':self.get_dict_value(members,'refundInfo'),'memberDetailInfo':self.get_dict_value(members,'memberDetailInfo'),'errcode':self.get_dict_value(members,'errcode'),'errmsg':self.get_dict_value(members,'errmsg'),'goodsPromotionInfo':self.get_dict_value(members,'goodsPromotionInfo'),'goodsSellMode':self.get_dict_value(members,'goodsSellMode'),'updateTime':self.get_dict_value(members,'updateTime'),'finishTime':self.get_dict_value(members,'finishTime'),'bizSouceType':self.get_dict_value(members,'bizSouceType')}
                 member_table.append(member)
             except requests.exceptions.SSLError:
                 print('请求次数过多，重新请求')
@@ -453,7 +326,7 @@ class WeiMengInterface():
             print("请求" + str(i))
         self.save_as_csv_create(data=sale_order_table, file_name='./Data/store_list')
 
-    # 获取订单详情(智慧零售)
+    # 获取门店详情(智慧零售)
     def get_store_detail(self, access_token):
         url = 'https://dopen.weimob.com/api/1_0/ec/merchant/getStoreInfo?accesstoken={0}'.format(access_token)
         print("客户详情接口url：" + url)
@@ -643,10 +516,10 @@ class WeiMengInterface():
                 member_table.append(member)
             except requests.exceptions.SSLError:
                 print('请求次数过多，重新请求')
-                break
+                continue
             except requests.exceptions.ConnectionError:
                 print('链接异常，重新请求')
-                break
+                continue
             except TypeError:
                 print('没有数据，重新请求')
                 continue
@@ -763,136 +636,225 @@ class WeiMengInterface():
     #             sale_order_table.append(sale_order_dict)
     #     self.save_as_csv_create(data=sale_order_table, file_name='./Data/store_stock_list')
 
+    # 获取微客的客户列表
+    def get_weike_invite_user_list(self, access_token):
+        url = 'https://dopen.weimob.com/api/1_0/newsdp/weike/getInvitedMemberList?accesstoken={0}'.format(access_token)
+        print("客户详情接口url：" + url)
+        mc = MySqlClient(154, 'spider')
+        wids = mc.query_sql_list(
+            """SELECT
+                    wid
+                from 
+                    weimeng_merchant_weike_list;""", 'wid')
+
+        print("需要获取" + str(len(wids)) + "个用户信息")
+        member_table = []
+        # 读取非会员
+        for wid in wids:
+            i = 0
+            try:
+                while True:
+                    i = i + 1
+                    # print("开始第" + str(i) + "次请求" + str(wid) + "用户的数据")
+                    data = json.dumps({
+                        "pageNum": i,
+                        "pageSize": 20,
+                        "queryParameter": {
+                            "wid": wid
+                        }
+                    })
+                    res = requests.post(url, data).json()
+                    print(res)
+                    # 获取会员数据
+                    members = res['data']['pageList']
+                    if members == []:
+                        print("当前用户"+wid+"数据请求完成")
+                        break
+                    for member in members:
+                        user_wid = member['wid']
+                        applyTime = member['applyTime']
+                        add_time = now_time
+                        member_table.append({'wid':user_wid,'applyTime':applyTime,'add_time':add_time,'weike_wid':wid})
+            except requests.exceptions.SSLError:
+                print('请求次数过多，重新请求')
+                continue
+            except requests.exceptions.ConnectionError:
+                print('链接异常，重新请求')
+                continue
+            except TypeError:
+                print('没有数据，重新请求')
+                continue
+        self.save_as_csv_create(data=member_table, file_name='./Data/weike_invite_user_list')
+
+    # 获取产品列表
+    # http://yun.weimob.com/saas/word/detailApi.html?tag=281&menuId=1&id=347
+    def get_goods_list(self, access_token):
+        # member_table = []
+        url = 'https://dopen.weimob.com/api/1_0/ec/goods/queryGoodsList?accesstoken={0}'.format(access_token)
+        print("会员列表列接口url：" + url)
+        i = 0
+        # 循环获取
+        table = []
+        while True:
+            i = i+1
+            data = {
+                "pageNum": i,
+                "pageSize": 100
+            }
+            json_data = json.dumps(data)
+            res = requests.post(url=url, data=json_data).json()
+            print("第" + str(i) + "次请求")
+
+            # 获取会员数据
+            datas = res['data']['pageList']
+            if datas == []:
+                print("数据全部请求完成")
+                break
+            for data in datas:
+                table.append({'add_time':now_time,'goodsId': self.get_dict_value(data,'goodsId'),'title': self.get_dict_value(data,'title'),'maxPrice': self.get_dict_value(data,'maxPrice'),'minPrice': self.get_dict_value(data,'minPrice'),'avaliableStockNum': self.get_dict_value(data,'avaliableStockNum'),'defaultImageUrl': self.get_dict_value(data,'defaultImageUrl'),'salesNum': self.get_dict_value(data,'salesNum'),'putAwayDate': self.get_dict_value(data,'putAwayDate'),'isPutAway': self.get_dict_value(data,'isPutAway'),'isMultiSku': self.get_dict_value(data,'isMultiSku'),'sortNum': self.get_dict_value(data,'sortNum'),'isExistEmptyStock': self.get_dict_value(data,'isExistEmptyStock'),'isAllStockEmpty': self.get_dict_value(data,'isAllStockEmpty'),'isCanSell': self.get_dict_value(data,'isCanSell'),'sellModelType': self.get_dict_value(data,'sellModelType'),'isPreSell': self.get_dict_value(data,'isPreSell')})
+        self.save_as_csv_create(data=table, file_name='./Data/goods_list')
+
+    # 获取产品明细
+    # http://yun.weimob.com/saas/word/detailApi.html?tag=281&menuId=1&id=1274
+    def get_goods_detail(self, access_token):
+        url = 'https://dopen.weimob.com/api/1_0/ec/retailGoods/queryGoodsDetail?accesstoken={0}'.format(access_token)
+        print("客户详情接口url：" + url)
+        mc = MySqlClient(154, 'spider')
+        items = mc.query_sql_list(
+            """SELECT
+                goodsId
+            from weimeng_goods_list""", 'goodsId')
+
+        print("需要获取" + str(len(items)) + "个信息")
+        table = []
+        i = 0
+        for item in items:
+            try:
+                i = i + 1
+                print("开始第" + str(i) + "次请求")
+                data = json.dumps({
+                    "goodsId": item
+                })
+                res = requests.post(url, data).json()
+                data = res['data']['goods']
+                table.append({'add_time':now_time,'storeId':res['data']['storeId'],'goodsId': self.get_dict_value(data,'goodsId'),'title': self.get_dict_value(data,'title'),'outerGoodsCode': self.get_dict_value(data,'outerGoodsCode'),'isMultiSku': self.get_dict_value(data,'isMultiSku'),'goodsImageUrl': self.get_dict_value(data,'goodsImageUrl'),'defaultImageUrl': self.get_dict_value(data,'defaultImageUrl'),'goodsDesc': self.get_dict_value(data,'goodsDesc'),'deductStockType': self.get_dict_value(data,'deductStockType'),'isPutAway': self.get_dict_value(data,'isPutAway'),'sort': self.get_dict_value(data,'sort'),'isMemberShipDiscount': self.get_dict_value(data,'isMemberShipDiscount'),'categoryList': self.get_dict_value(data,'categoryList'),'selectedSaleAttrList': self.get_dict_value(data,'selectedSaleAttrList'),'selectedGoodsAttrList': self.get_dict_value(data,'selectedGoodsAttrList'),'selectedSaleAttrIdList': self.get_dict_value(data,'selectedSaleAttrIdList'),'selectedClassifyList': self.get_dict_value(data,'selectedClassifyList'),'selectedTag': self.get_dict_value(data,'selectedTag'),'b2cGoods': self.get_dict_value(data,'b2cGoods'),'skuList': self.get_dict_value(data,'skuList'),'initialSales': self.get_dict_value(data,'initialSales'),'isCanSell': self.get_dict_value(data,'isCanSell'),'sellModelType': self.get_dict_value(data,'sellModelType'),'isPreSell': self.get_dict_value(data,'isPreSell')})
+            except requests.exceptions.SSLError:
+                print('请求次数过多，重新请求')
+                continue
+            except requests.exceptions.ConnectionError:
+                print('链接异常，重新请求')
+                continue
+        self.save_as_csv_create(data=table, file_name='./Data/goods_detail')
+        mc.conn.close()
+
+    # 获取售后订单列表
+    # http://yun.weimob.com/saas/word/detailApi.html?tag=290&menuId=1&id=378
+    def get_rights_order_list(self, access_token):
+        # member_table = []
+        url = 'https://dopen.weimob.com/api/1_0/ec/rights/searchRightsOrderList?accesstoken={0}'.format(access_token)
+        print("会员列表列接口url：" + url)
+        i = 0
+        # 循环获取
+        table = []
+        while True:
+            try:
+                i = i+1
+                data = {
+                    "pageNum": i,
+                    "pageSize": 100
+                }
+                json_data = json.dumps(data)
+                res = requests.post(url=url, data=json_data).json()
+                print("第" + str(i) + "次请求")
+                # 获取会员数据
+                print(res)
+                datas = res['data']['pageList']
+                for data in datas:
+                    print(data)
+                    table.append({'add_time':now_time,'ecBizStoreId': self.get_dict_value(data,'ecBizStoreId'),'rightsStatusList': self.get_dict_value(data,'rightsStatusList'),'rightsType': self.get_dict_value(data,'rightsType'),'createTime': self.get_dict_value(data,'createTime'),'endTime': self.get_dict_value(data,'endTime'),'id': self.get_dict_value(data,'id'),'orderNo': self.get_dict_value(data,'orderNo'),'pageNum': self.get_dict_value(data,'pageNum'),'pageSize': self.get_dict_value(data,'pageSize'),'updateStartTime': self.get_dict_value(data,'updateStartTime'),'updateEndTime': self.get_dict_value(data,'updateEndTime')})
+            except KeyError:
+                print("数据全部请求完成")
+                break
+        self.save_as_csv_create(data=table, file_name='./Data/rights_order_list')
+
+    # 获取售后订单详情
+    # http://yun.weimob.com/saas/word/detailApi.html?tag=290&menuId=1&id=379
+    def get_rights_order_detail(self, access_token):
+        url = 'https://dopen.weimob.com/api/1_0/ec/rights/getRightsOrderDetail?accesstoken={0}'.format(access_token)
+        print("客户详情接口url：" + url)
+        mc = MySqlClient(154, 'spider')
+        items = mc.query_sql_list(
+            """SELECT
+                id
+            from weimeng_rights_order_list""", 'id')
+
+        print("需要获取" + str(len(items)) + "个信息")
+        table = []
+        i = 0
+        for item in items:
+            try:
+                i = i + 1
+                print("开始第" + str(i) + "次请求")
+                data = json.dumps({
+                    "id": item
+                })
+                res = requests.post(url, data).json()
+                data = res['data']['rightsInfo']
+                table.append({'add_time':now_time,'pid': self.get_dict_value(data,'pid'),'wid': self.get_dict_value(data,'wid'),'deliveryInfo': self.get_dict_value(data,'deliveryInfo'),'refundAmount': self.get_dict_value(data,'refundAmount'),'refundBalance': self.get_dict_value(data,'refundBalance'),'refundPoints': self.get_dict_value(data,'refundPoints'),'rightsType': self.get_dict_value(data,'rightsType'),'rightsReason': self.get_dict_value(data,'rightsReason'),'goods': self.get_dict_value(data,'goods'),'id': self.get_dict_value(data,'id'),'paymentAmount': self.get_dict_value(data,'paymentAmount'),'refundAccountInfo': self.get_dict_value(data,'refundAccountInfo'),'refundMethod': self.get_dict_value(data,'refundMethod'),'refundPaySuccessTime': self.get_dict_value(data,'refundPaySuccessTime'),'deliveryAmount': self.get_dict_value(data,'deliveryAmount'),'orderInfo': self.get_dict_value(data,'orderInfo'),'rightsStatus': self.get_dict_value(data,'rightsStatus'),'rightsStatusName': self.get_dict_value(data,'rightsStatusName'),'channelType': self.get_dict_value(data,'channelType'),'channelTypeName': self.get_dict_value(data,'channelTypeName'),'aotuConfrimReceivedTime': self.get_dict_value(data,'aotuConfrimReceivedTime'),'autoRefundPayTime': self.get_dict_value(data,'autoRefundPayTime'),'createTime': self.get_dict_value(data,'createTime'),'flagContent': self.get_dict_value(data,'flagContent'),'paymentType': self.get_dict_value(data,'paymentType'),'paymentTypeName': self.get_dict_value(data,'paymentTypeName'),'updateTime': self.get_dict_value(data,'updateTime'),'flagRank': self.get_dict_value(data,'flagRank'),'defaultAddressType': self.get_dict_value(data,'defaultAddressType'),'defaultReturnAddress': self.get_dict_value(data,'defaultReturnAddress'),'autoHandleTime': self.get_dict_value(data,'autoHandleTime'),'usedMemberPoints': self.get_dict_value(data,'usedMemberPoints'),'balanceDeductionAmount': self.get_dict_value(data,'balanceDeductionAmount'),'pointsDiscountAmount': self.get_dict_value(data,'pointsDiscountAmount'),'autoHandleText': self.get_dict_value(data,'autoHandleText'),'agreeRightsTime': self.get_dict_value(data,'agreeRightsTime'),'returnGoodsTime': self.get_dict_value(data,'returnGoodsTime'),'confirmReceivedTime': self.get_dict_value(data,'confirmReceivedTime'),'finishTime': self.get_dict_value(data,'finishTime'),'applyAmount': self.get_dict_value(data,'applyAmount'),'storeId': self.get_dict_value(data,'storeId'),'storeTitle': self.get_dict_value(data,'storeTitle'),'processStoreId': self.get_dict_value(data,'processStoreId'),'processStoreTitle': self.get_dict_value(data,'processStoreTitle'),'headStoreId': self.get_dict_value(data,'headStoreId'),'customRightsReason': self.get_dict_value(data,'customRightsReason'),'reasonImageUrlList': self.get_dict_value(data,'reasonImageUrlList'),'refusedReason': self.get_dict_value(data,'refusedReason')})
+            except requests.exceptions.SSLError:
+                print('请求次数过多，重新请求')
+                continue
+            except requests.exceptions.ConnectionError:
+                print('链接异常，重新请求')
+                continue
+        self.save_as_csv_create(data=table, file_name='./Data/rights_order_detail')
+        mc.conn.close()
+
+    # 获取进销存单据列表（出入库）
+    # http://yun.weimob.com/saas/word/detailApi.html?tag=282&menuId=1&id=562
+    def get_inventory_order_list(self, access_token):
+        url = 'https://dopen.weimob.com/api/1_0/ec/stock/queryInventoryOrderListWithPage?accesstoken={0}'.format(access_token)
+        print("会员列表列接口url：" + url)
+        # 循环获取
+        table = []
+        for parentInventoryType in ['1','2']:
+            i = 0
+            print('============================'+parentInventoryType)
+            try:
+                while True:
+                    i = i+1
+                    data = {
+                        "pageNum": i,
+                        "pageSize": 20,
+                        "queryParameter": {
+                            "parentInventoryType": parentInventoryType
+                        }
+                    }
+                    json_data = json.dumps(data)
+                    res = requests.post(url=url, data=json_data).json()
+                    print("第" + str(i) + "次请求")
+                    # 获取会员数据
+                    print(res)
+                    datas = res['data']['pageList']
+                    for data in datas:
+                        print(data)
+                        table.append({'add_time':now_time,'pageNum': self.get_dict_value(data,'pageNum'),'pageSize': self.get_dict_value(data,'pageSize'),'totalCount': self.get_dict_value(data,'totalCount'),'pageList': self.get_dict_value(data,'pageList'),'id': self.get_dict_value(data,'id'),'storageType': self.get_dict_value(data,'storageType'),'storageTypeName': self.get_dict_value(data,'storageTypeName'),'createTime': self.get_dict_value(data,'createTime'),'remark': self.get_dict_value(data,'remark'),'referId': self.get_dict_value(data,'referId'),'manager': self.get_dict_value(data,'manager'),'inventoryType': self.get_dict_value(data,'inventoryType')})
+            except KeyError:
+                print("数据全部请求完成")
+                continue
+            except TypeError:
+                print("数据全部请求完成")
+                continue
+        self.save_as_csv_create(data=table, file_name='./Data/inventory_order_list')
+
 if __name__ == '__main__':
+
     client_id = 'EDD3EAB6F807344E8AB5AE583A3E073C'
     client_secret = '9B659BC31EF571D38DFA73DDAA61CC1B'
     week_day = datetime.datetime.now().weekday()
     # 新建微盟实例
     wm = WeiMengInterface(client_id, client_secret)
-    # MySql客户端
-    mc154 = MySqlClient(154, 'spider')
-
-    # # 每周一获取code
-    # if (week_day == 99):
-    #     print("********周一，开始获取code********")
-    #     code = wm.get_code()
-    #     # 获取refresh_token(一周获取一次)
-    #     print("\n********获取refresh_token********")
-    #     wm.get_refresh_token(code=code)
-
-    # # 增量获取会员列表列(循环获取，每次500次请求，每个请求500条数据)
-    # print("********获取会员列表列********")
-    # while True:
-    #     try:
-    #         # 刷新access_token(2小时一次)
-    #         print("\n********刷新access_token(2小时一次)********")
-    #         access_token = wm.get_access_token()
-    #         print(access_token)
-    #         wm.get_member_list(access_token=access_token)
-    #     except requests.exceptions.ConnectionError:
-    #         print("请求次数过多，重新获取")
-    #         continue
-    #     except TypeError:
-    #         print("数据请求结束，退出循环")
-    #         break
-    # # 增量保存会员列表信息
-    # # mc154.create_table(pandas.read_csv('./Data/member_list.csv', low_memory=False), 'weimeng_user_member_list')
-    # mc154.truncate_day_data('weimeng_user_member_list',now_time)
-    # mc154.insert_into_mysql_file_data('./Data/member_list.csv','weimeng_user_member_list',now_time)
-    #
-    # # # 获取订单列表
-    # print("获取获取订单列表情接口")
-    # access_token = wm.get_access_token()
-    # wm.get_order_list(access_token)
-    # # mc154.create_table(pandas.read_csv('./Data/order_list.csv', low_memory=False), 'weimeng_sale_order_list')
-    # mc154.truncate_table('weimeng_sale_order_list')
-    # mc154.insert_into_mysql_file_data('./Data/order_list.csv', 'weimeng_sale_order_list', now_time)
-    #
-    # # # 获取门店列表
-    # print("获取门店列表接口")
-    # access_token = wm.get_access_token()
-    # wm.get_store_list(access_token)
-    # # mc154.create_table(pandas.read_csv('./Data/store_list.csv', low_memory=False), 'weimeng_store_list')
-    # mc154.truncate_table('weimeng_store_list')
-    # mc154.insert_into_mysql_file_data('./Data/store_list.csv', 'weimeng_store_list', now_time)
-    #
-    # # 获取门店详情
-    # print("获取门店详情接口")
-    # access_token = wm.get_access_token()
-    # wm.get_store_detail(access_token)
-    # # mc154.create_table(pandas.read_csv('./Data/store_detail.csv', low_memory=False), 'weimeng_store_detail')
-    # mc154.truncate_table('weimeng_store_detail')
-    # mc154.insert_into_mysql_file_data('./Data/store_detail.csv', 'weimeng_store_detail', now_time)
-    #
-    # # 获取查询导购列表
-    # print("获取查询导购列表")
-    # access_token = wm.get_access_token()
-    # wm.get_store_guider_list(access_token)
-    # # mc154.create_table(pandas.read_csv('./Data/store_guider_list.csv', low_memory=False), 'weimeng_store_guider_list')
-    # mc154.truncate_table('weimeng_store_guider_list')
-    # mc154.insert_into_mysql_file_data('./Data/store_guider_list.csv', 'weimeng_store_guider_list', now_time)
-    #
-    # # 获取导购目标列表
-    # print("获取导购目标列表")
-    # access_token = wm.get_access_token()
-    # wm.get_store_guider_target_list(access_token)
-    # # mc154.create_table(pandas.read_csv('./Data/store_guider_target_list.csv', low_memory=False), 'weimeng_store_guider_target_list')
-    # mc154.truncate_table('weimeng_store_guider_target_list')
-    # mc154.insert_into_mysql_file_data('./Data/store_guider_target_list.csv', 'weimeng_store_guider_target_list', now_time)
-    #
-    # # 获取商户优惠券列表
-    # print("获取商户优惠券列表")
-    # access_token = wm.get_access_token()
-    # wm.get_merchant_coupon_list(access_token)
-    # # mc154.create_table(pandas.read_csv('./Data/merchant_coupon_list.csv', low_memory=False), 'weimeng_merchant_coupon_list')
-    # mc154.truncate_table('weimeng_merchant_coupon_list')
-    # mc154.insert_into_mysql_file_data('./Data/merchant_coupon_list.csv', 'weimeng_merchant_coupon_list', now_time)
-    #
-    # # 通过券码查询优惠券详情（C端）
-    #
-    # # 获取商户微客列表
-    # print('获取商户微课列表')
-    # access_token = wm.get_access_token()
-    # wm.get_merchant_weike_list(access_token)
-    # # mc154.create_table(pandas.read_csv('./Data/merchant_weike_list.csv', low_memory=False), 'weimeng_merchant_weike_list')
-    # mc154.truncate_table('weimeng_merchant_weike_list')
-    # mc154.insert_into_mysql_file_data('./Data/merchant_weike_list.csv', 'weimeng_merchant_weike_list', now_time)
-    #
-    # # 获取商户微客明细
-    # print('获取商户微课明细')
-    # access_token = wm.get_access_token()
-    # wm.get_weike_detail(access_token)
-    # # mc154.create_table(pandas.read_csv('./Data/weike_detail.csv', low_memory=False), 'weimeng_weike_detail')
-    # mc154.truncate_table('weimeng_weike_detail')
-    # mc154.insert_into_mysql_file_data('./Data/weike_detail.csv', 'weimeng_weike_detail', now_time)
-
-    # 获取门店库存列表
-    # access_token = wm.get_access_token()
-    # wm.get_store_stock_list(access_token)
-    # mc154.get_create_sql('./Data/store_stock_list.csv','weimeng_store_stock_list')
-    # mc154.insert_into_mysql_file_data('./Data/store_stock_list.csv', 'weimeng_store_stock_list', now_time)
-
-    # # 获取商户分账记录列表
-    # # access_token = wm.get_access_token()
-    # # wm.get_commission_record_list(access_token)
-    #
-    # # 获取订单详情
-    print("获取订单详情接口")
+    # 获取进销存单据列表（出入库）
+    print("获取进销存单据列表（出入库）")
     access_token = wm.get_access_token()
-    wm.get_order_detail(access_token)
-    mc154.get_create_sql('./Data/order_detail.csv','weimeng_sale_order_detail')
-    mc154.insert_into_mysql_file_data('./Data/order_detail.csv', 'weimeng_sale_order_detail', now_time)
-    #
-    # # 获取用户明细所有数据
-    # while True:
-    #     access_token = wm.get_access_token()
-    #     res = wm.get_member_detail(access_token)
-    #     if res ==[]:
-    #         break
-    #
-    # # 关闭driver客户端
-    for i in range(0,50):
-        time.sleep(0.2)
-        access_token = wm.get_access_token()
-    mc154.conn.close()
-
+    wm.get_inventory_order_list(access_token)

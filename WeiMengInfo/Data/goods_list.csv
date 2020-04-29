@@ -1,0 +1,296 @@
+add_time,avaliableStockNum,defaultImageUrl,goodsId,isAllStockEmpty,isCanSell,isExistEmptyStock,isMultiSku,isPreSell,isPutAway,maxPrice,minPrice,putAwayDate,salesNum,sellModelType,sortNum,title
+2020-04-28,6999,https://image-c.weimobwmc.com/saas-wxbiz/ce28acb79b874410b9b27d694aeee74d.jpg,1215898390189,False,True,False,1,,0,3399.0,3399.0,1587989663000,0,,0,【M6劲远版】经典造型 6大突破  铅酸60V20AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/7a07bce7b8424c3cb7e2fd1ddd1070b1.jpg,1215895260189,False,True,False,1,,0,3899.0,3899.0,1587989237000,0,,0,【E6智动版】方正轻骑设计 尽显潮流风范 铅酸60V20AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/7a07bce7b8424c3cb7e2fd1ddd1070b1.jpg,1215913190189,False,True,False,1,,0,3699.0,3699.0,1587989117000,0,,0,【E6劲霸版】方正轻骑设计 尽显潮流风范 铅酸72V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/c15fe5bfa28045899b3e805ab499ef3e.jpg,1215908770189,False,True,False,1,,0,3690.0,3690.0,1587988747000,0,,0,【E6 (广东版)】方正轻骑设计 尽显潮流风范  铅酸72V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/44484e25ac504015b7aa178bc6b3600c.jpg,1215912080189,False,True,False,1,,0,3399.0,3399.0,1587987994000,0,,0,【欧雅锂电新国标靠背（广东版）】精致格调大灯 亮丽仪表  锂电48V15AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/c15fe5bfa28045899b3e805ab499ef3e.jpg,1215902710189,False,True,False,1,,0,3890.0,3890.0,1587987076000,0,,0,【E6动力版 (广东版)】方正轻骑设计 尽显潮流风范  铅酸72V20AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/5c12fad7ff6f4590bfc30bffeb53b716.jpg,1215902510189,False,True,False,1,,0,2299.0,2299.0,1587986583000,0,,0,【尚靓新国标（广东版）】强有力的能量保障 铅酸48V20AH
+2020-04-28,7000,https://image-c.weimobwmc.com/saas-wxbiz/2c494c9458434d0cb4ac98b9d341aec8.jpg,1215889500189,False,True,False,1,,0,2999.0,2999.0,1587986301000,0,,0,【锐战（广东版）】够实用 够安全 够舒适 铅酸72V20AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/4812b8b2dfaa4abea041b12eb07aa790.jpg,1215902200189,False,True,False,1,,0,3099.0,3099.0,1587985901000,0,,0,【米露轻摩尾箱版（广东版）】时尚色彩 实用载物空间想装就装 铅酸60V20AH
+2020-04-28,9000,https://image-c.weimobwmc.com/saas-wxbiz/d292380c584d44d69795fd449f22739a.jpg,1215527480189,False,True,False,1,,0,2390.0,2390.0,1587906554000,0,,0,【小金鼠轻摩版】时尚轻巧 就是那么霸气 铅酸48V12AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/d4c337fca8de4e8fad982cccd38c5745.jpeg,1215424090189,True,True,True,0,,1,99.0,99.0,1587886232000,0,,0,99定金享受直播间秒杀价
+2020-04-28,50,https://image-c.weimobwmc.com/saas-wxbiz/86592bd6308d4edeb49ab39b17aaf4ab.png,1215357860189,False,True,False,0,,1,58.0,58.0,1587879608000,0,,0,鲁西专用锁
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/38bca84a8aab4d0ab6e5d6751f88dabc.jpg,1215076460189,False,True,False,1,,0,1890.0,1890.0,1587778656000,0,,0,【尚米新国标版（广东版）】新国标下的三大升级 铅酸48V12AH
+2020-04-28,7000,https://image-c.weimobwmc.com/saas-wxbiz/2c494c9458434d0cb4ac98b9d341aec8.jpg,1215069570189,False,True,False,1,,0,2799.0,2799.0,1587778468000,0,,0,【锐战（广东版）】够实用 够安全 够舒适 铅酸60V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/4e659a6624ff443182991d2d9c760b4d.jpeg,1215076020189,True,True,True,0,,1,3680.0,3680.0,1587778517000,0,,0,【石家庄】锐战加长60V20
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/51bb516f653f457597b78c6bc3737d77.jpg,1215075150189,True,True,True,0,,1,1799.0,1799.0,1587778152000,0,,0,48V12AH国标电动车 原价1799，以旧换新直播间秒杀价999
+2020-04-28,2,https://image-c.weimobwmc.com/saas-wxbiz/933512a320bf44469934741fa941a0cc.png,1214866770189,False,True,False,0,,1,2299.0,2299.0,1587706727000,0,,0,以旧换新 豪战精致靠背版 60V20AH（旧车48V12AH）
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/6089cb2139a240dfb1ed4d835023126b.jpg,1214848000189,False,True,False,1,,1,1999.0,1499.0,1587704867000,0,,0,以旧换新【小金鼠 新国标】灵动小巧 向光前行  铅酸48V12AH
+2020-04-28,16000,https://image-c.weimobwmc.com/saas-wxbiz/e3e2ba85d73e414ebc63b6ad5d8fb3e5.jpg,1214837590189,False,True,False,1,,1,2090.0,1590.0,1587699797000,0,,0,【以旧换新】【小飞侠新国标版】铅酸48V12AH
+2020-04-28,40000,https://image-c.weimobwmc.com/saas-wxbiz/b24e7fbb396f45ef85d20a46f2e3dd31.jpg,1214836580189,False,True,False,1,,1,2190.0,1690.0,1587698812000,0,,0,以旧换新 【小王子新国标版】铅酸48V12AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/b9b2a8573e074c4c865c1077b87ec0de.jpg,1214617070189,False,True,False,1,,1,2890.0,2890.0,1587645869000,0,,0,鲁西直播专用【尚途轻摩版】铅酸48V20AH
+2020-04-28,5999,https://image-c.weimobwmc.com/saas-wxbiz/50b54dbe2e404fc39a25137c3fa6a591.jpg,1214617000189,False,True,False,1,,1,4299.0,4299.0,1587639826000,0,,0,鲁西直播专用【V20豪华版】 尊贵品质 五大升级 锂电48V20AH
+2020-04-28,16000,https://image-c.weimobwmc.com/saas-wxbiz/e8b40ad77ecd4fcda7907e17036a60b1.jpg,1214627930189,False,True,False,1,,1,2399.0,2099.0,1587638774000,0,,0,鲁西直播专用【尚靓新国标（广东版）】强有力的能量保障 铅酸48V
+2020-04-28,9000,https://image-c.weimobwmc.com/saas-wxbiz/2659c2b3b419493e81912a27dad74e0d.jpg,1214620810189,False,True,False,1,,1,2399.0,2399.0,1587638256000,0,,0,鲁西直播专用【小金鼠豪华版】闪耀来袭 敢于不凡   铅酸48V12AH
+2020-04-28,7999,https://image-c.weimobwmc.com/saas-wxbiz/5d2e6d08c20048db8a36d1bb19d79a1e.jpg,1214591820189,False,True,False,1,,1,1999.0,1999.0,1587637600000,0,,0,鲁西专用 【尚米 新国标版】小而精悍 为你而来 铅酸48V12AH
+2020-04-28,7000,https://image-c.weimobwmc.com/saas-wxbiz/00d58cb45d654772a303ba7792bc1c2d.jpg,1214604890189,False,True,False,1,,0,2499.0,2499.0,1587648289000,0,,0,【小飞象2.0】四大升级 震撼上市 铅酸48V20AH
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/5437ae7fc24e4c3392c8ad3f336fe328.jpg,1214237990189,False,True,False,0,,1,68.0,68.0,1587558811000,0,,0,定时器
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/3102346965484b8590b923826dc40864.jpg,1214254070189,True,True,True,0,,1,2599.0,2599.0,1587558455000,0,,0,【滕州专属】   尚可
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/72e6fe48aa7c48bf9158d27f91a5b07f.jpg,1214233610189,True,True,True,0,,1,7999.0,7999.0,1587558252000,0,,0,G5 锂电版
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/b217b287e76044339735c0eec1974e54.jpg,1214235200189,True,True,True,0,,1,3599.0,3599.0,1587558000000,0,,0,雅迪 M5 60V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/7044b5ca9c964e1f84533578a8d8e9da.png,1214233240189,True,True,True,0,,1,3790.0,3790.0,1587557190000,0,,0,[滕州雅迪4S店]  V20标准版
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/f1aab35574cf431f8fe5cc9e02c368da.jpg,1214231720189,True,True,True,0,,1,3799.0,3799.0,1587557027000,0,,0,雅迪E1 60V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/82fe69356ff44da6b0ebac151b9fffc9.jpg,1214234610189,True,True,True,0,,1,3599.0,3599.0,1587556501000,0,,0,雅迪M2 60V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/318a2e2c3fe04ccea8605223dc584153.jpg,1214234140189,True,True,True,0,,1,3899.0,3899.0,1587555438000,0,,0,R5L
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/9cb1c9f582294c8d9a42058a5f5e7870.jpg,1214236430189,True,True,True,0,,1,2899.0,2899.0,1587554772000,0,,0,尚途plus
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/f517d57e82af42d1a1fdb894b9fbef23.jpg,1214228700189,True,True,True,0,,1,1799.0,1799.0,1587554293000,0,,0,小金鼠-B 48V12AH电池
+2020-04-28,10000,https://image-c.weimobwmc.com/saas-wxbiz/b24e7fbb396f45ef85d20a46f2e3dd31.jpg,1214163990189,False,True,False,1,,1,2190.0,2190.0,1587794534000,0,,0,【小王子新国标版】铅酸48V12AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/45a8cb324e3b48d694e24c596cef7e36.jpg,1214160000189,True,True,True,0,,1,3880.0,3880.0,1587541097000,0,,0,幸驰C3PLUS电动三轮车48V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/4647d5f68546459ba7b7d25f6f705f22.jpg,1214139440189,True,True,True,0,,1,3680.0,3680.0,1587540896000,0,,0,乐酷电动三轮车48V20AH
+2020-04-28,10000,https://image-c.weimobwmc.com/saas-wxbiz/f1bc4f579c874279b6ca5988f942eba2.jpg,1214133230189,False,True,False,1,,0,3290.0,3190.0,1587794552000,0,,0,【欧战新国标（广东版）】时尚活力 运动外观 锂电48V16AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/600c2ebdd82f4f45b169adcec579c52a.jpg,1214068860189,True,True,True,0,,1,3299.0,3299.0,1587531548000,0,,0,【鲁西直播专属】飞羽 48V15AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/bb03a2080ce94e859e2085b9b9806151.jpg,1214058410189,False,True,False,1,,1,2890.0,2890.0,1587794530000,0,,0,【尚途轻摩版】铅酸48V20AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/e5f051a1bb5e4b108fc48dfbc30ed54c.jpg,1214041230189,False,True,False,1,,1,2690.0,2690.0,1587794548000,0,,0,【尚腾轻摩版】铅酸48V20AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/d3e49588f2a54c99b932bc694b3b6cd1.jpg,1214044100189,False,True,False,1,,1,3399.0,3399.0,1587794569000,0,,0,【酷J新国标版2.0】星恒48V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/19a1bdbdd30948f7837e5f35ca64ad53.jpg,1214042060189,True,True,True,0,,1,2699.0,2699.0,1587524661000,0,,0,鲁西直播专属尚凯48V12AH电池
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/038f0684cee24e97a666bf718446b28d.jpg,1214040140189,False,True,False,1,,0,2599.0,2599.0,1587524297000,0,,0,【酷Q锂电新国标版】自在骑行的全新升级 锂电48V12AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/eb5eb19ab2ef4a0180e06c16e0410187.jpg,1214029790189,False,True,False,1,,1,1890.0,1890.0,1587794564000,0,,0,【尚米新国标版】电池盒可提取 铅酸48V12AH
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/5d0bcf6a6b464ae193a671a48cca3c5d.jpg,1214021890189,False,True,False,1,,1,4199.0,4199.0,1587794543000,0,,0,【极光3.0轻摩版】铅酸60V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/e73c862b00d1474a8e8efbee2f681730.jpg,1213988760189,True,True,True,0,,1,99.0,99.0,1587516971000,0,,0,【4月30日鲁西直播间定金专用】预付定金99元可享受直播间秒杀价
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/95712e600a21458ab6f04dd41f465d6c.jpg,1213940180189,True,True,True,0,,1,99.0,99.0,1587468501000,0,,0,【鲁西4月30日直播间专用】预付99元可抵200元直播间秒杀车型除外
+2020-04-28,7000,https://image-c.weimobwmc.com/saas-wxbiz/a95dc7d2ec8c425d8ce70597f9f90809.jpg,1213930050189,False,True,False,1,,1,3250.0,3250.0,1587794556000,0,,0,【酷雷轻摩版】铅酸48V20AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/591d2e53a2624f0aa1cbdcbd14a046a9.jpg,1213921030189,False,True,False,1,,1,3490.0,3490.0,1587794574000,0,,0,【酷V轻摩版】铅酸48V23AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/54895455f8f74527a64d2707f5bfdccd.jpg,1213882750189,False,True,False,1,,0,3490.0,3490.0,1587459640000,0,,0,【欧韵新国标（广东版）】优雅出行 铅酸45V15AH
+2020-04-28,10000,https://image-c.weimobwmc.com/saas-wxbiz/dd5c960b691043979f370e059175e3bd.png,1213741350189,False,True,False,0,,1,99.0,99.0,1587532094000,0,,0,淮南23号直播专用
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/7c6374f50fd3498f8632ba67587f750f.jpg,1213747830189,False,True,False,1,,1,4180.0,4180.0,1587794579000,0,,0,【极光2.0轻摩版】铅酸48V23AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/e9d9743fc7ff47558c6ff072af7adfd8.jpg,1213737930189,False,True,False,1,,1,2680.0,2680.0,1587794581000,0,,0,【尚炫新国标版2.0】铅酸48V12AH
+2020-04-28,9000,https://image-c.weimobwmc.com/saas-wxbiz/ed13359288274c19afd7178fcca6b2b2.jpg,1213732830189,False,True,False,1,,1,2650.0,2650.0,1587794582000,0,,0,【尚菲新国标版】铅酸48V12AH
+2020-04-28,9000,https://image-c.weimobwmc.com/saas-wxbiz/06f5f6b67631483e880863524f6b330d.jpg,1213737590189,False,True,False,1,,1,2650.0,2650.0,1587794584000,0,,0,【尚菲新国标版2.0】铅酸48V12AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/e3e2ba85d73e414ebc63b6ad5d8fb3e5.jpg,1213701890189,False,True,False,1,,1,2699.0,2699.0,1587794586000,0,,0,【小飞侠锂电新国标】锂电48V12AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/c021665034ba4b639eba00ec476c7db8.jpg,1213695950189,False,True,False,1,,1,3450.0,3450.0,1587794588000,0,,0,【M321新国标版】锂电48V12AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/8cb3044d4b144711bd8f4183507e7184.jpg,1213605860189,False,True,False,1,,1,3490.0,3490.0,1587794590000,0,,0,【R5轻摩版】铅酸48V20AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/f9ace7df214046ea9a2a9109e4c2ebc8.jpg,1213609420189,False,True,False,1,,1,2430.0,2430.0,1587794592000,0,,0,【米乐乐新国标版】锂电48V12AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/932c270616034987b24a541a3e3aae8b.jpg,1213605620189,False,True,False,1,,1,2490.0,2490.0,1587794594000,0,,0,【302新国标版】锂电48V12AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/e3e2ba85d73e414ebc63b6ad5d8fb3e5.jpg,1213610070189,False,True,False,1,,1,2090.0,2090.0,1587794596000,0,,0,【小飞侠新国标版】铅酸48V12AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/7646cef60b7847599ab3d70d6fbc5c2b.jpg,1213609140189,False,True,False,1,,1,3490.0,3490.0,1587794598000,0,,0,【酷K新国标版】锂电48V12AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/0aed587d0baf46e590382cdddf94e1cc.jpg,1213607850189,False,True,False,1,,1,2899.0,2899.0,1587794600000,0,,0,【A325新国标版】锂电48V12AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/a7a16d7fe0cd4377987ee35a60bfc2bb.jpg,1213603210189,False,True,False,1,,1,2590.0,2590.0,1587794602000,0,,0,【A205新国标版】锂电48V12AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/381e0fa4eb864ad38d3063427f16bc94.jpg,1213604850189,False,True,False,1,,1,2699.0,2699.0,1587794604000,0,,0,【A612新国标版】锂电48V12AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/d05ea4ed6f634b30a264f663617e804e.jpg,1213608540189,False,True,False,1,,1,2599.0,2599.0,1587794611000,0,,0,【A360新国标版】锂电48V12AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/085fe6b36d2d4b57b89450e298bd3188.png,1213228260189,False,True,False,1,,1,6499.0,5499.0,1587794614000,0,,0,【川渝贵专用】【陆虎】铅酸 72V20AH/72V52AH
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/efe17a24b0774bab9948c1e6224a31e1.png,1213228020189,False,True,False,1,,1,4299.0,4299.0,1587794616000,0,,0,【川渝贵专用】【米彩运动风】铅酸 72V20AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/70e4436ead9a44c2b9dbf3f969f3012c.png,1213213610189,False,True,False,1,,1,3899.0,3199.0,1587794752000,0,,0,【川渝贵专用】【新公主二代】铅酸72V/96V
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/8e8c9a44ba3e4d148a4ee313c5b7f484.jpg,1213211210189,True,True,True,0,,1,259.0,259.0,1587226715000,0,,0,雅迪原装电池以旧换新半价 48V12AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/ed97bff411854a75a5182ba2b861e47d.png,1213184250189,False,True,False,1,,1,2899.0,2799.0,1587794749000,0,,0,【川渝贵专用】【迅雅动力版】铅酸72V20AH
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/8d748f5d8ff0463e86c1a5f09234ed34.png,1213193330189,False,True,False,1,,1,3999.0,3999.0,1587794754000,0,,0,【川渝贵专用】【莱客动力电摩版】72V20AH
+2020-04-28,10000,https://image-c.weimobwmc.com/saas-wxbiz/c155b115b67444a8acc518301f1de48a.jpg,1213175630189,False,True,False,1,,1,3799.0,3599.0,1587794756000,0,,0,【川渝贵专用】【Q舞动力版】铅酸72V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/bbcfdb3318d74ffdab3caa6b3bf3e9f6.jpg,1213177820189,False,True,False,1,,1,3399.0,3399.0,1587794758000,0,,0,【川渝贵专用】【米彩二代动力轻摩版】 72V20AH
+2020-04-28,2000,https://image-c.weimobwmc.com/saas-wxbiz/9fe0ecb19bdc43fd9918dae155fa77e7.png,1213184100189,False,True,False,1,,1,3980.0,3880.0,1587794760000,0,,0,【川渝贵专用】【米月动力版】铅酸72V20AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/eb78cd95eda54d35a137fef697a817a1.png,1213193260189,False,True,False,1,,1,3699.0,3699.0,1587794762000,0,,0,【川渝贵专用】【劲鲨】铅酸96V20AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/b81c391195d6438aa4235611f3fd56f8.jpg,1213173870189,False,True,False,1,,1,4499.0,4499.0,1587794763000,0,,0,【川渝贵专用】【博朗动力版】铅酸72V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/1957e410a06242478150c20915272a83.jpg,1213175340189,False,True,False,1,,1,3899.0,3899.0,1587794765000,0,,0,【川渝贵专用】【M6动力版 】经典造型 6大突破 72V20AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/60db1c8151a64f349682a5d035cf7d7a.png,1213193060189,False,True,False,1,,1,4199.0,3999.0,1587794767000,0,,0,【川渝贵专用】【锐致动力版】铅酸72V20AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/91062115b647477d8c52ab0c689e668d.jpg,1213150180189,False,True,False,1,,0,2790.0,2790.0,1587794779000,0,,0,【U3新国标】小巧精致车身 轻松自在穿行 铅酸48V12AH
+2020-04-28,10,https://image-c.weimobwmc.com/saas-wxbiz/4812b8b2dfaa4abea041b12eb07aa790.jpg,1213050850189,False,True,False,0,,0,3399.0,3399.0,1587794775000,0,,0,【米露】温婉造型 硬核实力 铅酸60V20AH
+2020-04-28,15000,https://image-c.weimobwmc.com/saas-wxbiz/338930492cde485e868f83b406c40113.jpg,1212989810189,False,True,False,1,,0,3390.0,3390.0,1587127409000,0,,0,【锐骏（广东版）】无法复制的时尚个性 铅酸60V/72V
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/fb182c5bb81e4b158f324926c6e39736.jpg,1212996350189,False,True,False,1,,1,4590.0,4590.0,1587795205000,0,,0,【新战警侠】铅酸60V20AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/df12e34f75c24971a4734fcb2c7fc5dd.jpg,1212992570189,False,True,False,1,,1,4990.0,4990.0,1587795209000,0,,0,【X5轻摩版】铅酸72V20AH
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/00d8dacca755476aa8bcc91a219af2ff.png,1212983440189,False,True,False,1,,0,99.0,89.0,1587122844000,0,,0,铅酸电池安全充电器
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/0497457a0e2f46bfa7d8ff2eaea18b99.jpg,1212990110189,False,True,False,1,,0,2599.0,2599.0,1587122279000,0,,0,【米彩2020】焕彩新生 经典再升级 铅酸60V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/7044b5ca9c964e1f84533578a8d8e9da.png,1212949510189,True,True,True,0,,1,3790.0,3790.0,1587117589000,0,,0,[西安伞塔路雅迪]  V20标准版
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/22e967760cfd45229e38f62fc6c1c634.jpg,1212843120189,False,True,False,1,,0,2799.0,2799.0,1587101157000,0,,0,【尚程】“铝”众不同 全新轻骑 铅酸48V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/c15fe5bfa28045899b3e805ab499ef3e.jpg,1212730290189,False,True,False,1,,0,3490.0,3490.0,1587045608000,0,,0,【E6 (广东版)】方正轻骑设计 尽显潮流风范  铅酸60V20AH
+2020-04-28,23996,https://image-c.weimobwmc.com/saas-wxbiz/887b352a082542a8b26d7ceaf62464a6.jpg,1212688220189,False,False,False,1,,1,4299.0,3799.0,1587029697000,0,,0,以旧换新 【V20豪华版】 尊贵品质 五大升级 锂电48V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/6cbf651d2fe143a5ae45e1d86d62a3dd.jpeg,1212423920189,True,True,True,0,,1,99.0,99.0,1587003915000,0,,0,济宁专属 预交99元抵200元
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/4be6a5223d5846d08cfe6447bc65b15d.png,1212387880189,False,True,False,0,,1,3880.0,3880.0,1587000694000,0,,0,限时秒杀 济宁专属 极光2.0
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/4b701c42aec84c858e435329f1a9ff48.jpg,1212406000189,False,True,False,1,,1,2699.0,2699.0,1587003928000,0,,0,限时秒杀 济宁专属 【尚纳轻摩版】 铅酸48V20AH
+2020-04-28,7999,https://image-c.weimobwmc.com/saas-wxbiz/ad66c3aecdf54b3fac095ed3fd3e7874.jpg,1212389520189,False,True,False,1,,1,1999.0,1999.0,1587003929000,0,,0,济宁限时秒杀 【尚米 新国标版】小而精悍 为你而来 铅酸48V12AH
+2020-04-28,2000,https://image-c.weimobwmc.com/saas-wxbiz/aea1ca2759a04ac39e3b6007f173b441.jpg,1212122960189,False,True,False,1,,1,99.0,99.0,1586923327000,0,,0,测试【预付定金99元专享】  米彩精英靠背版 60V20AH
+2020-04-28,502,https://image-c.weimobwmc.com/saas-wxbiz/55068805e0bf4a7e8ae8670a3e71509d.jpg,1212122890189,False,True,False,1,,1,99.0,99.0,1586923219000,0,,0,测试【预付定金99元专享】  豪战精致版60V20AH
+2020-04-28,2000,https://image-c.weimobwmc.com/saas-wxbiz/1fcf6ed172184c728ff42cdc21d6e1ab.png,1212033060189,False,True,False,1,,0,199.0,199.0,1586871243000,0,,0,【雨衣】优质尼龙面料 至轻至薄时尚风衣款
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/32833a71e0984e70b02e00635d280e58.jpg,1212033030189,True,True,True,0,,1,980.0,980.0,1586871122000,0,,0,雅迪原装电池以旧换新半价 60V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/222fdf810bed44628cee0868863a8ee1.jpg,1212033000189,True,True,True,0,,1,550.0,550.0,1586871120000,0,,0,雅迪原装电池以旧换新半价 48V20AH
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/af736b471976415a971696b9c0961e5e.jpg,1211973830189,False,False,False,1,,1,4190.0,3690.0,1586863369000,0,,0,以旧换新 【E3 2.0】小而美 再进化  铅酸60V20AH
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/38c49a1dcf5b42549015407f6b82cb71.jpg,1211978180189,False,False,False,1,,1,3890.0,3390.0,1586863371000,0,,0,以旧换新【V7 锂电标准版】内外兼修 骑行无忧 星恒锂电48V20AH
+2020-04-28,31996,https://image-c.weimobwmc.com/saas-wxbiz/ad66c3aecdf54b3fac095ed3fd3e7874.jpg,1211924070189,False,True,False,1,,1,1999.0,1499.0,1586852822000,0,,0,以旧换新 【尚米 新国标版】小而精悍 为你而来 铅酸48V12AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/dbe3c7d16e4b403a91649c1b5544af82.jpg,1211905990189,False,True,False,1,,1,5999.0,5499.0,1586851952000,0,,0,以旧换新【G5石墨烯版】有国际范的高端电动车 石墨烯72V20AH
+2020-04-28,32120,https://image-c.weimobwmc.com/saas-wxbiz/aea1ca2759a04ac39e3b6007f173b441.jpg,1211906980189,False,True,False,1,,1,2999.0,2499.0,1586851528000,0,,0,以旧换新 【米彩精英版】加厚座垫 开“骑”乐活之旅 60V20AH
+2020-04-28,30800,https://image-c.weimobwmc.com/saas-wxbiz/686104ebf3b041d1ad8028047facf936.png,1211891670189,False,False,False,1,,1,4000.0,370.0,1586849887000,0,,0,以旧换新【R MINIA锂电】迷你，自由引力 锂电48V15AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/54803234dcb34b8dbd398d458c0a035d.jpg,1211839870189,False,False,False,1,,1,2999.0,2499.0,1586844397000,0,,0,以旧换新【尚迪新国标（广东版）】人性化设计豪华体验 铅酸48V12AH
+2020-04-28,64000,https://image-c.weimobwmc.com/saas-wxbiz/5c12fad7ff6f4590bfc30bffeb53b716.jpg,1211835610189,False,True,False,1,,1,2399.0,1599.0,1586844287000,0,,0,以旧换新 【尚靓新国标（广东版）】强有力的能量保障 铅酸48V
+2020-04-28,40000,https://image-c.weimobwmc.com/saas-wxbiz/44484e25ac504015b7aa178bc6b3600c.jpg,1211834600189,False,False,False,1,,1,3799.0,3299.0,1586842582000,0,,0,以旧换新 【欧雅锂电新国标（广东版）】精致格调大灯 亮丽仪表  锂电48V15AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/559e3801f53041d0b24d05b2dcd1a460.jpg,1211827470189,False,False,False,1,,1,3099.0,2599.0,1586842455000,0,,0,以旧换新【尚乐新国标（广东版）】精于设计，舒适体验全升级 铅酸48V12AH
+2020-04-28,40000,https://image-c.weimobwmc.com/saas-wxbiz/c2cc2a27b7dd4271ba0c7e43da732985.jpg,1211822230189,False,False,False,1,,1,2499.0,1999.0,1586838802000,0,,0,以旧换新 【316S新国标（广东版）】可提电池贴近生活 一路伴行 锂电48V12AH
+2020-04-28,48000,https://image-c.weimobwmc.com/saas-wxbiz/4812b8b2dfaa4abea041b12eb07aa790.jpg,1211819230189,False,False,False,1,,1,3499.0,2999.0,1586838677000,0,,0,以旧换新 【米露轻摩（广东版）】时尚色彩 实用载物空间想装就装 铅酸60V20AH
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/df0e7e52f2414e86b0be84ee7c038e07.png,1211814670189,False,True,False,0,,1,2799.0,2799.0,1586837360000,0,,0,济宁专属 雅迪电动车 尚腾轻摩 48V20AH
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/5da54ce73e59491dbba9540e614017d6.jpg,1211791250189,False,True,False,0,,1,4880.0,4880.0,1586832543000,0,,0,X战警
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/870995db9a7f491eb5823fb5d0095cba.png,1211779990189,False,True,False,0,,1,3880.0,3880.0,1586831481000,0,,0,济宁专属 米纳
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/de790cba6ae6402f81414ca28d8d1830.png,1211771540189,False,True,False,0,,1,1899.0,1899.0,1586830722000,0,,0,济宁专属 小飞侠
+2020-04-28,300,https://image-c.weimobwmc.com/saas-wxbiz/e0910cd0b0284749b63ea8e9f5068602.jpg,1211769870189,False,True,False,0,,1,5680.0,5680.0,1586828684000,0,,0,X5
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/32c2e4e236c14de7b5ab5b8e4bee808d.bmp,1211769450189,False,True,False,0,,1,2599.0,2599.0,1586828251000,0,,0,限时秒杀 济宁专属 尚可
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/0d7f040237584b98a362d08f538eafe1.jpg,1211723910189,False,False,False,1,,1,2800.0,2300.0,1587795134000,0,,0,以旧换新 【尚优新国标（广东版）】可提电池 高亮大灯 铅酸48V12AH
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/873877f928364b64919ed59a76de03f6.jpg,1211707980189,False,False,False,1,,1,3799.0,3299.0,1586781104000,0,,0,以旧换新 【米莱劲远（广东版）】全幕显像 水滴转向 铅酸60V20AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/38c49a1dcf5b42549015407f6b82cb71.jpg,1211717140189,False,True,False,1,,0,5199.0,5199.0,1586780372000,0,,0,【V7 锂电标准版】内外兼修 骑行无忧 星恒锂电48V20AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/55068805e0bf4a7e8ae8670a3e71509d.jpg,1211705570189,False,True,False,1,,1,3299.0,2799.0,1586779172000,0,,0,以旧换新 【豪战加长版】铅酸60V20AH
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/60fa2c6f064341cba271b73c4dbb6f3b.jpg,1211716360189,False,False,False,1,,1,3599.0,3099.0,1586778586000,0,,0,以旧换新 【博冠】外在动人 内在动心 铅酸48V20AH
+2020-04-28,16000,https://image-c.weimobwmc.com/saas-wxbiz/734e58e9057243deb7acb5e84831fd41.jpg,1211704860189,False,False,False,1,,1,4599.0,4099.0,1586777778000,0,,0,以旧换新 【雷曼智动版】运动质感 冒险主义 铅酸72V20AH
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/653d9063ca24491e992ff7c5fc90ae8b.jpg,1211722150189,False,False,False,1,,1,3999.0,3499.0,1586776532000,0,,0,以旧换新 【欧豆锂电新国标（广东版）】舒适人机互动体验 锂电48V15AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/135caf7db8104998b6bf39549a07f047.jpg,1211715480189,False,False,False,1,,1,3999.0,3499.0,1586776053000,0,,0,以旧换新 【欧豆锂电新国标】美学大灯 基因传承 锂电48V15AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/3d87e09b0de24515aa0771dcba713b3e.jpg,1211715060189,False,False,False,1,,1,3999.0,3499.0,1586775448000,0,,0,以旧换新 【欧K锂电】小巧 灵活 时尚 锂电48V15AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/e21b3eaf53ba4117b14d01da28f69082.jpg,1211703540189,False,False,False,1,,1,4099.0,3599.0,1586775450000,0,,0,以旧换新【锐界智动版】转动电门 瞬间加速 铅酸60V20AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/428ee241cf0d4106816df972f374a3c4.jpg,1211703310189,False,False,False,1,,1,3499.0,2999.0,1586773734000,0,,0,以旧换新 雅迪电动车 锐战 60V/20Ah
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/af736b471976415a971696b9c0961e5e.jpg,1211569420189,False,True,False,1,,0,3590.0,3590.0,1586756884000,0,,0,【E3 2.0】小而美 再进化  铅酸60V20AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/f1898f92b31c4f448dd78f7c43db3898.jpg,1211497900189,False,False,False,1,,1,3799.0,3299.0,1586742349000,0,,0,【以旧换新】 雅迪电动车  锐越 72V20AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/f1898f92b31c4f448dd78f7c43db3898.jpg,1211491360189,False,False,False,1,,1,3799.0,3299.0,1586742310000,0,,0,【以旧换新】 雅迪电动车  锐越 60V20AH
+2020-04-28,12000,https://image-c.weimobwmc.com/saas-wxbiz/63f372cd9dce4d21a11b4856b650e3e5.jpg,1211494580189,False,False,False,1,,1,3999.0,3499.0,1586742019000,0,,0,以旧换新 雅迪电动车 锐鹰劲霸版（靠背） 72V20AH
+2020-04-28,1596,https://image-c.weimobwmc.com/saas-wxbiz/dd5699e5e4e742c9969c222a82b12a0b.jpg,1211485870189,False,False,False,1,,1,4299.0,3799.0,1586742021000,0,,0,以旧换新 雅迪电动车 T6劲远版 60V20AH
+2020-04-28,12000,https://image-c.weimobwmc.com/saas-wxbiz/6379956af01f4ce59400dbdfb8823676.jpg,1211490410189,False,False,False,1,,1,3999.0,3499.0,1586741299000,0,,0,以旧换新 雅迪电动车 T6铂金版大护杠尾箱  60V20AH
+2020-04-28,16000,https://image-c.weimobwmc.com/saas-wxbiz/7a07bce7b8424c3cb7e2fd1ddd1070b1.jpg,1211468350189,False,False,False,1,,1,3999.0,3499.0,1586695183000,0,,0,以旧换新 雅迪电动车  E6劲远版 60V20AH
+2020-04-28,50,https://image-c.weimobwmc.com/saas-wxbiz/b3a2100e543b46439bfbf151970b841e.jpg,1211454710189,False,True,False,0,,1,59.0,59.0,1586694547000,0,,0,济宁专属 雅迪专用锁
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/9d28273e946846a78c2640aa5a929feb.jpg,1211456510189,False,True,False,0,,1,98.0,98.0,1586694331000,0,,0,雅迪专用头盔
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/f0cefb302a804e93860beb8cd1724ce3.jpg,1211452830189,False,True,False,0,,1,68.0,68.0,1586694333000,0,,0,济宁专属 定时器
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/e03f5fdcc5e344ab82a219cc82cfa8c9.jpg,1211458950189,False,False,False,1,,1,3299.0,2799.0,1586692710000,0,,0,以旧换新 雅迪电动车 欧格 新国标锂电48V20AH
+2020-04-28,28000,https://image-c.weimobwmc.com/saas-wxbiz/8256a7a5a402427287b74da0117677a7.jpg,1211449130189,False,False,False,1,,0,3299.0,2799.0,1586742488000,0,,0,【以旧换新】雅迪电动车 米彩五代 60V20AH
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/e4ee6409b9e549a3bc3632b4aeb7973a.png,1211450260189,False,False,False,1,,1,3599.0,3099.0,1586689843000,0,,0,以旧换新 雅迪电动车 米彩五代劲霸版 72V20AH
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/cfe8513c6ab64724a9746400f439fccd.jpg,1211427680189,False,False,False,1,,1,4399.0,3899.0,1586686248000,0,,0,以旧换新 雅迪电动车 E3  60V20AH
+2020-04-28,2396,https://image-c.weimobwmc.com/saas-wxbiz/c22113e9ceb24a0b8b1aa1ceac2384d4.jpg,1211432450189,False,False,False,1,,1,4299.0,3799.0,1586683452000,0,,0,以旧换新 雅迪电动车 E2 七彩繁星灯 都市新潮流   铅酸60V20AH
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/9e2f8ea06257456fa0d4ed4ab5f9b6a4.png,1211379950189,False,True,False,0,,1,2399.0,2399.0,1586670646000,0,,0,限时秒杀 济宁专属 速行电轻摩
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/4be6a5223d5846d08cfe6447bc65b15d.png,1211394020189,False,True,False,0,,1,4180.0,4180.0,1586670543000,0,,0,极光2.0
+2020-04-28,20,https://image-c.weimobwmc.com/saas-wxbiz/74c8c84998a04f4ba736a5e2de661d18.jpg,1211369380189,False,True,False,0,,1,1799.0,1799.0,1586669438000,0,,0,限时秒杀 济宁专属  小金鼠
+2020-04-28,2200,https://image-c.weimobwmc.com/saas-wxbiz/49deaa3d33ef445eb09c34f5a1eb40bd.jpg,1211379330189,False,False,False,0,,1,99.0,99.0,1586669138000,0,,0,济宁专场 预交99元定金简易款抵200元 豪华款抵300元
+2020-04-28,16000,https://image-c.weimobwmc.com/saas-wxbiz/1a402e593b564d659a6ea648898fffe7.jpg,1211338410189,False,False,False,1,,1,3699.0,3199.0,1586657496000,0,,0,以旧换新 雅迪电动车 新国标欧致 100KM无忧通勤 锂电池 48V24AH
+2020-04-28,24040,https://image-c.weimobwmc.com/saas-wxbiz/131f4d8b93a14494b4447f134533663f.jpg,1211325520189,False,False,False,1,,1,3799.0,3299.0,1586656792000,0,,0,以旧换新 雅迪电动车 米月升级版 60V20AH
+2020-04-28,16000,https://image-c.weimobwmc.com/saas-wxbiz/429b0c2668c94f2d9e5b10a813837826.jpg,1211312050189,False,False,False,1,,1,3799.0,3299.0,1586614470000,0,,0,以旧换新 雅迪电动车 米萱高配 60V20AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/8d6e1b71dd86412ea5dadd0579d066fc.jpg,1211306640189,False,False,False,1,,1,3699.0,3199.0,1586614166000,0,,0,以旧 换新雅迪电动车 米萱  60V20AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/5f2af539bb1d484d95d70ca7dd9d33c9.png,1211308120189,False,False,False,1,,1,3500.0,3000.0,1586613700000,0,,0,以旧换新  雅迪电动车 尚K-L新国标版48V12AH锂电
+2020-04-28,16000,https://image-c.weimobwmc.com/saas-wxbiz/d54f164cc514441d96afefb59ae6a91a.png,1211304430189,False,False,False,1,,1,3099.0,2599.0,1586611698000,0,,0,以旧换新 雅迪电动车 尚K新国标版 48V12
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/7cd689fb297f46f9be0d13fe0da13e27.jpg,1211302180189,False,False,False,1,,1,3899.0,3399.0,1586611212000,0,,0,以旧换新 雅迪电动车 酷J 锂电新国标 48V20AH锂电
+2020-04-28,32000,https://image-c.weimobwmc.com/saas-wxbiz/0f6c6d5af14a4b5f8f7a9c86df56a616.jpg,1211297670189,False,False,False,1,,1,3499.0,2999.0,1586609221000,0,,0,以旧换新 雅迪电动车 速迅轻摩版 48V20AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/4a5be43c115a4f319645dc0bba21d76b.jpg,1211298800189,False,False,False,1,,1,3599.0,3099.0,1586608714000,0,,0,以旧换新  雅迪电动车 酷K 轻摩版 48V23AH
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/1da0d4e3d5c945288cac8c834e7d1fee.jpg,1211297520189,False,False,False,1,,1,3799.0,3299.0,1586608196000,0,,0,雅迪电动车 R3 48V23AH
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/af3fc77ae3e944ecb36ff4d9191b39e5.jpg,1211297410189,False,False,False,1,,1,4299.0,3799.0,1586607635000,0,,0,雅迪电动车 E-VEN轻摩版 48V23AH
+2020-04-28,32000,https://image-c.weimobwmc.com/saas-wxbiz/4b701c42aec84c858e435329f1a9ff48.jpg,1211297190189,False,False,False,1,,1,2999.0,2499.0,1586607091000,0,,0,以旧换新 雅迪电动车 尚纳轻摩版 48V20AH
+2020-04-28,24000,https://image-c.weimobwmc.com/saas-wxbiz/444d756b136742f78ca729d25370a2c6.jpg,1211298230189,False,False,False,1,,1,3299.0,2799.0,1586606232000,0,,0,以旧换新 雅迪电动车 R1 Plus 48V23AH
+2020-04-28,48000,https://image-c.weimobwmc.com/saas-wxbiz/638180e505e54c689bb81daae056ed3c.jpg,1211292540189,False,False,False,1,,1,2899.0,2399.0,1586605691000,0,,0,以旧换新 雅迪电动车 速威轻摩版 48V20AH
+2020-04-28,56000,https://image-c.weimobwmc.com/saas-wxbiz/b39ef1899c06477abc24dbe14ca6307d.jpg,1211238440189,False,True,False,1,,0,2999.0,2499.0,1586591983000,0,,0,以旧换新 雅迪电动车 小飞象新国标 48V20AH
+2020-04-28,48000,https://image-c.weimobwmc.com/saas-wxbiz/d1f1ec3737c4414a887483dffe820b9c.jpg,1211241850189,False,False,False,1,,1,2699.0,2199.0,1586590701000,0,,0,以旧换新  雅迪电动车 尚米 新国标锂电版 48V12Ah锂电
+2020-04-28,5999,https://image-c.weimobwmc.com/saas-wxbiz/14109de149b540ae97e8d901927b56cc.jpg,1211223400189,False,True,False,1,,0,3290.0,3290.0,1586589535000,0,,0,【欧韵锂电】轻快go！加载梦想 轻松向前 锂电48V15AH
+2020-04-28,31996,https://image-c.weimobwmc.com/saas-wxbiz/ad66c3aecdf54b3fac095ed3fd3e7874.jpg,1211225210189,False,False,False,1,,1,1799.0,1299.0,1586589569000,0,,0,以旧换新 雅迪电动车 尚米 新国标版 48V12Ah
+2020-04-28,7700,https://image-c.weimobwmc.com/saas-wxbiz/686104ebf3b041d1ad8028047facf936.png,1211195730189,False,True,False,1,,0,3390.0,3390.0,1586584248000,0,,0,【R MINI锂电】迷你，自由引力 锂电48V15AH
+2020-04-28,20000,https://image-c.weimobwmc.com/saas-wxbiz/6199fe5d1e864d9b8f3d8a70fc58a051.jpg,1211182440189,False,False,False,1,,1,3799.0,3299.0,1587795222000,0,,0,以旧换新 雅迪电动车 欧拉 后靠背大踏板 轻巧有实力 新国标 锂电池48V15AH
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/0405842bc5a0491d83557eda98fd3adf.jpg,1211153720189,False,False,False,1,,1,4599.0,4599.0,1586573131000,0,,0,以旧换新 雅迪电动车 莱客 60V20Ah
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/5c12fad7ff6f4590bfc30bffeb53b716.jpg,1211146390189,False,True,False,1,,0,1999.0,1999.0,1586568129000,0,,0,【尚靓新国标（广东版）】强有力的能量保障 铅酸48V12AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/51ea3dba374741e4965b90dde34ce696.png,1211137760189,False,True,False,1,,0,5480.0,5480.0,1586566939000,0,,0,【幸驰A3PLUS  电动三轮车】新一代跨界敞篷小跑 铅酸48V20AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/c6101205afa64c438b6553967e458ea7.jpg,1211158590189,False,True,False,1,,0,4180.0,4180.0,1586566639000,0,,0,【小海鸥通配版电动三轮车】铅酸 48V20AH
+2020-04-28,55996,https://image-c.weimobwmc.com/saas-wxbiz/ce28acb79b874410b9b27d694aeee74d.jpg,1211139740189,False,False,False,1,,1,4099.0,3299.0,1586574161000,0,,0,以旧换新 雅迪电动车 M6 经典造型 六大突破升级
+2020-04-28,12000,https://image-c.weimobwmc.com/saas-wxbiz/8dc0edb3f417477980f15fc99bf6209c.jpg,1211140290189,False,False,False,1,,1,2599.0,2599.0,1587824667000,0,,0,雅迪电动车 小王子轻摩版 48V12AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/5f2af539bb1d484d95d70ca7dd9d33c9.png,1211067750189,False,True,False,1,,0,2699.0,2699.0,1586508783000,0,,0,【尚K 锂电新国标】简而不同 遇见美好 锂电48V12AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/d54f164cc514441d96afefb59ae6a91a.png,1211094460189,False,True,False,1,,0,2299.0,2299.0,1586508598000,0,,0,【尚K 新国标】简约新时尚  铅酸48V12AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/54803234dcb34b8dbd398d458c0a035d.jpg,1210909260189,False,True,False,1,,0,2699.0,2699.0,1586445567000,0,,0,【尚迪新国标（广东版）】人性化设计豪华体验 铅酸48V12AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/e5ad858bd35d4d739e23989f2ae8c668.png,1210370450189,False,True,False,1,,0,4480.0,4480.0,1586422896000,0,,0,【乐酷2020电动三轮车】全新升级多能妈妈车 铅酸48V20AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/a9347177d47042dd9f9a7085c02a50e0.jpg,1210363290189,False,True,False,1,,0,4280.0,4280.0,1586354368000,0,,0,【A3Mini 电动三轮车】轻巧小车   铅酸48V20AH
+2020-04-28,2000,https://image-c.weimobwmc.com/saas-wxbiz/f1898f92b31c4f448dd78f7c43db3898.jpg,1210302880189,False,True,False,1,,1,3799.0,3799.0,1586585253000,0,,0,雅迪电动车  锐越 72V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/222fdf810bed44628cee0868863a8ee1.jpg,1210241030189,True,True,True,1,,1,1400.0,239.0,1586421486000,0,,0,沭阳专属 原装电池半价以旧换新（48V12AH起）
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/33e45c440feb458b9f8b8a63ad5d487b.jpg,1210124790189,True,True,True,0,,1,58.0,58.0,1586422901000,0,,0,挡风被
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/4cdfbc15870740c891d8ef0a25183d3e.jpg,1210112070189,False,True,False,0,,1,138.0,138.0,1586422902000,0,,0,头盔
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/4ea1a8a7f5164d808e52d81e7d091023.jpg,1210112000189,True,True,True,0,,1,38.0,38.0,1586422904000,0,,0,雨衣
+2020-04-28,1506,https://image-c.weimobwmc.com/saas-wxbiz/55068805e0bf4a7e8ae8670a3e71509d.jpg,1210097650189,False,True,False,1,,1,2499.0,99.0,1586423365000,0,,0,沭阳专属 豪战精致版60V20AH 任意车型以旧换新
+2020-04-28,14060,https://image-c.weimobwmc.com/saas-wxbiz/aea1ca2759a04ac39e3b6007f173b441.jpg,1210104960189,False,True,False,1,,1,2399.0,99.0,1586423372000,0,,0,沭阳专属 米彩精英靠背版 60V20AH  以旧换新 （ 旧车 48V20AH电池）
+2020-04-28,9000,https://image-c.weimobwmc.com/saas-wxbiz/a57ba65bf6674e359a91e1911b195fec.jpg,1209794000189,False,True,False,1,,0,2299.0,2299.0,1586163132000,0,,0,【小金鼠豪华版】闪耀来袭 敢于不凡   铅酸48V12AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/7e61d107095448e9b41f10229b71ce71.png,1209773670189,True,True,True,0,,1,200.0,200.0,1586422907000,0,,0,淮南秒杀预付200元抵400
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/721a46488771407796372bb458054555.jpeg,1209788520189,True,True,True,0,,1,99.0,99.0,1586422908000,0,,0,湛江直播间预付99元抵200
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/be100ab1a5f64e54af7a6c88844af56b.jpg,1209786160189,True,True,True,0,,1,5999.0,5999.0,1586422910000,0,,0,沭阳专属   G5 石墨烯版
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/ec1f2671e5b949a7b62c15282464f114.jpg,1209784030189,True,True,True,0,,1,4599.0,4599.0,1586422934000,0,,0,沭阳专属  莱客
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/dd5699e5e4e742c9969c222a82b12a0b.jpg,1209775010189,True,True,True,0,,1,4299.0,4299.0,1586422934000,0,,0,沭阳专属 T6
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/71f30a28a77c416cb8ae54b80603c27d.jpg,1209771850189,True,True,True,0,,1,3499.0,3499.0,1586422934000,0,,0,沭阳专属  E6
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/efd0eb02248a43f0a7960b10acb85b1d.jpg,1209781610189,True,True,True,1,,1,3799.0,3799.0,1586422934000,0,,0,沭阳专属 雷力
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/85428902db1b4851a3821e791f0b647b.jpg,1209774540189,True,True,True,0,,1,3699.0,3699.0,1586422934000,0,,0,沭阳专属  锐领
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/1957e410a06242478150c20915272a83.jpg,1209771300189,True,True,True,0,,1,3599.0,3599.0,1586422934000,0,,0,沭阳专属  M6
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/2d1d229a3a8446ec92337e9ce2cb3f56.jpg,1209778130189,True,True,True,0,,1,2999.0,2999.0,1586423383000,0,,0,沭阳专属   米彩三代
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/d2d89d892b7145b8942079dbd8c29e66.jpg,1209783050189,True,True,True,0,,1,2999.0,2999.0,1586423386000,0,,0,沭阳专属 米彩精英尾箱版
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/1da0d4e3d5c945288cac8c834e7d1fee.jpg,1209780370189,True,True,True,0,,1,3799.0,3799.0,1586423388000,0,,0,沭阳专属 R3
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/ac94084eb0bc476ab266ff462301d13c.jpg,1209769890189,True,True,True,0,,1,3299.0,3299.0,1586423391000,0,,0,沭阳专属 R1
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/4cfffd4a878b47e48ffb1ce0818e486b.jpg,1209768910189,True,True,True,0,,1,3399.0,3399.0,1586423394000,0,,0,沭阳专属  酷雷
+2020-04-28,2700,https://image-c.weimobwmc.com/saas-wxbiz/0f6c6d5af14a4b5f8f7a9c86df56a616.jpg,1209768710189,False,True,False,1,,1,2999.0,99.0,1586423397000,0,,0,速迅电轻摩 48V20AH 以旧换新 定金抢购
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/e2b95c527260480aaa3a2e95d7501a10.jpg,1209759800189,True,True,True,0,,1,2999.0,2999.0,1586423400000,0,,0,沭阳专属  尚途
+2020-04-28,1500,https://image-c.weimobwmc.com/saas-wxbiz/4b701c42aec84c858e435329f1a9ff48.jpg,1209764730189,False,True,False,1,,1,2599.0,99.0,1586423403000,0,,0,尚纳 48V20AH 以旧换新 定金抢购
+2020-04-28,36000,https://image-c.weimobwmc.com/saas-wxbiz/638180e505e54c689bb81daae056ed3c.jpg,1209759540189,False,True,False,1,,1,2499.0,99.0,1586423407000,0,,0,速威48V20AH   以旧换新 定金抢购
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/3102346965484b8590b923826dc40864.jpg,1209768160189,True,True,True,0,,1,2599.0,2599.0,1586423410000,0,,0,沭阳专属   尚可
+2020-04-28,20,https://image-c.weimobwmc.com/saas-wxbiz/74c8c84998a04f4ba736a5e2de661d18.jpg,1209768020189,False,True,False,0,,1,1999.0,1999.0,1586423414000,0,,0,沭阳专属  小金鼠
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/43c161c32d0c418e88e8bbcf43a69560.jpg,1209759030189,True,True,True,0,,1,2299.0,2299.0,1586423429000,0,,0,沭阳专属    小王子轻摩
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/64c358ae51374ede993af20a4dbbb1d3.jpg,1209758730189,True,True,True,0,,1,1999.0,1999.0,1586423425000,0,,0,沭阳专属  小王子
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/44484e25ac504015b7aa178bc6b3600c.jpg,1209749400189,False,True,False,1,,0,3499.0,3499.0,1586585572000,0,,0,【欧雅锂电新国标尾箱版（广东版）】精致格调大灯 亮丽仪表  锂电48V15AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/e03f5fdcc5e344ab82a219cc82cfa8c9.jpg,1209412080189,False,True,False,1,,0,3590.0,3590.0,1586573448000,0,,0,【欧格锂电标准版】遇见出行新美好 锂电48V20AH
+2020-04-28,599,https://image-c.weimobwmc.com/saas-wxbiz/c22113e9ceb24a0b8b1aa1ceac2384d4.jpg,1209003140189,False,False,False,1,,1,3999.0,3999.0,1586423437000,1,,0,以旧换新 雅迪电动车 E2 （旧车电池48V20AH以上）
+2020-04-28,6999,https://image-c.weimobwmc.com/saas-wxbiz/ce28acb79b874410b9b27d694aeee74d.jpg,1209001460189,False,True,False,1,,1,3599.0,3599.0,1586423441000,0,,0,以旧换新 雅迪电动车 M6劲远版 （旧车电池48V20AH以上）
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/cfe8513c6ab64724a9746400f439fccd.jpg,1209007140189,False,True,False,1,,1,3699.0,3699.0,1586423445000,0,,0,以旧换新 雅迪电动车 E3 （旧车电池48V20AH以上）
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/0405842bc5a0491d83557eda98fd3adf.jpg,1209001160189,False,True,False,1,,1,3699.0,3699.0,1586423450000,0,,0,以旧换新 雅迪电动车 莱客（旧车电池48V20AH以上）
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/7a07bce7b8424c3cb7e2fd1ddd1070b1.jpg,1208999850189,False,True,False,1,,1,3799.0,3799.0,1586423452000,0,,0,以旧换新 雅迪电动车 E6劲远版（旧车电池48V20AH以上）
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/dbe3c7d16e4b403a91649c1b5544af82.jpg,1208975180189,False,False,False,1,,1,5899.0,5899.0,1586423460000,0,,0,以旧换新 雅迪电动车G5石墨烯版（旧车电池48V20AH以上）
+2020-04-28,2000,https://image-c.weimobwmc.com/saas-wxbiz/f1898f92b31c4f448dd78f7c43db3898.jpg,1208959980189,False,True,False,1,,1,3399.0,3399.0,1586423464000,0,,0,以旧换新 雅迪电动车 锐越（旧车电池48V20AH以上）
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/428ee241cf0d4106816df972f374a3c4.jpg,1208962090189,False,False,False,1,,1,2899.0,2899.0,1586423467000,0,,0,以旧换新 雅迪电动车 锐战（旧车电池48V20AH以上）
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/559e3801f53041d0b24d05b2dcd1a460.jpg,1208960130189,False,True,False,1,,0,2699.0,2699.0,1586573421000,0,,0,【尚乐新国标（广东版）】精于设计，舒适体验全升级 铅酸48V12AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/8d6e1b71dd86412ea5dadd0579d066fc.jpg,1208899460189,False,True,False,1,,1,3399.0,3399.0,1586423475000,0,,0,以旧换新 雅迪电动车 米萱（旧车电池48V20AH以上）
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/653d9063ca24491e992ff7c5fc90ae8b.jpg,1208955000189,False,True,False,1,,0,3699.0,3699.0,1586573431000,0,,0,【欧豆锂电新国标（广东版）】舒适人机互动体验 锂电48V15AH
+2020-04-28,6010,https://image-c.weimobwmc.com/saas-wxbiz/131f4d8b93a14494b4447f134533663f.jpg,1208946720189,False,True,False,1,,1,3599.0,3599.0,1586423483000,0,,0,以旧换新 雅迪电动车 米月升级版（旧车电池48V20AH以上）
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/c2cc2a27b7dd4271ba0c7e43da732985.jpg,1208876890189,False,True,False,1,,0,2599.0,2599.0,1586573427000,0,,0,【316S新国标（广东版）】可提电池贴近生活 一路伴行 锂电48V12AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/af3fc77ae3e944ecb36ff4d9191b39e5.jpg,1208879570189,False,True,False,1,,1,3599.0,3599.0,1586423493000,0,,0,以旧换新 雅迪电动车 E-VEN轻摩版（旧车电池48V20AH以上）
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/7cd689fb297f46f9be0d13fe0da13e27.jpg,1208879140189,False,True,False,1,,1,3499.0,3499.0,1586423497000,0,,0,以旧换新 雅迪电动车 酷J锂电新国标（旧车电池48V20AH以上）
+2020-04-28,1999,https://image-c.weimobwmc.com/saas-wxbiz/887b352a082542a8b26d7ceaf62464a6.jpg,1208900250189,False,True,False,1,,1,4099.0,4099.0,1586423500000,0,,0,以旧换新 雅迪电动车 V20豪华版（旧车电池48V20AH以上）
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/4b701c42aec84c858e435329f1a9ff48.jpg,1208892150189,False,True,False,1,,1,2799.0,2799.0,1586423504000,0,,0,以旧换新 雅迪电动车 尚纳轻摩版（旧车电池48V20AH以上）
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/0f6c6d5af14a4b5f8f7a9c86df56a616.jpg,1208862620189,False,True,False,1,,1,2999.0,2999.0,1586423507000,0,,0,以旧换新 雅迪电动车 速迅轻摩版（旧车电池48V20AH以上）
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/63f372cd9dce4d21a11b4856b650e3e5.jpg,1208857790189,False,True,False,1,,1,3499.0,3499.0,1586423513000,0,,0,以旧换新 雅迪电动车 锐鹰劲霸版（靠背）（旧车电池48V20AH以上）
+2020-04-28,399,https://image-c.weimobwmc.com/saas-wxbiz/dd5699e5e4e742c9969c222a82b12a0b.jpg,1208873200189,False,True,False,1,,1,4299.0,4299.0,1586423518000,0,,0,以旧换新 雅迪电动车 T6劲远版（旧车电池48V20AH以上）
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/6089cb2139a240dfb1ed4d835023126b.jpg,1208826650189,False,True,False,1,,1,1999.0,1999.0,1586423522000,0,,0,以旧换新（旧车电池48V20AH以上）雅迪电动车 小金鼠
+2020-04-28,7000,https://image-c.weimobwmc.com/saas-wxbiz/8256a7a5a402427287b74da0117677a7.jpg,1208790730189,False,True,False,1,,1,2899.0,2899.0,1586423526000,0,,0,以旧换新 雅迪电动车 米彩五代（旧车电池48V20AH以上）
+2020-04-28,12000,https://image-c.weimobwmc.com/saas-wxbiz/8dc0edb3f417477980f15fc99bf6209c.jpg,1208801400189,False,True,False,1,,1,2399.0,2399.0,1586573381000,0,,0,以旧换新 雅迪电动车 小王子轻摩版 (旧车电池48V20AH以上）
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/933512a320bf44469934741fa941a0cc.png,1208552560189,True,True,True,0,,1,3099.0,3099.0,1586573391000,0,,0,豪战精致靠背版 60V20AH
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/e28ac975f0554ca187e9a8d43de7f0e4.png,1208552540189,True,True,True,0,,1,3199.0,3199.0,1586573393000,0,,0,雅迪电动车 米彩精致靠背版  60V20AH
+2020-04-28,200,https://image-c.weimobwmc.com/saas-wxbiz/df0e7e52f2414e86b0be84ee7c038e07.png,1208545260189,False,True,False,0,,1,2999.0,2999.0,1586573396000,0,,0,沭阳专属 雅迪电动车 尚腾轻摩 48V20AH
+2020-04-28,17999,https://image-c.weimobwmc.com/saas-wxbiz/ad66c3aecdf54b3fac095ed3fd3e7874.jpg,1208549190189,False,True,False,1,,1,1399.0,99.0,1586423548000,0,,0,雅迪电动车 尚米新国标 48V12AH 以旧换新 （旧车48V20AH电池）
+2020-04-28,502,https://image-c.weimobwmc.com/saas-wxbiz/933512a320bf44469934741fa941a0cc.png,1208549120189,False,True,False,0,,1,2699.0,2699.0,1586423554000,0,,0,豪战精致靠背版 60V20AH  以旧换新 （ 旧车 48V20AH电池）
+2020-04-28,8030,https://image-c.weimobwmc.com/saas-wxbiz/aea1ca2759a04ac39e3b6007f173b441.jpg,1208547040189,False,False,False,1,,1,2599.0,2599.0,1586423558000,0,,0,以旧换新 雅迪电动车 米彩精英版（旧车电池48V20AH以上）
+2020-04-28,7999,https://image-c.weimobwmc.com/saas-wxbiz/ad66c3aecdf54b3fac095ed3fd3e7874.jpg,1208552100189,False,True,False,1,,1,1599.0,1599.0,1586423564000,0,,0,以旧换新  雅迪电动车 尚米（旧车电池48V20AH以上）
+2020-04-28,0,https://image-c.weimobwmc.com/saas-wxbiz/5869212cf1fd412fb7cd8a7ccfd1c7cd.png,1208414000189,True,True,True,0,,1,99.0,99.0,1586423573000,0,,0,【淮南雅迪专用】预交99定金即可享受4月9日直播间秒杀价格
+2020-04-28,5,https://image-c.weimobwmc.com/saas-wxbiz/d60918af3fac4151ba5626a7b762473f.jpg,1208221870189,False,True,True,1,,1,14800.0,14800.0,1585567539000,25,,0,雅迪电动车 G5-MAX
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/4812b8b2dfaa4abea041b12eb07aa790.jpg,1207854770189,False,True,False,1,,0,2999.0,2999.0,1585415944000,0,,0,【米露轻摩靠背版（广东版）】时尚色彩 实用载物空间想装就装 铅酸60V20AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/e4ee6409b9e549a3bc3632b4aeb7973a.png,1207473880189,False,True,False,1,,0,3199.0,3199.0,1585289490000,0,,0,【米彩五代劲霸版】  铅酸72V20AH
+2020-04-28,7000,https://image-c.weimobwmc.com/saas-wxbiz/8256a7a5a402427287b74da0117677a7.jpg,1207459960189,False,True,False,1,,0,2990.0,2990.0,1585289194000,0,,0,【米彩五代】跨越五代的升级  铅酸60V20AH
+2020-04-28,3635,https://image-c.weimobwmc.com/saas-wxbiz/71588a72081b4497bebb7243517bb22f.png,1206996420189,False,True,False,1,,0,206.0,158.0,1585137807000,0,,0,雅迪电动车 两用充电器
+2020-04-28,8010,https://image-c.weimobwmc.com/saas-wxbiz/ba1a0b12af794c27b9cb2fab7b5d3d1c.png,1207006340189,False,True,False,0,,0,16.0,16.0,1585137436000,2,,0,轮胎保护剂
+2020-04-28,602,https://image-c.weimobwmc.com/saas-wxbiz/abc6ed5b93094adc899d5bc97cd25ef7.png,1206996230189,False,True,False,1,,0,208.0,208.0,1585137335000,1,,1,儿童安全座椅
+2020-04-28,2630,https://image-c.weimobwmc.com/saas-wxbiz/5f8fcbe7d48f4517a28cab070f723999.png,1206998110189,False,True,False,1,,0,46.0,46.0,1585137105000,0,,0,运动保温杯
+2020-04-28,184,https://image-c.weimobwmc.com/saas-wxbiz/1d1f97bb124a45daa2e30a0c78dffbb2.png,1206990850189,False,True,False,0,,0,126.0,126.0,1585136913000,0,,0,儿童头盔-3D坦克
+2020-04-28,177,https://image-c.weimobwmc.com/saas-wxbiz/088198c1d7eb4376bd32ba3b92b66086.png,1207001430189,False,True,False,0,,0,126.0,126.0,1585136842000,0,,0,儿童头盔-亲子款
+2020-04-28,462,https://image-c.weimobwmc.com/saas-wxbiz/21ce2bde0a294480bf17372cbd3ff8f1.png,1206996000189,False,True,False,1,,0,159.0,159.0,1585136605000,2,,4,3C时尚头盔
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/60fa2c6f064341cba271b73c4dbb6f3b.jpg,1206173300189,False,True,False,1,,0,3390.0,3390.0,1584948429000,0,,0,【博冠】外在动人 内在动心 铅酸48V20AH
+2020-04-28,1177,https://image-c.weimobwmc.com/saas-wxbiz/c5a6e0b638a5457b85dc897c89bef57c.jpg,1204774720189,False,True,False,0,,0,1.0,1.0,1584500359000,17,,0,一元图标  后台专用
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/6089cb2139a240dfb1ed4d835023126b.jpg,1204427690189,False,True,False,1,,0,1999.0,1999.0,1584364198000,2,,0,【小金鼠 新国标】灵动小巧 向光前行  铅酸48V12AH
+2020-04-28,399,https://image-c.weimobwmc.com/saas-wxbiz/dd5699e5e4e742c9969c222a82b12a0b.jpg,1204430350189,False,True,False,1,,0,3699.0,3699.0,1584361405000,0,,0,【T6 劲远版靠背】追求卓越，品味不凡 铅酸60V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/135caf7db8104998b6bf39549a07f047.jpg,1204202700189,False,True,False,1,,0,3590.0,3590.0,1584324838000,0,,0,【欧豆锂电新国标】美学大灯 基因传承 锂电48V15AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/3d87e09b0de24515aa0771dcba713b3e.jpg,1204200610189,False,True,False,1,,0,3490.0,3490.0,1584324616000,0,,0,【欧K锂电】小巧 灵活 时尚 锂电48V15AH
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/63f372cd9dce4d21a11b4856b650e3e5.jpg,1204139160189,False,True,False,1,,0,3499.0,3499.0,1584265278000,1,,0,【锐鹰劲霸靠背版】锋芒，锐不可挡 铅酸60V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/e21b3eaf53ba4117b14d01da28f69082.jpg,1204143920189,False,True,False,1,,0,3390.0,3390.0,1584264872000,0,,0,【锐界智动版】转动电门 瞬间加速 铅酸60V20AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/734e58e9057243deb7acb5e84831fd41.jpg,1203657140189,False,True,False,1,,0,4299.0,4299.0,1584083256000,0,,0,【雷曼智动版】运动质感 冒险主义 铅酸72V20AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/0f6c6d5af14a4b5f8f7a9c86df56a616.jpg,1203636720189,False,True,False,1,,0,2999.0,2999.0,1584081351000,0,,0,【速迅 轻摩版】轻松出行 尽情驰骋  铅酸48V20AH
+2020-04-28,8000,https://image-c.weimobwmc.com/saas-wxbiz/4b701c42aec84c858e435329f1a9ff48.jpg,1203634780189,False,True,False,1,,0,2799.0,2799.0,1584081040000,0,,0,【尚纳轻摩版】 铅酸48V20AH
+2020-04-28,12000,https://image-c.weimobwmc.com/saas-wxbiz/638180e505e54c689bb81daae056ed3c.jpg,1203632670189,False,True,False,1,,0,2799.0,2799.0,1584080573000,0,,0,【速威 轻摩版】全面智能仪表  铅酸48V20AH
+2020-04-28,14000,https://image-c.weimobwmc.com/saas-wxbiz/b39ef1899c06477abc24dbe14ca6307d.jpg,1203629760189,False,True,False,1,,0,2799.0,2799.0,1584542347000,0,,0,【小飞象 新国标】 轻而不同 耀目而来  铅酸48V20AH
+2020-04-28,12000,https://image-c.weimobwmc.com/saas-wxbiz/8dc0edb3f417477980f15fc99bf6209c.jpg,1203622680189,False,True,False,1,,0,2399.0,2399.0,1587824664000,0,,0,【小王子 轻摩版】 热销爆款 全新升级  铅酸48V12AH
+2020-04-28,12000,https://image-c.weimobwmc.com/saas-wxbiz/d1f1ec3737c4414a887483dffe820b9c.jpg,1203618280189,False,True,False,1,,0,2499.0,2499.0,1584079153000,0,,0,【尚米 锂电新国标】小身型 大有身手 锂电48V12AH
+2020-04-28,5999,https://image-c.weimobwmc.com/saas-wxbiz/887b352a082542a8b26d7ceaf62464a6.jpg,1203451640189,False,True,False,1,,0,3899.0,3899.0,1584006118000,0,,0,【V20豪华版】 尊贵品质 五大升级 锂电48V20AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/7cd689fb297f46f9be0d13fe0da13e27.jpg,1203203700189,False,True,False,1,,0,3399.0,3399.0,1583979349000,0,,0,【酷J 锂电新国标】实惠实用新国标 锂电48V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/4a5be43c115a4f319645dc0bba21d76b.jpg,1203206460189,False,True,False,1,,0,3399.0,3399.0,1583979070000,0,,0,【酷K 轻摩版】 铅酸48V23AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/1da0d4e3d5c945288cac8c834e7d1fee.jpg,1203199590189,False,True,False,1,,0,3599.0,3599.0,1583978392000,0,,0,【R3】不惧颠簸 无畏崎岖  铅酸48V23AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/af3fc77ae3e944ecb36ff4d9191b39e5.jpg,1203197290189,False,True,False,1,,0,4299.0,4299.0,1583977820000,0,,0,【E-ven 轻摩版】mini轻骑 E见倾心  铅酸48V23AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/444d756b136742f78ca729d25370a2c6.jpg,1203194910189,False,True,False,1,,0,2999.0,2999.0,1583977484000,0,,0,【R1 Plus】靓丽灵动 小巧玲珑  铅酸48V23AH
+2020-04-28,7999,https://image-c.weimobwmc.com/saas-wxbiz/ad66c3aecdf54b3fac095ed3fd3e7874.jpg,1203189230189,False,True,False,1,,0,1699.0,1699.0,1583976585000,0,,0,【尚米 新国标版】小而精悍 为你而来 铅酸48V12AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/873877f928364b64919ed59a76de03f6.jpg,1201629850189,False,True,False,1,,0,3399.0,3399.0,1583582263000,0,,0,【米莱劲远（广东版）】全幕显像 水滴转向 铅酸60V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/0d7f040237584b98a362d08f538eafe1.jpg,1201630500189,False,True,False,1,,0,2699.0,2699.0,1583581689000,0,,0,【尚优新国标（广东版）】可提电池 高亮大灯 铅酸48V12AH
+2020-04-28,6010,https://image-c.weimobwmc.com/saas-wxbiz/131f4d8b93a14494b4447f134533663f.jpg,1201630250189,False,True,False,1,,0,3099.0,3099.0,1583581342000,0,,0,【米月升级版】更懂女人心的时尚轻摩  铅酸60V20AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/429b0c2668c94f2d9e5b10a813837826.jpg,1201630030189,False,True,False,1,,0,3299.0,3299.0,1583581010000,0,,0,【米萱高配版】星造型，新时尚  铅酸60V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/8d6e1b71dd86412ea5dadd0579d066fc.jpg,1201623880189,False,True,False,1,,0,3099.0,3099.0,1583580838000,0,,0,【米萱】 铅酸60V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/6199fe5d1e864d9b8f3d8a70fc58a051.jpg,1201577930189,False,True,False,1,,0,3399.0,3399.0,1583570898000,0,,0,【欧拉锂电】轻巧有实力，你的梦想加速器 锂电48V15AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/55068805e0bf4a7e8ae8670a3e71509d.jpg,1201578270189,False,True,False,1,,0,2899.0,2899.0,1583570818000,0,,0,【豪战加长版】铅酸60V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/428ee241cf0d4106816df972f374a3c4.jpg,1201573870189,False,True,False,1,,0,2899.0,2899.0,1583570521000,0,,0,【锐战】颜值与好用并存 铅酸60V20AH
+2020-04-28,2000,https://image-c.weimobwmc.com/saas-wxbiz/f1898f92b31c4f448dd78f7c43db3898.jpg,1201580910189,False,True,False,1,,0,3399.0,3399.0,1583570293000,0,,0,【锐越通配版】战斗侠的出征利器 铅酸60V20AH
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/6379956af01f4ce59400dbdfb8823676.jpg,1201576350189,False,True,False,1,,0,4199.0,4199.0,1583570080000,0,,0,【T6铂金护杠尾箱】卓越实力 领跑一路”不凡“ 铅酸60V20AH
+2020-04-28,5000,https://image-c.weimobwmc.com/saas-wxbiz/dbe3c7d16e4b403a91649c1b5544af82.jpg,1201569880189,False,True,False,1,,0,5399.0,5399.0,1583569723000,0,,0,【G5石墨烯版】有国际范的高端电动车 石墨烯72V20AH
+2020-04-28,5999,https://image-c.weimobwmc.com/saas-wxbiz/7a07bce7b8424c3cb7e2fd1ddd1070b1.jpg,1201572560189,False,True,False,1,,0,3499.0,3499.0,1583569704000,2,,0,【E6劲远版】方正轻骑设计 尽显潮流风范 铅酸60V20AH
+2020-04-28,3000,https://image-c.weimobwmc.com/saas-wxbiz/0405842bc5a0491d83557eda98fd3adf.jpg,1201569450189,False,True,False,1,,0,3499.0,3499.0,1583569380000,0,,0,【莱客轻摩】时尚外观 超大尾箱 铅酸60V20AH
+2020-04-28,6000,https://image-c.weimobwmc.com/saas-wxbiz/cfe8513c6ab64724a9746400f439fccd.jpg,1201568980189,False,True,False,1,,0,3499.0,3499.0,1583569078000,0,,0,【E3都市版】都市轻骑 我型我show   铅酸60V20AH
+2020-04-28,8030,https://image-c.weimobwmc.com/saas-wxbiz/aea1ca2759a04ac39e3b6007f173b441.jpg,1201568450189,False,True,False,1,,0,2699.0,2699.0,1583568788000,1,,0,【米彩精英版】加厚座垫 开“骑”乐活之旅 60V20AH
+2020-04-28,4000,https://image-c.weimobwmc.com/saas-wxbiz/1a402e593b564d659a6ea648898fffe7.jpg,1201570810189,False,True,False,1,,0,3699.0,3699.0,1583568460000,0,,0,【欧致锂电】100KM无忧通勤 锂电48V24AH
+2020-04-28,7000,https://image-c.weimobwmc.com/saas-wxbiz/ce28acb79b874410b9b27d694aeee74d.jpg,1201560450189,False,True,False,1,,0,3599.0,3599.0,1583567269000,4,,0,【M6劲霸版】经典造型 6大突破  铅酸72V20AH
+2020-04-28,599,https://image-c.weimobwmc.com/saas-wxbiz/c22113e9ceb24a0b8b1aa1ceac2384d4.jpg,1201140280189,False,True,False,1,,0,3499.0,3499.0,1583472455000,2,,0,【E2】七彩繁星灯 方正新潮流   铅酸60V20AH
