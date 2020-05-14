@@ -114,3 +114,19 @@ class MySqlClient():
         print(sql)
         self.cursor.execute(sql)
         print("动态建表成功")
+
+if __name__ == '__main__':
+
+    mc154 = MySqlClient(154,'soider')
+    mc154.query_sql_lists('''
+        SELECT
+            weike_wid as fu,
+            wid as er
+        from 
+            spider.weimeng_weike_invite_user_list
+        union 
+        SELECT
+            REPLACE(REPLACE(inviter,'{"wid":',''),'}','')as fu,
+            wid as er
+        from 
+            spider.weimeng_merchant_weike_list''')

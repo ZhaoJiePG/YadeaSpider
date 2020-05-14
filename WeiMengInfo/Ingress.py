@@ -1,5 +1,5 @@
 # Author:Aliex ZJ
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 # -*- coding:utf-8 -*-
 import datetime
 import time
@@ -7,6 +7,9 @@ import time
 import pandas
 import requests
 import sys
+
+from WeiMengInfo.PrestoClient import PrestoClient
+
 sys.path.append('../')  # 新加入的
 print(sys.path)
 
@@ -22,154 +25,52 @@ if __name__ == '__main__':
     # 新建微盟实例
     wm = WeiMengInterface(client_id, client_secret)
     # MySql客户端
-    mc154 = MySqlClient(154, 'spider')
-    #
-    # # # 增量获取会员列表列(循环获取，每次500次请求，每个请求500条数据)
-    # print("********获取会员列表列********")
-    # while True:
-    #     try:
-    #         # 刷新access_token(2小时一次)
-    #         print("\n********刷新access_token(2小时一次)********")
-    #         access_token = wm.get_access_token()
-    #         print(access_token)
-    #         wm.get_member_list(access_token=access_token)
-    #     except requests.exceptions.ConnectionError:
-    #         print("请求次数过多，重新获取")
-    #         continue
-    #     except TypeError:
-    #         print("数据请求结束，退出循环")
-    #         break
-    # # 增量保存会员列表信息
-    # # mc154.create_table(pandas.read_csv('./Data/member_list.csv', low_memory=False), 'weimeng_user_member_list')
-    # mc154.truncate_day_data('weimeng_user_member_list',now_time)
-    # mc154.insert_into_mysql_file_data('./Data/member_list.csv','weimeng_user_member_list',now_time)
-    #
-    # # 获取订单列表
-    # print("获取获取订单列表情接口")
-    # access_token = wm.get_access_token()
-    # wm.get_order_list(access_token)
-    # mc154.get_create_sql('./Data/order_list.csv','weimeng_sale_order_list')
-    # mc154.insert_into_mysql_file_data('./Data/order_list.csv', 'weimeng_sale_order_list', now_time)
-    #
-    # # # 获取门店列表
-    # print("获取门店列表接口")
-    # access_token = wm.get_access_token()
-    # wm.get_store_list(access_token)
-    # mc154.get_create_sql('./Data/store_list.csv','weimeng_store_list')
-    # mc154.insert_into_mysql_file_data('./Data/store_list.csv', 'weimeng_store_list', now_time)
-    #
-    # # 获取门店详情
-    # print("获取门店详情接口")
-    # access_token = wm.get_access_token()
-    # wm.get_store_detail(access_token)
-    # mc154.get_create_sql('./Data/store_detail.csv','weimeng_store_detail')
-    # mc154.insert_into_mysql_file_data('./Data/store_detail.csv', 'weimeng_store_detail', now_time)
-    #
-    # # 获取查询导购列表
-    # print("获取查询导购列表")
-    # access_token = wm.get_access_token()
-    # wm.get_store_guider_list(access_token)
-    # mc154.get_create_sql('./Data/store_guider_list.csv','weimeng_store_guider_list')
-    # mc154.insert_into_mysql_file_data('./Data/store_guider_list.csv', 'weimeng_store_guider_list', now_time)
-    #
-    # # 获取导购目标列表
-    # print("获取导购目标列表")
-    # access_token = wm.get_access_token()
-    # wm.get_store_guider_target_list(access_token)
-    # mc154.get_create_sql('./Data/store_guider_target_list.csv','weimeng_store_guider_target_list')
-    # mc154.insert_into_mysql_file_data('./Data/store_guider_target_list.csv', 'weimeng_store_guider_target_list', now_time)
-    #
-    # # 获取商户优惠券列表
-    # print("获取商户优惠券列表")
-    # access_token = wm.get_access_token()
-    # wm.get_merchant_coupon_list(access_token)
-    # mc154.get_create_sql('./Data/merchant_coupon_list.csv','weimeng_merchant_coupon_list')
-    # mc154.insert_into_mysql_file_data('./Data/merchant_coupon_list.csv', 'weimeng_merchant_coupon_list', now_time)
-    #
-    # # 通过券码查询优惠券详情（C端）
-    #
-    # # 获取商户微客列表
-    # print('获取商户微课列表')
-    # access_token = wm.get_access_token()
-    # wm.get_merchant_weike_list(access_token)
-    # mc154.get_create_sql('./Data/merchant_weike_list.csv','weimeng_merchant_weike_list')
-    # mc154.insert_into_mysql_file_data('./Data/merchant_weike_list.csv', 'weimeng_merchant_weike_list', now_time)
-    #
-    # # 获取商户微客明细
-    # print('获取商户微课明细')
-    # access_token = wm.get_access_token()
-    # wm.get_weike_detail(access_token)
-    # mc154.get_create_sql('./Data/weike_detail.csv','weimeng_weike_detail')
-    # mc154.insert_into_mysql_file_data('./Data/weike_detail.csv', 'weimeng_weike_detail', now_time)
-    #
-    # # 获取门店库存列表
-    # print("获取门店库存列表")
-    # access_token = wm.get_access_token()
-    # wm.get_store_stock_list(access_token)
-    # mc154.get_create_sql('./Data/store_stock_list.csv','weimeng_store_stock_list')
-    # mc154.insert_into_mysql_file_data('./Data/store_stock_list.csv', 'weimeng_store_stock_list', now_time)
-    #
-    # # 获取订单详情
-    # print("获取订单详情接口")
-    # access_token = wm.get_access_token()
-    # wm.get_order_detail(access_token)
-    # mc154.get_create_sql('./Data/order_detail.csv','weimeng_sale_order_detail')
-    # mc154.insert_into_mysql_file_data('./Data/order_detail.csv', 'weimeng_sale_order_detail', now_time)
-    #
-    # # 获取产品列表
-    # print("获取产品列表")
-    # access_token = wm.get_access_token()
-    # wm.get_goods_list(access_token)
-    # mc154.get_create_sql('./Data/goods_list.csv','weimeng_goods_list')
-    # mc154.insert_into_mysql_file_data('./Data/goods_list.csv', 'weimeng_goods_list', now_time)
-    #
-    # # 获取产品明细
-    # print("获取产品明细")
-    # access_token = wm.get_access_token()
-    # wm.get_goods_detail(access_token)
-    # mc154.get_create_sql('./Data/goods_detail.csv','weimeng_goods_detail')
-    # mc154.insert_into_mysql_file_data('./Data/goods_detail.csv', 'weimeng_goods_detail', now_time)
-    #
-    # # 获取售后订单列表
-    # print("获取售后订单列表")
-    # access_token = wm.get_access_token()
-    # wm.get_rights_order_list(access_token)
-    # mc154.get_create_sql('./Data/rights_order_list.csv','weimeng_rights_order_list')
-    # mc154.insert_into_mysql_file_data('./Data/rights_order_list.csv', 'weimeng_rights_order_list', now_time)
-    #
-    # # 获取售后订单详情
-    # print("获取售后订单详情")
-    # access_token = wm.get_access_token()
-    # wm.get_rights_order_detail(access_token)
-    # mc154.get_create_sql('./Data/rights_order_detail.csv','weimeng_rights_order_detail')
-    # mc154.insert_into_mysql_file_data('./Data/rights_order_detail.csv', 'weimeng_rights_order_detail', now_time)
-    #
-    # # 获取进销存单据列表（出入库）
-    # print("获取进销存单据列表（出入库）")
-    # access_token = wm.get_access_token()
-    # wm.get_inventory_order_list(access_token)
-    # mc154.get_create_sql('./Data/inventory_order_list.csv','weimeng_inventory_order_list')
-    # mc154.insert_into_mysql_file_data('./Data/inventory_order_list.csv', 'weimeng_inventory_order_list', now_time)
-    #
-    # # 获取用户明细所有数据
-    # print("获取用户明细所有数据")
-    # while True:
-    #     access_token = wm.get_access_token()
-    #     res = wm.get_member_detail(access_token)
-    #     if res ==[]:
-    #         break
-    #
-    #
-    # 获取微客的邀请客户列表
-    print("获取微客的邀请客户列表")
+    # mc154 = MySqlClient(154, 'spider')
     access_token = wm.get_access_token()
-    wm.get_weike_invite_user_list(access_token)
-    mc154.get_create_sql('./Data/weike_invite_user_list.csv','weimeng_weike_invite_user_list')
-    mc154.insert_into_mysql_file_data('./Data/weike_invite_user_list.csv', 'weimeng_weike_invite_user_list', now_time)
 
-    # 关闭driver客户端
-    for i in range(0,50):
-        time.sleep(0.2)
-        access_token = wm.get_access_token()
-    mc154.conn.close()
+    dict_abc = {1:'a',2:'b',3:'c',4:'d',5:'e',6:'f',7:'g',8:'h',9:'i',10:'j',11:'k',12:'l',13:'m'}
+
+    append_str1 = ''
+    append_str2 = ''
+    append_str3 = ''
+
+    index = 0
+    while True:
+        index = index + 1
+        # 初始化，跳出第一次循环
+        if (index == 1):
+            continue
+        # 当前字段表名
+        column = 'weike'+str(index)
+        # 上个字段表名
+        last_column = 'weike' + str(index-1)
+        append_str1 = column
+        append_str2 = append_str2 + '\n,{0}.wid as {1}'.format(column,column)
+        append_str3 = append_str3 +'''
+            left join ods.s07_spider_weimeng_merchant_weike_list as {0}
+            on {1}.inviter={2}.wid
+            '''.format(column,column,last_column)
+        # 动态拼接sql
+        sql = '''
+            select
+                count({0})
+            from 
+                (select
+                    weike1.inviter as zero
+                    ,weike1.wid as weike1{1}
+                from
+                    ods.s07_spider_weimeng_merchant_weike_list as weike1{2}
+                )'''.format(append_str1,append_str2,append_str3)
+        # 查询是否结束
+        presto202 = PrestoClient('202')
+        res = presto202.queryBySql(sql)[0][0]
+        print('当前结果'+str(res))
+        # if res == 0:
+        if index == 10:
+            print('数据到尽头，结束循环，当前循环表到'+column)
+            # 创建表
+            presto202.queryBySql('create table ods.s07_weimeng_weike_process_relation as '
+                                 +sql.replace('count({})'.format(column),'*')
+                                 +" where zero='0'")
+            break
 

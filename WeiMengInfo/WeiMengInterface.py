@@ -3,6 +3,9 @@
 # -*- coding:utf-8 -*-
 import datetime
 import json
+import os
+from json import JSONDecodeError
+
 import pandas
 import requests
 
@@ -235,6 +238,196 @@ class WeiMengInterface():
         mc.insert_into_mysql_file_data('./Data/member_detail.csv', 'weimeng_user_member_detail', now_time)
         mc.conn.close()
         return member_table
+
+    # 商城零售-查询客户详情（会员卡）
+    def get_query_user_info(self, access_token):
+        url = 'https://dopen.weimob.com/api/1_0/ec/membership/queryUserInfoOpen?accesstoken={0}'.format(access_token)
+        print("客户详情接口url：" + url)
+        mc = MySqlClient(154, 'spider')
+        wids = mc.query_sql_list(
+            """SELECT
+                wid
+            from 
+                spider.weimeng_user_member_detail
+            where rankId<>'None'""", 'wid')
+
+        print("需要获取" + str(len(wids)) + "个用户信息")
+        member_table = []
+        # 读取非会员
+        # NoneMember = self.get_csv_line_only('./Data/NoneMember_queryuserinfo.csv', 'wid')
+        # wids = list(set(wids).difference(set(NoneMember)))
+        i = 0
+        for wid in wids:
+            try:
+                i = i + 1
+                print("开始第" + str(i) + "次请求" + str(wid) + "用户的数据")
+                data = json.dumps({
+                    "wid": wid,
+                    "storeId": "0"
+                })
+                res = requests.post(url, data).json()
+                # 获取会员数据
+                members = res['data']['memberCardInfoList'][0]
+                # 获取只需要的字段
+                member_table.append({'wid':wid,'add_time':now_time,'becomeMemberStoreId':self.get_dict_value(members,'becomeMemberStoreId'),'becomeMemberStoreName':self.get_dict_value(members,'becomeMemberStoreName')
+                                        ,'becomeMemberTime':self.get_dict_value(members,'becomeMemberTime'),'cardName':self.get_dict_value(members,'cardName')
+                                        ,'cardTemplateId':self.get_dict_value(members,'becomeMemberStoreId'),'cardType':self.get_dict_value(members,'cardType')
+                                        ,'code':self.get_dict_value(members,'code'),'endDate':self.get_dict_value(members,'endDate')
+                                        ,'getCardChannel':self.get_dict_value(members,'getCardChannel'),'getCardChannelName':self.get_dict_value(members,'getCardChannelName')
+                                        ,'growth':self.get_dict_value(members,'growth'),'mid':self.get_dict_value(members,'mid')
+                                        ,'rankId':self.get_dict_value(members,'rankId'),'rankName':self.get_dict_value(members,'rankName')
+                                        ,'startDate':self.get_dict_value(members,'startDate'),'status':self.get_dict_value(members,'status')
+                                        ,'statusName':self.get_dict_value(members,'statusName'),'wechatCardCode':self.get_dict_value(members,'wechatCardCode')
+                                        ,'wechatCardStatus':self.get_dict_value(members,'wechatCardStatus')})
+            except requests.exceptions.SSLError:
+                print('请求次数过多，重新请求')
+                continue
+            except requests.exceptions.ConnectionError:
+                print('链接异常，重新请求')
+                continue
+            except TypeError:
+                # self.save_as_file_insert('./Data/NoneMember_queryuserinfo.csv', str(wid))
+                print('不是会员，跳出')
+                continue
+            except JSONDecodeError:
+                print('不是会员，跳出')
+                continue
+            except ValueError:
+                print('没有数据，重新请求')
+                continue
+        self.save_as_csv_create(data=member_table, file_name='./Data/query_user_info')
+        mc.truncate_table('weimeng_query_user_info')
+        mc.get_create_sql('./Data/query_user_info.csv', 'weimeng_query_user_info')
+        mc.insert_into_mysql_file_data('./Data/query_user_info.csv', 'weimeng_query_user_info', now_time)
+        mc.conn.close()
+
+    # 通过wid查询用户券码列表
+    def get_coupon_page_by_wid(self, access_token):
+        url = 'https://dopen.weimob.com/api/1_0/ec/coupon/getCouponPageByWid?accesstoken={0}'.format(access_token)
+        print("客户详情接口url：" + url)
+        mc = MySqlClient(154, 'spider')
+
+        wids = mc.query_sql_list(
+            """SELECT
+                   wid
+                from spider.weimeng_merchant_weike_list
+                union 
+                SELECT
+                    wid
+                from 
+                    spider.weimeng_weike_invite_user_list
+                """, 'wid')
+
+        print("需要获取" + str(len(wids)) + "个用户信息")
+        member_table = []
+        # 读取非会员
+        # NoneMember = self.get_csv_line_only('./Data/NoneMember_queryuserinfo.csv', 'wid')
+        # wids = list(set(wids).difference(set(NoneMember)))
+        i = 0
+        for wid in wids:
+            try:
+                i = i + 1
+                print("开始第" + str(i) + "次请求" + str(wid) + "用户的数据")
+                for status in ['1','2','3','7']:
+                    try:
+                        data = json.dumps({
+                            "wid": wid,
+                            "pageSize": 100,
+                            "pageNum": 1,
+                            "queryParameter": {
+                                "statusRange": [
+                                    status
+                                ]
+                            }
+                        })
+                        res = requests.post(url, data).json()
+                        # 获取会员数据
+                        members = res['data']['pageList']
+                        for member in members:
+                            member_table.append({'wid':wid,'add_time':now_time
+                                                ,'cardTemplateId':self.get_dict_value(member,'cardTemplateId'),'acceptGoodsType':self.get_dict_value(member,'acceptGoodsType')
+                                                ,'cashTicketAmt':self.get_dict_value(member,'cashTicketAmt'),'cashTicketCondition':self.get_dict_value(member,'cashTicketCondition')
+                                                ,'code':self.get_dict_value(member,'code'),'discount':self.get_dict_value(member,'discount')
+                                                ,'expireDate':self.get_dict_value(member,'expireDate'),'isAvailable':self.get_dict_value(member,'isAvailable')
+                                                ,'name':self.get_dict_value(member,'name'),'selectStoreType':self.get_dict_value(member,'selectStoreType')
+                                                ,'startDate':self.get_dict_value(member,'startDate'),'status':self.get_dict_value(member,'status')
+                                                ,'type':self.get_dict_value(member,'type'),'useNotice':self.get_dict_value(member,'useNotice')})
+                    except TypeError:
+                        print('券状态没有信息，跳出')
+                        continue
+            except requests.exceptions.SSLError:
+                print('请求次数过多，重新请求')
+                continue
+            except requests.exceptions.ConnectionError:
+                print('链接异常，重新请求')
+                continue
+            except TypeError:
+                # self.save_as_file_insert('./Data/NoneMember_queryuserinfo.csv', str(wid))
+                print('不是会员，跳出')
+                continue
+        self.save_as_csv_create(data=member_table, file_name='./Data/coupon_page_by_wid')
+        mc.truncate_table('weimeng_coupon_page_by_wid')
+        mc.get_create_sql('./Data/coupon_page_by_wid.csv','weimeng_coupon_page_by_wid')
+        mc.insert_into_mysql_file_data('./Data/coupon_page_by_wid.csv', 'weimeng_coupon_page_by_wid', now_time)
+        mc.conn.close()
+
+    # 根据wid获取用户信息(unionid)
+    def get_user_info(self, access_token):
+        url = 'https://dopen.weimob.com/api/1_0/uc/user/getUserInfo?accesstoken={0}'.format(access_token)
+        print("客户详情接口url：" + url)
+        mc = MySqlClient(154, 'spider')
+        wids = mc.query_sql_list(
+            """SELECT
+                   wid
+                from spider.weimeng_merchant_weike_list
+                union 
+                SELECT
+                    wid
+                from 
+                    spider.weimeng_weike_invite_user_list""", 'wid')
+
+        print("需要获取" + str(len(wids)) + "个用户信息")
+        member_table = []
+        # 读取非会员
+        # NoneMember = self.get_csv_line_only('./Data/NoneMember_queryuserinfo.csv', 'wid')
+        # wids = list(set(wids).difference(set(NoneMember)))
+        i = 0
+        for wid in wids:
+            try:
+                i = i + 1
+                print("开始第" + str(i) + "次请求" + str(wid) + "用户的数据")
+                data = json.dumps({
+                    "wid": wid
+                })
+                res = requests.post(url, data).json()
+                # 获取会员数据
+                members = res['data']
+                # 获取只需要的字段
+                member = members['sourceObjectList'][0]
+                member_table.append({'wid':wid,'add_time':now_time,'superWid':self.get_dict_value(members,'superWid'),'pid':self.get_dict_value(members,'pid'),'sourceObjectList':self.get_dict_value(members,'sourceObjectList'),
+                                     'sourceOpenid':self.get_dict_value(member,'sourceOpenid'),'sourceAppid':self.get_dict_value(member,'sourceAppid'),'subscribeTime':self.get_dict_value(member['sourceData'],'subscribeTime'),
+                                     'unionid':self.get_dict_value(member['sourceData'],'unionid'),'nickname':self.get_dict_value(member['sourceData'],'nickname')})
+            except requests.exceptions.SSLError:
+                print('请求次数过多，重新请求')
+                continue
+            except requests.exceptions.ConnectionError:
+                print('链接异常，重新请求')
+                continue
+            except TypeError:
+                print('不是会员，跳出')
+                continue
+            except ValueError:
+                print('没有数据，重新请求')
+                continue
+            except JSONDecodeError:
+                print('没有数据，重新请求')
+                continue
+        self.save_as_csv_create(data=member_table, file_name='./Data/user_info')
+        mc.truncate_table('weimeng_user_info')
+        mc.get_create_sql('./Data/user_info.csv', 'weimeng_user_info')
+        mc.insert_into_mysql_file_data('./Data/user_info.csv', 'weimeng_user_info', now_time)
+        mc.conn.close()
+        # return member_table
 
     # 获取订单列表(智慧零售)
     def get_order_list(self, access_token):
@@ -474,12 +667,9 @@ class WeiMengInterface():
                 print("数据全部请求完成")
                 break
             for sale_order in sale_orders:
-                sale_order_dict = {}
-                for item in dict(sale_order).keys():
-                    if item != "":
-                        sale_order_dict[item] = str(sale_order[item]).replace('\'','\"')
-                sale_order_dict["add_time"] = now_time
-                sale_order_table.append(sale_order_dict)
+                sale_order_table.append({'add_time':now_time,'inviter':self.get_dict_value(sale_order['inviter'],'wid'),'level':self.get_dict_value(sale_order,'level')
+                                        ,'registerTime':self.get_dict_value(sale_order,'registerTime'),'scrollId':self.get_dict_value(sale_order,'scrollId')
+                                        ,'state':self.get_dict_value(sale_order,'state'),'wid':self.get_dict_value(sale_order,'wid')})
         self.save_as_csv_create(data=sale_order_table, file_name='./Data/merchant_weike_list')
 
     # 获取微客的基本信息
@@ -491,7 +681,7 @@ class WeiMengInterface():
             """	SELECT
                     wid
                 from 
-                    spider.weimeng_sale_order_list""", 'wid')
+                    spider.weimeng_merchant_weike_list""", 'wid')
 
         print("需要获取" + str(len(orderNos)) + "个订单信息")
         print(orderNos)
@@ -521,6 +711,9 @@ class WeiMengInterface():
                 print('链接异常，重新请求')
                 continue
             except TypeError:
+                print('没有数据，重新请求')
+                continue
+            except ValueError:
                 print('没有数据，重新请求')
                 continue
         self.save_as_csv_create(data=member_table, file_name='./Data/weike_detail')
@@ -603,39 +796,6 @@ class WeiMengInterface():
                 sale_order_table.append(sale_order_dict)
         self.save_as_csv_create(data=sale_order_table, file_name='./Data/store_stock_list')
 
-    # 获取进销存单据列表
-    # http://yun.weimob.com/saas/word/detailApi.html?tag=282&menuId=1&id=562
-    # def get_inventory_order_list(self, access_token):
-    #     sale_order_table = []
-    #     i = 0
-    #     while True:
-    #         i = i + 1
-    #         data = {
-    #             "pageNum": i,
-    #             "pageSize": 500,
-    #             "queryParameter": {
-    #                 "searchType": 0,
-    #                 "type": 1
-    #             }
-    #         }
-    #         data_json = json.dumps(data)
-    #         print(data_json)
-    #         response = requests.post(
-    #             'https://dopen.weimob.com/api/1_0/ec/stock/queryInventoryOrderListWithPage?accesstoken={}'.format(
-    #                 access_token), data=data_json).json()
-    #         sale_orders = response["data"]["pageList"]
-    #         if sale_orders == []:
-    #             print("数据全部请求完成")
-    #             break
-    #         for sale_order in sale_orders:
-    #             sale_order_dict = {}
-    #             for item in dict(sale_order).keys():
-    #                 if item != "":
-    #                     sale_order_dict[item] = str(sale_order[item]).replace('\'','\"')
-    #             sale_order_dict["add_time"] = now_time
-    #             sale_order_table.append(sale_order_dict)
-    #     self.save_as_csv_create(data=sale_order_table, file_name='./Data/store_stock_list')
-
     # 获取微客的客户列表
     def get_weike_invite_user_list(self, access_token):
         url = 'https://dopen.weimob.com/api/1_0/newsdp/weike/getInvitedMemberList?accesstoken={0}'.format(access_token)
@@ -682,6 +842,9 @@ class WeiMengInterface():
                 print('链接异常，重新请求')
                 continue
             except TypeError:
+                print('没有数据，重新请求')
+                continue
+            except ValueError:
                 print('没有数据，重新请求')
                 continue
         self.save_as_csv_create(data=member_table, file_name='./Data/weike_invite_user_list')
@@ -848,13 +1011,4 @@ class WeiMengInterface():
         self.save_as_csv_create(data=table, file_name='./Data/inventory_order_list')
 
 if __name__ == '__main__':
-
-    client_id = 'EDD3EAB6F807344E8AB5AE583A3E073C'
-    client_secret = '9B659BC31EF571D38DFA73DDAA61CC1B'
-    week_day = datetime.datetime.now().weekday()
-    # 新建微盟实例
-    wm = WeiMengInterface(client_id, client_secret)
-    # 获取进销存单据列表（出入库）
-    print("获取进销存单据列表（出入库）")
-    access_token = wm.get_access_token()
-    wm.get_inventory_order_list(access_token)
+    pass

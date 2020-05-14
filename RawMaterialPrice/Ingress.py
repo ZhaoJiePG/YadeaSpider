@@ -25,6 +25,7 @@ import requests
 
 now_time = datetime.datetime.now().strftime('%Y-%m-%d')
 
+
 # 图片验证码解析
 def base64_api(uname, pwd, img):
     img = img.convert('RGB')
@@ -42,8 +43,10 @@ def base64_api(uname, pwd, img):
         return result["message"]
     return ""
 
+
 def delSpecialChars(str):
-    return str.replace('\n','').replace(' ','').replace('(','').replace(')','').replace('\xa0', '').replace('\t','')
+    return str.replace('\n', '').replace(' ', '').replace('(', '').replace(')', '').replace('\xa0', '').replace('\t',
+                                                                                                                '')
 
 # 获取csv网址
 def getUrlList(csv_path, url_name):
@@ -59,14 +62,16 @@ def getUrlList(csv_path, url_name):
 
     return url_list
 
+
 # 保存csv格式
 def saveAsCsv(data, name):
     df = pd.DataFrame(data)
     df.to_csv('./Data/{0}.csv'.format(name), sep=',', header=True, index=False, encoding='utf-8')
-    print('{0}.csv'.format(name)+"保存成功")
+    print('{0}.csv'.format(name) + "保存成功")
+
 
 # 保存数据到mysql
-def insertIntoMysql(data,databaseName,tableName,port):
+def insertIntoMysql(data, databaseName, tableName, port):
     config = dict(host='10.149.1.{0}'.format(port), user='root', password='root',
                   cursorclass=pymysql.cursors.DictCursor)
     # 建立连接
@@ -86,7 +91,8 @@ def insertIntoMysql(data,databaseName,tableName,port):
     # executemany批量操作 插入数据 批量操作比逐个操作速度快很多
     cursor.executemany('INSERT INTO {} VALUES ({})'.format(tableName, s), values)
 
-def truncateTable(databaseName,tableName,port):
+
+def truncateTable(databaseName, tableName, port):
     config = dict(host='10.149.1.{0}'.format(port), user='root', password='root',
                   cursorclass=pymysql.cursors.DictCursor)
     # 建立连接
@@ -98,29 +104,31 @@ def truncateTable(databaseName,tableName,port):
     cursor = conn.cursor()
     # # 选择连接database
     conn.select_db(databaseName)
-    truncate_sql = "DELETE FROM {0} WHERE add_time='{1}'".format(tableName,now_time)
+    truncate_sql = "DELETE FROM {0} WHERE add_time='{1}'".format(tableName, now_time)
     print(truncate_sql)
     cursor.execute(truncate_sql)
 
-def save_to_mysql(file_addr,database_name,table_name,port):
+
+def save_to_mysql(file_addr, database_name, table_name, port):
     # 清空数据
     for dirs in os.walk(file_addr):
         fileList = dirs[2]
         for fileName in fileList:
             # 读取每个文件
-            csvFile=file_addr+'/{0}'.format(fileName)
-            print('开始存储'+str(csvFile)+'数据到mysql')
+            csvFile = file_addr + '/{0}'.format(fileName)
+            print('开始存储' + str(csvFile) + '数据到mysql')
             try:
-                resData = pd.read_csv(csvFile,encoding='utf-8')
+                resData = pd.read_csv(csvFile, encoding='utf-8')
                 # 去除空值
                 resData = resData.astype(object).where(pd.notnull(resData), None)
                 print(resData)
                 # 插入数据库
-                insertIntoMysql(resData,database_name,table_name,port)
+                insertIntoMysql(resData, database_name, table_name, port)
             except EmptyDataError:
                 print("当前商品不符合规则")
 
             sleep(2)
+
 
 # 解析中国商务网1  日期-产品-规格-价格
 def praseChinaBusiness1(url_list):
@@ -149,6 +157,7 @@ def praseChinaBusiness1(url_list):
 
     return table
 
+
 # 解析中国商务网2  产品-规格-日期-价格
 def praseChinaBusiness2(url_list):
     table = []
@@ -175,6 +184,7 @@ def praseChinaBusiness2(url_list):
                       'add_time': now_time})
 
     return table
+
 
 # 解析中国商务网3  产品-日期-地区-规格-价格(判断)
 def praseChinaBusiness3(url_list):
@@ -217,6 +227,7 @@ def praseChinaBusiness3(url_list):
 
     return table
 
+
 # 解析中国商务网4  日期-产品-规格-地区-价格(判断)
 def praseChinaBusiness4(url_list):
     table = []
@@ -250,6 +261,7 @@ def praseChinaBusiness4(url_list):
 
     return table
 
+
 # 解析中国商务网5  产品-规格-日期-价格(取第二个)
 def praseChinaBusiness5(url_list):
     table = []
@@ -277,38 +289,58 @@ def praseChinaBusiness5(url_list):
 
     return table
 
+
 # 解析上海有色网
 def praseShangHaiYouSe(url_list):
     # 保存表数据
     table = []
 
-    # 定义请求头
-    headers = {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0',
-        'cookie': 'SMM_device_id=223c8667-1512-582b-87ff-eb162aa2e3e4; SMM_session_id=e24de27d-b7dc-559f-9dfb-8f0892bd9934; SMM_session_start_timestamp=1566432783777; Hm_lvt_9734b08ecbd8cf54011e088b00686939=1566432784; Hm_lpvt_9734b08ecbd8cf54011e088b00686939=1566433111; SMM_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZWxscGhvbmUiOiIxMzYxNjY4MzM1MCIsImNvbXBhbnlfaWQiOjAsImNvbXBhbnlfc3RhdHVzIjowLCJjcmVhdGVfYXQiOjE1NjY0MzMwOTksImVtYWlsIjoia2FpamlhbmcudGFvQGNoaW5heGluemhpLmNvbSIsImVuX2VuZF90aW1lIjowLCJlbl9yZWdpc3Rlcl9zdGVwIjoxLCJlbl9yZWdpc3Rlcl90aW1lIjowLCJlbl9zdGFydF90aW1lIjowLCJlbl91c2VyX3R5cGUiOjAsImVuZF90aW1lIjoxNTgyNzMyNzk5LCJpc19tYWlsIjowLCJpc19waG9uZSI6MSwibGFuZ3VhZ2UiOiIiLCJseV9lbmRfdGltZSI6MCwibHlfc3RhcnRfdGltZSI6MCwibHlfdXNlcl90eXBlIjowLCJyZWdpc3Rlcl90aW1lIjoxMzYyMDE5NTYyLCJzdGFydF90aW1lIjoxNTE5NTc0NDAwLCJ1c2VyX2lkIjo0MTE1OTcsInVzZXJfbmFtZSI6InhpbnpoaWRpYW5qaTAyIiwidXNlcl90eXBlIjoyLCJ1dWlkX3NoYTI1NiI6ImNkZjRhMDA3ZTJiMDJhMGM0OWZjOWI3Y2NmYmI4YTEwYzY0NGY2MzVlMTc2NWRjZjJhN2FiNzk0ZGRjN2VkYWMiLCJ6eF9lbmRfdGltZSI6MCwienhfc3RhcnRfdGltZSI6MCwienhfdXNlcl90eXBlIjowfQ.QA9Zhr8sezkTSLerMIcLEstV0LEE_esnHlrDz_wOpeA; referer_code=https%3A%2F%2Fhq.smm.cn%2Ftong%2Fcategory%2F201102250376'
-    }
+    option = webdriver.ChromeOptions()
+    # option.add_argument('headless')
+    driver = webdriver.Chrome(executable_path='../chromedriver.exe', chrome_options=option)
+
+    # 模拟 登录https://user.smm.cn/login
+    driver.get('https://user.smm.cn/login')
+    # 账号
+    name = driver.find_element_by_xpath('/html/body/div/div[1]/div[2]/div/div/div/div[2]/div[3]/div[2]/div[1]/div/form/div[1]/div[1]/div/input')
+    name.send_keys('xinzhidianji02')
+    # 密码
+    password = driver.find_element_by_xpath('/html/body/div/div[1]/div[2]/div/div/div/div[2]/div[3]/div[2]/div[1]/div/form/div[1]/div[2]/div/input')
+    password.send_keys('123456')
+    # 确定登录
+    affirm = driver.find_element_by_xpath('/html/body/div/div[1]/div[2]/div/div/div/div[2]/div[3]/div[2]/div[1]/div/form/div[3]/button')
+    affirm.click()
 
     for i in range(0, len(url_list)):
         # 请求的网址
+        driver.get('https://user.smm.cn/login')
         url = url_list[i]['上海有色网'][1]
 
         # session接受调用cookie
-        response = requests.get(url=url, headers=headers)
-        context = response.text
+        driver.get(url=url)
+        sleep(2)
 
         # 解析
-        selector = etree.HTML(context)
-        name = selector.xpath('/html/body/div[1]/div[2]/div[1]/div/div[1]/div/div[1]/div/p[1]/text()')[0]
-        name = name.replace('\r','').replace('\n','').replace(' ','')
-        date = selector.xpath('/html/body/div[1]/div[2]/div[1]/div/div[3]/div[2]/ul/table/tbody/tr[1]/td[1]/text()')
-        price = selector.xpath('/html/body/div[1]/div[2]/div[1]/div/div[3]/div[2]/ul/table/tbody/tr[1]/td[3]/text()')
-        price = (str(price[0]).replace('\n','').replace('\r','').replace(' ',''))
+        selector = etree.HTML(driver.page_source)
+        name = selector.xpath('/html/body/div[1]/div[2]/div[1]/div/div[1]/div/div[1]/p[1]/span[1]/text()')[0]
+        name = name.replace('\r', '').replace('\n', '').replace(' ', '')
+        print(name)
+        price = ''
+        try:
+            print(driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div/div[3]/div[1]/div/div[2]/table/tbody/tr[2]/td[4]').text)
+        except NoSuchElementException:
+            price = selector.xpath('/html/body/div[1]/div[2]/div[1]/div/div[4]/div[1]/div/div[2]/table/tbody/tr[2]/td[4]/text()')[0]
+        price = (price.replace('\n', '').replace('\r', '').replace(' ', ''))
+        print(price)
 
         # 保存数据
-        table.append({'name': name, 'area': str(url_list[i]['上海有色网'][0]), 'date': date[0], 'price':price,
+        table.append({'name': name, 'area': str(url_list[i]['上海有色网'][0]), 'date': now_time, 'price': price,
                       'add_time': now_time})
 
+
+    driver.quit()
     return table
+
 
 # 解析微信买塑网
 def praseMaiSu():
@@ -316,7 +348,7 @@ def praseMaiSu():
     table = []
     timeout = 2
 
-    index = 250
+    index = 245
     while True:
         url = 'https://weixin.sogou.com/weixin?type=2&s_from=input&query=买塑观察 第{}期'.format(index)
         option = webdriver.ChromeOptions()
@@ -337,7 +369,7 @@ def praseMaiSu():
             continue
 
         driver.close()
-        
+
         # 切换页面右边
         window_handles = driver.window_handles
         driver.switch_to.window(window_handles[-1])
@@ -348,7 +380,8 @@ def praseMaiSu():
 
         qi_key = ''
         try:
-            qi_key = xpath_date.xpath('//div[@id="js_content"]/section[2]/section/section/p[2]/strong/span[1]/text()')[0]
+            qi_key = xpath_date.xpath('//div[@id="js_content"]/section[2]/section/section/p[2]/strong/span[1]/text()')[
+                0]
 
             print('实际期数：' + qi_key)
             qi_key = int(qi_key)
@@ -383,6 +416,7 @@ def praseMaiSu():
             continue
     return table
 
+
 # 我的钢铁网
 def praseMySTeel():
     now_time = datetime.datetime.now().strftime('%Y-%m-%d')
@@ -411,7 +445,7 @@ def praseMySTeel():
     login.click()
 
     time.sleep(5)
-    #1.Cr系合结钢(40CrΦ20-28)
+    # 1.Cr系合结钢(40CrΦ20-28)
     print("开始获取Cr系合结钢(40CrΦ20-28)材料价格")
     mySteelUrls = getUrlList('./Data/RawUrl.csv', '我的钢铁网')
     stellurl1 = mySteelUrls[0]
@@ -423,37 +457,35 @@ def praseMySTeel():
     try:
         button = driver.find_element_by_link_text('{}日上海市场Cr系合结钢价格行情'.format(now_day))
         real_url = button.get_attribute('href')
-    except NoSuchElementException:
+        print("爬取材料：" + origin_name + "网址为" + real_url)
+        sleep(1)
+        driver.get(real_url)
+        sleep(1)
+        xpath_date = etree.HTML(driver.page_source)
+        # 数据更新日期
+        tr_list = xpath_date.xpath('//table[@id="marketTable"]/tbody/tr')
+        for tr in tr_list:
+            try:
+                # origin_name = 'Cr系合结钢(40CrΦ20-28)'
+                name = delSpecialChars(tr.xpath('./td[1]/a/text()')[0])
+                paihao = delSpecialChars(tr.xpath('./td[2]/text()')[0])
+                guige = delSpecialChars(tr.xpath('./td[4]/text()')[0])
+                area = delSpecialChars(tr.xpath('./td[5]/text()')[0])
+                real_name = name + '(' + guige + ')'
+                if (origin_name == real_name and area == '杭钢' and paihao == '40Cr'):
+                    price = delSpecialChars(tr.xpath('./td[6]/text()')[0])
+                    steelDict = {'name': real_name, 'area': area, 'date': now_time, 'price': price, 'add_time': now_time}
+                    print(steelDict)
+                    table.append(steelDict)
+            except BaseException:
+                print("error")
+                continue
+    except BaseException:
         print("找不到当前日网页")
-
-    print("爬取材料："+origin_name+"网址为"+real_url)
-    sleep(1)
-    driver.get(real_url)
-    sleep(1)
-    xpath_date = etree.HTML(driver.page_source)
-    # 数据更新日期
-    tr_list = xpath_date.xpath('//table[@id="marketTable"]/tbody/tr')
-    for tr in tr_list:
-        try:
-            # origin_name = 'Cr系合结钢(40CrΦ20-28)'
-            name = delSpecialChars(tr.xpath('./td[1]/a/text()')[0])
-            paihao = delSpecialChars(tr.xpath('./td[2]/text()')[0])
-            guige = delSpecialChars(tr.xpath('./td[4]/text()')[0])
-            area = delSpecialChars(tr.xpath('./td[5]/text()')[0])
-            real_name = name+'('+guige+')'
-            if(origin_name == real_name and area=='杭钢' and paihao=='40Cr'):
-                price = delSpecialChars(tr.xpath('./td[6]/text()')[0])
-                steelDict = {'name': real_name, 'area': area, 'date': now_time, 'price': price, 'add_time': now_time}
-                print(steelDict)
-                table.append(steelDict)
-        except BaseException:
-            print("error")
-            continue
     print('{}日上海市场Cr系合结钢价格行情获取成功'.format(now_day))
     print('===================================================')
 
-
-    #2.热轧板卷(5.5-11.75*1500*CQ235B)
+    # 2.热轧板卷(5.5-11.75*1500*CQ235B)
     print("开始获取热轧板卷(5.5-11.75*1500*CQ235B)材料价格")
     mySteelUrls = getUrlList('./Data/RawUrl.csv', '我的钢铁网')
     stellurl1 = mySteelUrls[1]
@@ -461,9 +493,14 @@ def praseMySTeel():
     steelUrl = stellurl1['我的钢铁网'][1]
     driver.get(steelUrl)
     time.sleep(1)
-    for path in ['（15：40）','（09：35）','（09：30）','（11：10）','（14:25）']:
+    time_list = []
+    for x in ["08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]:
+        for y in range(0, 59):
+            if (len(str(y)) == 1): y = "0" + str(y)
+            time_list.append("（" + x + "：" + str(y) + "）")
+    for path in time_list:
         try:
-            button = driver.find_element_by_link_text('{0}日{1}上海市场热轧板卷价格行情'.format(now_day,path))
+            button = driver.find_element_by_link_text('{0}日{1}上海市场热轧板卷价格行情'.format(now_day, path))
             real_url = button.get_attribute('href')
             print("当前时间有数据")
             break
@@ -471,33 +508,36 @@ def praseMySTeel():
             print("当前时间没有数据，跳出此页")
             continue
     sleep(1)
-    driver.get(real_url)
-    sleep(1)
-    xpath_date = etree.HTML(driver.page_source)
-    # 数据更新日期
-    # date = delSpecialChars(xpath_date.xpath('/html/body/div[8]/div[2]/div[1]/div[1]/text()')[0])[0:10]
-    tr_list = xpath_date.xpath('//table[@id="marketTable"]/tbody/tr')
-    for tr in tr_list:
-        try:
-            # origin_name = 'Cr系合结钢(40CrΦ20-28)'
-            name = delSpecialChars(tr.xpath('./td[1]/a/text()')[0])
-            paihao = delSpecialChars(tr.xpath('./td[3]/text()')[0])
-            guige = delSpecialChars(tr.xpath('./td[2]/text()')[0])
-            area = delSpecialChars(tr.xpath('./td[4]/text()')[0])
-            real_name = name+'('+guige+')'
-            # print(real_name + area)
-            if(origin_name == real_name and area=='鞍钢/本钢' and paihao=='Q235B'):
-                price = delSpecialChars(tr.xpath('./td[5]/text()')[0])
-                steelDict = {'name': real_name, 'area': area, 'date': now_time, 'price': price, 'add_time': now_time}
-                print(steelDict)
-                table.append(steelDict)
-        except BaseException:
-            print("error")
-            continue
-    print('{0}日{1}上海市场热轧板卷价格行情价格行情获取成功'.format(now_day,path))
+    try:
+        driver.get(real_url)
+        sleep(1)
+        xpath_date = etree.HTML(driver.page_source)
+        # 数据更新日期
+        # date = delSpecialChars(xpath_date.xpath('/html/body/div[8]/div[2]/div[1]/div[1]/text()')[0])[0:10]
+        tr_list = xpath_date.xpath('//table[@id="marketTable"]/tbody/tr')
+        for tr in tr_list:
+            try:
+                # origin_name = 'Cr系合结钢(40CrΦ20-28)'
+                name = delSpecialChars(tr.xpath('./td[1]/a/text()')[0])
+                paihao = delSpecialChars(tr.xpath('./td[3]/text()')[0])
+                guige = delSpecialChars(tr.xpath('./td[2]/text()')[0])
+                area = delSpecialChars(tr.xpath('./td[4]/text()')[0])
+                real_name = name + '(' + guige + ')'
+                # print(real_name + area)
+                if (origin_name == real_name and area == '鞍钢/本钢' and paihao == 'Q235B'):
+                    price = delSpecialChars(tr.xpath('./td[5]/text()')[0])
+                    steelDict = {'name': real_name, 'area': area, 'date': now_time, 'price': price, 'add_time': now_time}
+                    print(steelDict)
+                    table.append(steelDict)
+            except BaseException:
+                print("error")
+                continue
+    except BaseException:
+        print("找不到当前日网页")
+    print('{0}日{1}上海市场热轧板卷价格行情价格行情获取成功'.format(now_day, path))
     print('===================================================')
 
-    #3.冷轧无取向硅钢(0.5*1200*C)
+    # 3.冷轧无取向硅钢(0.5*1200*C)
     print("开始获取冷轧无取向硅钢(0.5*1200*C)材料价格")
     mySteelUrls = getUrlList('./Data/RawUrl.csv', '我的钢铁网')
     stellurl1 = mySteelUrls[2]
@@ -508,37 +548,38 @@ def praseMySTeel():
     try:
         button = driver.find_element_by_link_text('{}日上海市场无取向硅钢价格行情'.format(now_day))
         real_url = button.get_attribute('href')
-    except NoSuchElementException:
-        print("找不到当前日网页")
 
-    sleep(1)
-    driver.get(real_url)
-    sleep(1)
-    xpath_date = etree.HTML(driver.page_source)
-    # 数据更新日期
-    # date = delSpecialChars(xpath_date.xpath('/html/body/div[8]/div[2]/div[1]/div[1]/text()')[0])[0:10]
-    tr_list = xpath_date.xpath('//table[@id="marketTable"]/tbody/tr')
-    for tr in tr_list:
-        try:
-            name = delSpecialChars(tr.xpath('./td[1]/a/text()')[0])
-            paihao = delSpecialChars(tr.xpath('./td[3]/text()')[0])
-            guige = delSpecialChars(tr.xpath('./td[2]/text()')[0])
-            area = delSpecialChars(tr.xpath('./td[4]/text()')[0])
-            real_name = name+'('+guige+')'
-            # print(real_name + area)
-            if(origin_name == real_name and area=='宝钢' and paihao=='B50A350'):
-                price = delSpecialChars(tr.xpath('./td[5]/text()')[0])
-                steelDict = {'name': real_name, 'area': area, 'date': now_time, 'price': price, 'add_time': now_time}
-                print(steelDict)
-                table.append(steelDict)
-        except BaseException:
-            print("error")
-            continue
-    print('{}日上海市场无取向硅钢价格行情价格行情获取成功'.format(now_day,path))
+        sleep(1)
+        driver.get(real_url)
+        sleep(1)
+        xpath_date = etree.HTML(driver.page_source)
+        # 数据更新日期
+        # date = delSpecialChars(xpath_date.xpath('/html/body/div[8]/div[2]/div[1]/div[1]/text()')[0])[0:10]
+        tr_list = xpath_date.xpath('//table[@id="marketTable"]/tbody/tr')
+        for tr in tr_list:
+            try:
+                name = delSpecialChars(tr.xpath('./td[1]/a/text()')[0])
+                paihao = delSpecialChars(tr.xpath('./td[3]/text()')[0])
+                guige = delSpecialChars(tr.xpath('./td[2]/text()')[0])
+                area = delSpecialChars(tr.xpath('./td[4]/text()')[0])
+                real_name = name + '(' + guige + ')'
+                # print(real_name + area)
+                if (origin_name == real_name and area == '宝钢' and paihao == 'B50A350'):
+                    price = delSpecialChars(tr.xpath('./td[5]/text()')[0])
+                    steelDict = {'name': real_name, 'area': area, 'date': now_time, 'price': price, 'add_time': now_time}
+                    print(steelDict)
+                    table.append(steelDict)
+            except BaseException:
+                print("error")
+                continue
+    except BaseException:
+        print("找不到当前日网页")
+    print('{}日上海市场无取向硅钢价格行情价格行情获取成功'.format(now_day, path))
     print('===================================================')
     print(table)
     driver.quit()
     return table
+
 
 # 瑞道金属网
 def praseRinDow():
@@ -577,12 +618,12 @@ def praseRinDow():
         y = 430
         w = 90
         h = 30
-        region = im.crop((x, y, x+w, y+h))
+        region = im.crop((x, y, x + w, y + h))
         region.save("screen.png")
         img_path = "screen.png"
         img = Image.open(img_path)
         result = base64_api(uname='luanjing312', pwd='lj940312', img=img)
-        print("验证码是"+result)
+        print("验证码是" + result)
         # 发送验证码并登陆
         yanzhengma = driver.find_element_by_xpath("/html/body/div[3]/div/div[2]/div/div/div[4]/div/input")
         yanzhengma.send_keys(result)
@@ -594,7 +635,7 @@ def praseRinDow():
         except BaseException:
             print("验证码不对，继续验证")
             continue
-        if(logininfo == '瑞资讯SVIP会员'):
+        if (logininfo == '瑞资讯SVIP会员'):
             print("登陆成功")
             sleep(3)
             # 请求价格网站
@@ -607,7 +648,8 @@ def praseRinDow():
                 sleep(1)
                 selector = etree.HTML(driver.page_source)
                 date = selector.xpath('/html/body/div[3]/div/div[2]/div/div[2]/table[1]/tbody/tr[1]/td[1]/text()')[0]
-                price = selector.xpath('/html/body/div[3]/div/div[2]/div/div[2]/table[1]/tbody/tr[1]/td[3]/text()')[0][:-3]
+                price = selector.xpath('/html/body/div[3]/div/div[2]/div/div[2]/table[1]/tbody/tr[1]/td[3]/text()')[0][
+                        :-3]
                 area = '全国'
                 steelDict = {'name': name, 'area': area, 'date': date, 'price': price, 'add_time': now_time}
                 print(steelDict)
@@ -618,7 +660,8 @@ def praseRinDow():
 
     return table
 
-#执行爬虫并存储
+
+# 执行爬虫并存储
 def runSpilder():
     # 获取中华商务网1
     chinaBusinessUrl = getUrlList('./Data/RawUrl.csv', '中华商务网1')
@@ -670,30 +713,34 @@ def runSpilder():
         saveAsCsv(praseChinaBusiness5(chinaBusinessUrl), '5')
         print("网页正常")
 
-    # 获取上海有色网url
-    shangHaiYouSeUrl = getUrlList('./Data/RawUrl.csv', '上海有色网')
-    shangHaiYouSeData = praseShangHaiYouSe(shangHaiYouSeUrl)
-    saveAsCsv(shangHaiYouSeData, '7')
+    # # 获取上海有色网url
+    # shangHaiYouSeUrl = getUrlList('./Data/RawUrl.csv', '上海有色网')
+    # shangHaiYouSeData = praseShangHaiYouSe(shangHaiYouSeUrl)
+    # saveAsCsv(shangHaiYouSeData, '7')
 
-    # 我的钢铁网
-    saveAsCsv(praseMySTeel(), '8')
-
-    # 瑞道金属网
-    saveAsCsv(praseRinDow(), '9')
+    # # 瑞道金属网
+    # saveAsCsv(praseRinDow(), '9')
 
     # 获取微信买塑网
     saveAsCsv(praseMaiSu(), '6')
 
+    # 我的钢铁网
+    saveAsCsv(praseMySTeel(), '8')
+
 if __name__ == '__main__':
+
+    shangHaiYouSeUrl = getUrlList('./Data/RawUrl.csv', '上海有色网')
+    shangHaiYouSeData = praseShangHaiYouSe(shangHaiYouSeUrl)
+    saveAsCsv(shangHaiYouSeData, '7')
     # 爬取数据
-    runSpilder()
-
-    # 保存mysql
-    try:
-        truncateTable('spider','rawprice',154)
-        save_to_mysql('./Data','spider','rawprice',154)
-
-        truncateTable('spider','rawprice',127)
-        save_to_mysql('./Data','spider','rawprice',127)
-    except BaseException:
-        print("数据格式不匹配")
+    # runSpilder()
+    #
+    # # 保存mysql
+    # try:
+    #     truncateTable('spider', 'rawprice', 154)
+    #     save_to_mysql('./Data', 'spider', 'rawprice', 154)
+    #
+    #     truncateTable('spider', 'rawprice', 127)
+    #     save_to_mysql('./Data', 'spider', 'rawprice', 127)
+    # except BaseException:
+    #     print("数据格式不匹配")
